@@ -128,7 +128,7 @@ export default function Contact(props: ContactType) {
                             <Input type="text" name="name" size="md" />
                           </InputGroup>
                         </FormControl>
-                        <FormControl id="name">
+                        <FormControl id="email">
                           <FormLabel>Mail</FormLabel>
                           <InputGroup borderColor="#E0E1E7">
                             <InputLeftElement pointerEvents="none">
@@ -137,7 +137,7 @@ export default function Contact(props: ContactType) {
                             <Input type="text" name="email" size="md" />
                           </InputGroup>
                         </FormControl>
-                        <FormControl id="name">
+                        <FormControl id="message">
                           <FormLabel>Message</FormLabel>
                           <Textarea
                             borderColor="gray.300"
