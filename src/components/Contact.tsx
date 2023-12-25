@@ -31,7 +31,9 @@ import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
 
 export type ContactType = NonNullable<IndexPageFrontmatterType>["contact"];
+
 export default function Contact(props: ContactType) {
+
   return (
     <Container
       id="contact"
@@ -115,14 +117,15 @@ export default function Contact(props: ContactType) {
                 <Box bg="white" borderRadius="lg">
                   <Box m={8} color="#0B0E3F">
                     <VStack spacing={5}>
-                      <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
+                      <form name="contact" method="post" data-netlify-honeypot="bot-field" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact"/>
                         <FormControl id="name">
                           <FormLabel>Your Name</FormLabel>
                           <InputGroup borderColor="#E0E1E7">
                             <InputLeftElement pointerEvents="none">
                               <BsPerson color="gray.800" />
                             </InputLeftElement>
-                            <Input type="text" size="md" />
+                            <Input type="text" name="name" size="md" />
                           </InputGroup>
                         </FormControl>
                         <FormControl id="name">
@@ -131,7 +134,7 @@ export default function Contact(props: ContactType) {
                             <InputLeftElement pointerEvents="none">
                               <MdOutlineEmail color="gray.800" />
                             </InputLeftElement>
-                            <Input type="text" size="md" />
+                            <Input type="text" name="email" size="md" />
                           </InputGroup>
                         </FormControl>
                         <FormControl id="name">
@@ -141,6 +144,7 @@ export default function Contact(props: ContactType) {
                             _hover={{
                               borderRadius: "gray.300",
                             }}
+                            name="message"
                             placeholder="message"
                           />
                         </FormControl>
