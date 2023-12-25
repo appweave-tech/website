@@ -14,16 +14,14 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
+import { IndexPageFrontmatterType } from "../pages";
 
-type Nullable<T> = T | null | undefined;
+type heroType = NonNullable<IndexPageFrontmatterType>['hero'] 
 
-type Prop = {
-  title: Nullable<string>;
-  image: Nullable<string>;
-};
-export default function Hero({ title, image }: Prop) {
+export default function Hero(props: heroType) {
+
   return (
-    <Container maxW={"7xl"}>
+    <Container id="about" as="section" maxW={"6xl"}>
       <Stack
         align={"center"}
         spacing={{ base: 8, md: 10 }}
@@ -50,14 +48,14 @@ export default function Hero({ title, image }: Prop) {
                 zIndex: -1,
               }}
             >
-              Write once,
+              {props?.titleUp}
             </Text>
             <br />
             <Text as={"span"} color={"red.400"}>
-              use everywhere!
+              {props?.titleDown}
             </Text>
           </Heading>
-          <Text color={"gray.500"}>{title}</Text>
+          <Text color={"gray.500"}>{props?.description}</Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={{ base: "column", sm: "row" }}
@@ -71,7 +69,7 @@ export default function Hero({ title, image }: Prop) {
               bg={"red.400"}
               _hover={{ bg: "red.500" }}
             >
-              Get started
+              {props?.ctaButton?.at(0)?.text}
             </Button>
             <Button
               rounded={"full"}
@@ -80,7 +78,7 @@ export default function Hero({ title, image }: Prop) {
               px={6}
               leftIcon={<PlayIcon h={4} w={4} color={"gray.300"} />}
             >
-              How It Works
+              {props?.ctaButton?.at(0)?.text}
             </Button>
           </Stack>
         </Stack>
@@ -108,14 +106,14 @@ export default function Hero({ title, image }: Prop) {
             width={"full"}
             overflow={"hidden"}
           >
-            {image && (
+            {props?.image && (
               <Image
                 alt={"Hero Image"}
                 fit={"cover"}
                 align={"center"}
                 w={"100%"}
                 h={"100%"}
-                src={image}
+                src={props?.image}
               />
             )}
           </Box>

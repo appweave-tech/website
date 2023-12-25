@@ -1,9 +1,16 @@
 import * as React from "react";
 import { PageProps, graphql } from "gatsby";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import Footer from "../components/Footer";
+import Features from "../components/Features";
+import Testimonials from "../components/Testimonial";
+import FeaturedBlogs from "../components/Blog";
+import Contact from "../components/Contact";
 
 export type IndexPageType = Pick<Queries.IndexPageQuery, "markdownRemark">;
+
+export type IndexPageFrontmatterType = NonNullable<Queries.IndexPageQuery['markdownRemark']>['frontmatter']
 
 // Step 2: Define your component
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
@@ -11,14 +18,22 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
 };
 
 export const IndexPageTemplate = ({ markdownRemark }: IndexPageType) => {
-  const pageObj = markdownRemark?.frontmatter;
+  
+  const {hero , services, testimonials, contact}  = markdownRemark?.frontmatter!;
+
   return (
     <>
-      <Header />
+      <Navbar />
 
       <main>
-        <Hero title={pageObj?.title} image={pageObj?.image} />
+        <Hero {...hero!} />
+        <Features {...services!}  />
+        <Testimonials {...testimonials!} />
+        <FeaturedBlogs />
+        <Contact {...contact!}/>
       </main>
+
+      <Footer contact={contact!} />
     </>
   );
 };
@@ -34,8 +49,46 @@ export const query = graphql`
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       id
       frontmatter {
-        title
-        image
+        hero {
+          titleUp
+          titleDown
+          image
+          description
+          ctaButton {
+            text
+            link
+          }
+        }
+        services {
+          serviceImage
+          tag
+          title
+          description
+          service {
+            title
+            logo {
+              icon
+              bgColor
+            }
+          }
+        }
+        testimonials {
+          title
+          description
+          testimonial {
+            title
+            description
+            profile
+            name
+            bio
+          }
+        }
+
+        contact {
+          phoneNumber
+          email
+          address
+        }
       }
     }
   }
