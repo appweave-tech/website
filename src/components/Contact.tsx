@@ -115,7 +115,7 @@ export default function Contact(props: ContactType) {
                 <Box bg="white" borderRadius="lg">
                   <Box m={8} color="#0B0E3F">
                     <VStack spacing={5}>
-                      <form name="contact" method="POST" data-netlify="true">
+                      <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
                         <FormControl id="name">
                           <FormLabel>Your Name</FormLabel>
                           <InputGroup borderColor="#E0E1E7">
