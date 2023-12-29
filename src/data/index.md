@@ -21,15 +21,15 @@ services:
   service:
     - title: Designing
       logo:
-        icon: MdOutlineAnalytics
+        icon: FiAirplay
         bgColor: "#f8f406"
     - title: Deployement
       logo:
-        icon: FaLaptopCode
+        icon: FiAlertCircle
         bgColor: "#21ef08"
     - title: Developemne
       logo:
-        icon: BiLaptop
+        icon: FiCloudRain
         bgColor: "#e54f4f"
 testimonials:
   title: Community of Creators
