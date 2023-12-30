@@ -23,7 +23,6 @@
     "@emotion/styled": "^11.11.0",
     "@loadable/component": "^5.16.3",
     "decap-cms-app": "^3.1.0-beta.2",
-    "decap-cms-rss-widget": "^0.5.2",
     "decap-cms-widget-icon": "^0.0.1",
     "framer-motion": "^10.16.16",
     "gatsby": "^5.13.0",
