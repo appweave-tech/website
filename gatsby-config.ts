@@ -36,7 +36,7 @@ const config: GatsbyConfig = {
          * One convention is to place your Decap CMS customization code in a
          * `src/cms` directory.
          */
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        modulePath: `${__dirname}/src/cms/cms.ts`,
       },
     },
     {
