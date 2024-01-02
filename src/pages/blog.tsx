@@ -7,7 +7,7 @@ type BlogProp = {
     blog: string,
 }
 
-export const Blog = (props: BlogProp) => {
+const Blog = (props: BlogProp) => {
     return (
         <Container maxW={'6xl'} as="section" p="12">
             <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
@@ -37,3 +37,5 @@ export const Blog = (props: BlogProp) => {
         </Container>
     );
 }
+
+export default Blog;
