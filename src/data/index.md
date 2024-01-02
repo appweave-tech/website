@@ -1,36 +1,42 @@
 ---
 templateKey: index-page
 hero:
-  titleUp: Write Once,
-  titleDown: Use Everywhere
-  image: /images/127.0.0.1_5502_modules_text_on_image_text_on_image_149_by_subrato.html-1-.png
+  titleUp: Weaving
+  titleDown: Innovation
+  image: /images/image-product-services.png
   description: Embark on a voyage of creativity as you bring your ideas to life
     with AppWeave. Our platform is your launchpad, propelling your vision into
     the digital sphere with unmatched speed and precision.
   ctaButton:
     - text: How it works
       link: "#"
-    - text: Get started
-      link: "#"
+    - text: Contact Us
+      link: "#contact"
 services:
-  serviceImage: /images/127.0.0.1_5502_modules_text_on_image_text_on_image_149_by_subrato.html-1-.png
+  serviceImage: /images/image-product-manager.png
   tag: Our Story
   title: Weave Your Digital Tapestry
-  description: "Unleash the power of AppWeave to weave a rich tapestry of digital
-    experiences. "
+  description: Unleash the power of AppWeave to weave a rich tapestry of digital
+    experiences. Seamlessly intertwining intuitive design, robust functionality,
+    and unparalleled user engagement, AppWeave transforms your vision into an
+    immersive digital journey, unlocking boundless possibilities for your brand.
   service:
     - title: Designing
       logo:
         icon: FiAirplay
-        bgColor: "#f8f406"
+        bgColor: "#f56565"
     - title: Deployement
       logo:
         icon: FiAlertCircle
-        bgColor: "#21ef08"
+        bgColor: "#f56565"
     - title: Developement
       logo:
         icon: FiCloudRain
-        bgColor: "#e54f4f"
+        bgColor: "#f56565"
+    - title: Test
+      logo:
+        icon: FiAlertCircle
+        bgColor: "#f56565"
 testimonials:
   title: Community of Creators
   description: "Join a thriving community of creators who share your passion for
