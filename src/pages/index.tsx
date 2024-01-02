@@ -8,29 +8,36 @@ import Testimonials from "../components/Testimonial";
 import FeaturedBlogs from "../components/Blog";
 import Contact from "../components/Contact";
 
-export type IndexPageType = Pick<Queries.IndexPageQuery, "markdownRemark">;
+export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
-export type IndexPageFrontmatterType = NonNullable<Queries.IndexPageQuery['markdownRemark']>['frontmatter']
+export type IndexPageFrontmatterType = NonNullable<
+  Queries.IndexPageQuery["indexPage"]
+>["frontmatter"];
+
+export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
+
+export type BlogPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]>
 
 // Step 2: Define your component
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
-  return <IndexPageTemplate markdownRemark={data.markdownRemark} />;
+  console.log(data);
+  return <IndexPageTemplate indexPage={data.indexPage?.frontmatter!} blogs={data.blogs} />;
 };
 
-export const IndexPageTemplate = ({ markdownRemark }: IndexPageType) => {
-  
-  const {hero , services, testimonials, contact}  = markdownRemark?.frontmatter!;
-
+export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFrontmatterType, blogs: BlogPageType}) => {
+  const { hero, services, testimonials, contact } =
+    indexPage!;
+  blogs.edges.map((item) => (console.log(item.blog.frontmatter?.title)))
   return (
     <>
       <Navbar />
 
       <main>
         <Hero {...hero!} />
-        <Features {...services!}  />
+        <Features {...services!} />
         <Testimonials {...testimonials!} />
-        <FeaturedBlogs />
-        <Contact {...contact!}/>
+        <FeaturedBlogs {...blogs}/>
+        <Contact {...contact!} />
       </main>
 
       <Footer contact={contact!} />
@@ -46,7 +53,9 @@ export default IndexPage;
 
 export const query = graphql`
   query IndexPage {
-    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+    indexPage: markdownRemark(
+      frontmatter: { templateKey: { eq: "index-page" } }
+    ) {
       id
       frontmatter {
         hero {
@@ -83,11 +92,38 @@ export const query = graphql`
             bio
           }
         }
-
         contact {
           phoneNumber
           email
           address
+        }
+        blurbs {
+          blogList {
+            blurb
+          }
+        }
+      }
+    }
+    blogs: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "blog-page" } } }
+    ) {
+      edges {
+        blog: node {
+          fileAbsolutePath
+          frontmatter {
+            date
+            title
+            author
+            description
+            tags{
+              tag
+            }
+            image
+          }
+          wordCount {
+            words
+          }
+          timeToRead
         }
       }
     }

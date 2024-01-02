@@ -27,7 +27,7 @@ services:
       logo:
         icon: FaLaptopCode
         bgColor: "#21ef08"
-    - title: Developemne
+    - title: Developement
       logo:
         icon: BiLaptop
         bgColor: "#e54f4f"
@@ -61,4 +61,7 @@ contact:
   phoneNumber: +91 9962525432
   email: jhondoe@gmail.com
   address: Brigade panorama, Bangalore
+blurbs:
+  blogList:
+    - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
 ---
