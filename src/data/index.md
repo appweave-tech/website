@@ -65,8 +65,8 @@ testimonials:
       profile: /images/icon.png
 contact:
   phoneNumber: +91 9962525432
-  email: jhondoe@gmail.com
-  address: Brigade panorama, Bangalore
+  email: contact@appweave.tech
+  address: WeWork, Cinnabar Hills, Embassy Golf Links Business Park, Bengaluru 560071
 blurbs:
   blogList:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
