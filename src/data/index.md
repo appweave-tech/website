@@ -16,53 +16,60 @@ services:
   serviceImage: /images/image-product-manager.png
   tag: Our Story
   title: Weave Your Digital Tapestry
-  description: Unleash the power of AppWeave to weave a rich tapestry of digital
+  description: "Unleash the power of AppWeave to weave a rich tapestry of digital
     experiences. Seamlessly intertwining intuitive design, robust functionality,
     and unparalleled user engagement, AppWeave transforms your vision into an
     immersive digital journey, unlocking boundless possibilities for your brand.
+    Transforming Ideas into Impact: Mastering the 4 D's of digital
+    transformation."
   service:
-    - title: Designing
+  
+    - title: Design
       logo:
-        icon: FiAirplay
-        bgColor: "#f56565"
-    - title: Deployement
-      logo:
-        icon: FiAlertCircle
+        icon: DiEnvato 
         bgColor: "#f56565"
     - title: Developement
       logo:
-        icon: FiCloudRain
+        icon: DiGitBranch 
         bgColor: "#f56565"
-    - title: Test
+    - title: Deployment
       logo:
-        icon: FiAlertCircle
+        icon: DiOnedrive
+        bgColor: "#f56565"
+    - title: Data Analytics
+      logo:
+        icon: DiPython
         bgColor: "#f56565"
 testimonials:
-  title: Community of Creators
-  description: "Join a thriving community of creators who share your passion for
-    excellence. "
+  title: Insights from Satisfied Clients
+  description: Not just collection of testimonials but a living testament to our
+    commitment to delivering exceptional experiences and creating lasting
+    positive impressions.
   testimonial:
-    - title: Efficient Collaborating
-      description: "Streamline your development process with AppWeave's intuitive
-        workflows. Design visually stunning interfaces, develop robust
-        functionalities, and deploy with ease. "
-      profile: /images/icon.png
-      name: Jane Cooper
-      bio: CEO at ABC Corporation
-    - title: Intuitive Design
-      description: In the fast-paced world of technology, AppWeave keeps you ahead of
-        the curve. Accelerate your development timeline without compromising on
-        quality
-      profile: /images/icon.png
-      name: Jane Cooper
-      bio: CTO at ABC Corporation
+    - title: Seamless Brilliance
+      description: Appweave delivered an exceptional interface for my application, and
+        the site is performing brilliantly. The user experience they provided is
+        fantastic, making my application seamlessly effective.
+      profile: /images/1680088884891.jpeg
+      name: Aditya Kumar
+      bio: Design Lead at Nocturn Studio
+    - title: Professional Excellence
+      description: Appweave has been consistently professional from the outset! For
+        every change I desire on the website, they consistently provide the
+        right solutions implemented in a remarkably short time. Most
+        importantly, their kindness and support make working and communicating
+        with them a delightful pleasure. Highly recommend them! 🌟🌟🌟🌟
+      profile: /images/channels4_profile.jpg
+      name: Tjaša Kastelic
+      bio: Violinist & Founder at KMA Berlin
     - title: Mindblowing Service
-      description: At AppWeave, innovation is not a privilege; it's a right. Our
-        commitment to accessibility ensures that groundbreaking technology is
-        within reach for everyone.
-      bio: COO at ABC Corporation
-      name: Jane Cooper
-      profile: /images/icon.png
+      description: It was truly delightful working with Appweave. Unlike other service
+        providers, they demonstrate remarkable punctuality. Appweave did an
+        excellent job, and I am excited about the prospect of collaborating with
+        them again!
+      bio: CEO at Valoa AB IT Consulting Services
+      name: Gabriel Valencia
+      profile: /images/1688862579862.jpeg
 contact:
   phoneNumber: +91 9962525432
   email: contact@appweave.tech

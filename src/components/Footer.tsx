@@ -45,17 +45,6 @@ export default function Footer(props: FooterPropType) {
             <Text fontSize={"sm"}>
               © 2022 Chakra Templates. All rights reserved
             </Text>
-            <Stack direction={"row"} spacing={6}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
           </Stack>
           <SimpleGrid
             templateColumns={{ sm: "1fr 1fr 1fr", md: "1fr 1fr 1fr" }}
@@ -72,11 +61,16 @@ export default function Footer(props: FooterPropType) {
               <Link href={"#"}>Terms of Service</Link>
               <Link href={"#"}>Privacy Policy</Link>
             </Stack>
-            <Stack align={"flex-start"}>
-              <ListHeader>Contact Us</ListHeader>
-              <Link href={"#"}>{props.contact?.phoneNumber}</Link>
-              <Link href={"#"}>{props.contact?.email}</Link>
-              <Link href={"#"}>{props.contact?.address}</Link>
+            <Stack direction={"column"} spacing={4} align={"flex-start"}>
+              <SocialButton label={"Twitter"} href={"#"}>
+                <FaTwitter size={"2rem"} />
+              </SocialButton>
+              <SocialButton label={"YouTube"} href={"#"}>
+                <FaYoutube size={"2rem"} />
+              </SocialButton>
+              <SocialButton label={"Instagram"} href={"#"}>
+                <FaInstagram size={"2rem"} />
+              </SocialButton>
             </Stack>
           </SimpleGrid>
         </SimpleGrid>

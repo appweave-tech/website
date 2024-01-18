@@ -36,7 +36,7 @@ export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFro
         <Hero {...hero!} />
         <Features {...services!} />
         <Testimonials {...testimonials!} />
-        <FeaturedBlogs {...blogs}/>
+        {/* <FeaturedBlogs {...blogs}/> */}
         <Contact {...contact!} />
       </main>
 

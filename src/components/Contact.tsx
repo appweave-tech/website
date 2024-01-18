@@ -37,7 +37,6 @@ export default function Contact(props: ContactType) {
   return (
     <Container
       id="contact"
-      bg={useColorModeValue("gray.100", "gray.700")}
       maxW={'6xl'}
       mt={0}
       centerContent
