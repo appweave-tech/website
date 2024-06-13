@@ -2,8 +2,9 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Teerex_Store`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `AppWeave Labs`,
+    siteUrl: `https://appweave.tech`,
+
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -28,6 +29,12 @@ const config: GatsbyConfig = {
         name: "data",
         path: `${__dirname}/src/data/`,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        "icon": `images/favicon.png`
+      }
     },
     {
       resolve: `gatsby-plugin-decap-cms`,
