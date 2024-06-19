@@ -1,15 +1,12 @@
 import {
   Container,
-  Flex,
   Box,
   Heading,
   Text,
-  IconButton,
+  SimpleGrid,
   Button,
   VStack,
-  HStack,
-  Wrap,
-  WrapItem,
+ 
   FormControl,
   FormLabel,
   Input,
@@ -42,42 +39,132 @@ export default function Contact(props: ContactType) {
       centerContent
       overflow="hidden"
       as="section"
+      bgColor={"#edf2f7"}
     >
-      <Flex>
-        <Box
-          bg="#02054B"
-          color="white"
-          borderRadius="lg"
-          m={{ sm: 4, md: 16, lg: 10 }}
-          p={{ sm: 5, md: 5, lg: 16 }}
-        >
-          <Box p={4}>
-            <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
-              <WrapItem>
-                <Box>
-                  <Heading>Contact</Heading>
-                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
+                <Box bgColor={"#edf2f7"} justifySelf={"center"} margin={"2px 4em"} w={"100%"}>
+                  <Heading textAlign={"center"} >
+                   Contact us</Heading>
+                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
                     Fill up the form below to contact
                   </Text>
-                  <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
-                    <VStack pl={0} spacing={3} alignItems="flex-start">
-                      <Link href={"tel:" + props?.phoneNumber} isExternal display={'fled'} gap={'8px'} alignItems={'center'}>
-                        <MdPhone color="#1970F1" size="20px" />{" "}
-                        {props?.phoneNumber}
-                      </Link>
+                </Box>
 
-                      <Link href={"mailto:" + props?.email} isExternal display={'fled'} gap={'8px'} alignItems={'center'}>
-                        <MdEmail color="#1970F1" size="20px" />{" "}
-                        {props?.email}
+                <Box py={{ base: 5, lg: 10 }} w={"100%"} bg={"#edf2f7"}>
+                <center>
+                    <SimpleGrid   minChildWidth='320px' spacing='40px' >
+                      <Box bg={"#edf2f7"}>
+                       
+                      <Link display={'fled'} gap={'8px'} alignItems={'center'} w={"14rem"}>
+                        <VStack>
+                        <MdLocationOn color="#1970F1" size="100px" />
+                         <Text mt={{ sm: 3, md: 3, lg: 5}} color="gray.500">
+                        Address
+                         </Text>
+                          <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
+                             {props?.address}
+                          </Text>
+                        </VStack>
                       </Link>
+                      </Box>
+                    
+                      <Box bg={"#edf2f7"} >
+                        <Link href={"tel:" + props?.phoneNumber}  display={'fled'}  gap={'8px'} alignItems={'center'} w={"10rem"}>
+                    
+                        <VStack >
+                        
+                        <MdPhone color="#1970F1" size="100px"  />
+                        <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
+                        PHONE NUMBER
+                       </Text>
+                       <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>{props?.phoneNumber}</Text>
+                        </VStack>
+                      </Link>
+                      </Box>
+                      
+                      <Box bg={"#edf2f7"}><Link href={"mailto:" + props?.email} isExternal display={'fled'} gap={'8px'} alignItems={'center'} w={"10rem"} >
+                        <VStack>
+                           <MdEmail color="#1970F1" size="100px" />
+                           <Text mt={{ sm: 3, md: 3, lg: 5 }}  color="gray.500">
+                           EMAIL</Text>
+                           <Text mt={{ sm: 3, md: 3, lg: 5 }} >{props?.email}</Text>
+                          
+                        </VStack>
+                      </Link>
+                    
+                      </Box>
+                      
 
-                      <Link display={'fled'} gap={'8px'} alignItems={'center'}>
-                        <MdLocationOn color="#1970F1" size="20px" />{" "}
-                        {props?.address}
-                      </Link>
-                    </VStack>
-                  </Box>
-                  <HStack
+                      
+                    </SimpleGrid>
+                    </center>
+                    </Box>
+             
+                  
+               
+                <Box boxShadow='md' p='6' rounded='md' bg='white'  borderRadius="lg"  w={"100%"} margin={"5px 0px"}>
+                 
+                      <form name="contact" method="post" data-netlify-honeypot="bot-field" data-netlify="true">
+                      <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}w={"100%"} >
+                      <SimpleGrid  minChildWidth='120px' spacing='40px'>
+                        <input type="hidden" name="form-name" value="contact"/>
+                       
+                        <FormControl id="name">
+                          <FormLabel>Your Name</FormLabel>
+                          <InputGroup borderColor="#E0E1E7">
+                            <InputLeftElement pointerEvents="none">
+                              <BsPerson color="gray.800" />
+                            </InputLeftElement>
+                            <Input type="text" name="name" size="md" />
+                          </InputGroup>
+                        </FormControl>
+                        <FormControl id="email">
+                          <FormLabel>Mail</FormLabel>
+                          <InputGroup borderColor="#E0E1E7">
+                            <InputLeftElement pointerEvents="none">
+                              <MdOutlineEmail color="gray.800" />
+                            </InputLeftElement>
+                            <Input type="text" name="email" size="md" />
+                          </InputGroup>
+                        </FormControl>
+                        </SimpleGrid>
+                        </Box>
+                       
+                        <FormControl id="Subject">
+                          <FormLabel>Subject</FormLabel>
+                          <Input type="text" name="subject" size="md"   placeholder="Subject" />
+                        </FormControl>
+                        <FormControl id="message">
+                          <FormLabel>Message</FormLabel>
+                          <Textarea
+                            borderColor="gray.300"
+                            _hover={{
+                              borderRadius: "gray.300",
+                            }}
+                            name="message"
+                            placeholder="message"
+                          />
+                        </FormControl>
+                        <FormControl id="name" float="right">
+                          <center >
+                          <Button 
+                            margin={"4rem"}
+                            type="submit"
+                            variant="solid"
+                            bg="#0D74FF"
+                            color="white"
+                            _hover={{}}
+                          >
+                            Send Message
+                          </Button>
+                          </center>
+                         
+                        </FormControl>
+                      </form>
+                </Box>
+    </Container>
+  );
+}
+{/* <HStack
                     mt={{ lg: 10, md: 10 }}
                     spacing={5}
                     alignItems="flex-start"
@@ -109,64 +196,4 @@ export default function Contact(props: ContactType) {
                       _hover={{ bg: "#0D74FF" }}
                       icon={<BsDiscord size="16px" />}
                     />
-                  </HStack>
-                </Box>
-              </WrapItem>
-              <WrapItem>
-                <Box bg="white" borderRadius="lg">
-                  <Box m={8} color="#0B0E3F">
-                    <VStack spacing={5}>
-                      <form name="contact" method="post" data-netlify-honeypot="bot-field" data-netlify="true">
-                        <input type="hidden" name="form-name" value="contact"/>
-                        <FormControl id="name">
-                          <FormLabel>Your Name</FormLabel>
-                          <InputGroup borderColor="#E0E1E7">
-                            <InputLeftElement pointerEvents="none">
-                              <BsPerson color="gray.800" />
-                            </InputLeftElement>
-                            <Input type="text" name="name" size="md" />
-                          </InputGroup>
-                        </FormControl>
-                        <FormControl id="email">
-                          <FormLabel>Mail</FormLabel>
-                          <InputGroup borderColor="#E0E1E7">
-                            <InputLeftElement pointerEvents="none">
-                              <MdOutlineEmail color="gray.800" />
-                            </InputLeftElement>
-                            <Input type="text" name="email" size="md" />
-                          </InputGroup>
-                        </FormControl>
-                        <FormControl id="message">
-                          <FormLabel>Message</FormLabel>
-                          <Textarea
-                            borderColor="gray.300"
-                            _hover={{
-                              borderRadius: "gray.300",
-                            }}
-                            name="message"
-                            placeholder="message"
-                          />
-                        </FormControl>
-                        <FormControl id="name" float="right">
-                          <Button
-                            type="submit"
-                            variant="solid"
-                            bg="#0D74FF"
-                            color="white"
-                            _hover={{}}
-                          >
-                            Send Message
-                          </Button>
-                        </FormControl>
-                      </form>
-                    </VStack>
-                  </Box>
-                </Box>
-              </WrapItem>
-            </Wrap>
-          </Box>
-        </Box>
-      </Flex>
-    </Container>
-  );
-}
+                  </HStack> */}
