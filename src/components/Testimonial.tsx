@@ -20,7 +20,11 @@ type testimonialType = NonNullable<IndexPageFrontmatterType>["testimonials"];
 const Testimonial = (props: Props) => {
   const { children } = props;
 
-  return <Box>{children}</Box>;
+  return (
+    <Box display={"flex"} flexDir={"column"} flexBasis={0} flexGrow={1}>
+      {children}
+    </Box>
+  );
 };
 
 const TestimonialContent = (props: Props) => {
@@ -104,7 +108,11 @@ const TestimonialAvatar = ({
 
 export default function Testimonials(props: testimonialType) {
   return (
-    <Box id="testimonial" as="section" bg={useColorModeValue("gray.100", "gray.700")}>
+    <Box
+      id="testimonial"
+      as="section"
+      bg={useColorModeValue("gray.100", "gray.700")}
+    >
       <Container maxW={"6xl"} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={"center"}>
           <Heading>{props?.title}</Heading>
@@ -119,12 +127,8 @@ export default function Testimonials(props: testimonialType) {
               return (
                 <Testimonial>
                   <TestimonialContent>
-                    <TestimonialHeading>
-                      {item.title}
-                    </TestimonialHeading>
-                    <TestimonialText>
-                      {item.description}
-                    </TestimonialText>
+                    <TestimonialHeading>{item.title}</TestimonialHeading>
+                    <TestimonialText>{item.description}</TestimonialText>
                   </TestimonialContent>
                   <TestimonialAvatar
                     src={item.profile!}

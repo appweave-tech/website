@@ -31,11 +31,12 @@ import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
 
 export type ContactType = NonNullable<IndexPageFrontmatterType>["contact"];
+
 export default function Contact(props: ContactType) {
+
   return (
     <Container
       id="contact"
-      bg={useColorModeValue("gray.100", "gray.700")}
       maxW={'6xl'}
       mt={0}
       centerContent
@@ -115,32 +116,34 @@ export default function Contact(props: ContactType) {
                 <Box bg="white" borderRadius="lg">
                   <Box m={8} color="#0B0E3F">
                     <VStack spacing={5}>
-                      <form name="contact" method="post" netlify-honeypot="bot-field" data-netlify="true">
+                      <form name="contact" method="post" data-netlify-honeypot="bot-field" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact"/>
                         <FormControl id="name">
                           <FormLabel>Your Name</FormLabel>
                           <InputGroup borderColor="#E0E1E7">
                             <InputLeftElement pointerEvents="none">
                               <BsPerson color="gray.800" />
                             </InputLeftElement>
-                            <Input type="text" size="md" />
+                            <Input type="text" name="name" size="md" />
                           </InputGroup>
                         </FormControl>
-                        <FormControl id="name">
+                        <FormControl id="email">
                           <FormLabel>Mail</FormLabel>
                           <InputGroup borderColor="#E0E1E7">
                             <InputLeftElement pointerEvents="none">
                               <MdOutlineEmail color="gray.800" />
                             </InputLeftElement>
-                            <Input type="text" size="md" />
+                            <Input type="text" name="email" size="md" />
                           </InputGroup>
                         </FormControl>
-                        <FormControl id="name">
+                        <FormControl id="message">
                           <FormLabel>Message</FormLabel>
                           <Textarea
                             borderColor="gray.300"
                             _hover={{
                               borderRadius: "gray.300",
                             }}
+                            name="message"
                             placeholder="message"
                           />
                         </FormControl>

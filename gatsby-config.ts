@@ -2,8 +2,9 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Teerex_Store`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `AppWeave Labs`,
+    siteUrl: `https://appweave.tech`,
+
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -30,13 +31,19 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        "icon": `images/favicon.png`
+      }
+    },
+    {
       resolve: `gatsby-plugin-decap-cms`,
       options: {
         /**
          * One convention is to place your Decap CMS customization code in a
          * `src/cms` directory.
          */
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        modulePath: `${__dirname}/src/cms/cms.ts`,
       },
     },
     {
