@@ -164,36 +164,3 @@ export default function Contact(props: ContactType) {
     </Container>
   );
 }
-{/* <HStack
-                    mt={{ lg: 10, md: 10 }}
-                    spacing={5}
-                    alignItems="flex-start"
-                  >
-                    <IconButton
-                      aria-label="facebook"
-                      variant="ghost"
-                      size="sm"
-                      isRound={true}
-                      bg={'#fff'}
-                      _hover={{ bg: "#0D74FF" }}
-                      icon={<MdFacebook size="16px" />}
-                    />
-                    <IconButton
-                      aria-label="github"
-                      variant="ghost"
-                      size="sm"
-                      isRound={true}
-                      bg={'#fff'}
-                      _hover={{ bg: "#0D74FF" }}
-                      icon={<BsGithub size="16px" />}
-                    />
-                    <IconButton
-                      aria-label="discord"
-                      variant="ghost"
-                      size="sm"
-                      isRound={true}
-                      bg={'#fff'}
-                      _hover={{ bg: "#0D74FF" }}
-                      icon={<BsDiscord size="16px" />}
-                    />
-                  </HStack> */}
