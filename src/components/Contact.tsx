@@ -56,7 +56,7 @@ export default function Contact(props: ContactType) {
                        
                       <Link display={'fled'} gap={'8px'} alignItems={'center'} w={"14rem"}>
                         <VStack>
-                        <MdLocationOn color="#1970F1" size="100px" />
+                        <MdLocationOn color="#68d391" size="100px" />
                          <Text mt={{ sm: 3, md: 3, lg: 5}} color="gray.500">
                         Address
                          </Text>
@@ -72,7 +72,7 @@ export default function Contact(props: ContactType) {
                     
                         <VStack >
                         
-                        <MdPhone color="#1970F1" size="100px"  />
+                        <MdPhone color="#68d391" size="100px"  />
                         <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
                         PHONE NUMBER
                        </Text>
@@ -83,7 +83,7 @@ export default function Contact(props: ContactType) {
                       
                       <Box bg={"#edf2f7"}><Link href={"mailto:" + props?.email} isExternal display={'fled'} gap={'8px'} alignItems={'center'} w={"10rem"} >
                         <VStack>
-                           <MdEmail color="#1970F1" size="100px" />
+                           <MdEmail color="#68d391" size="100px" />
                            <Text mt={{ sm: 3, md: 3, lg: 5 }}  color="gray.500">
                            EMAIL</Text>
                            <Text mt={{ sm: 3, md: 3, lg: 5 }} >{props?.email}</Text>
@@ -150,7 +150,7 @@ export default function Contact(props: ContactType) {
                             margin={"4rem"}
                             type="submit"
                             variant="solid"
-                            bg="#0D74FF"
+                            bg="#68d391"
                             color="white"
                             _hover={{}}
                           >
