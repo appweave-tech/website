@@ -23,14 +23,13 @@ services:
     Transforming Ideas into Impact: Mastering the 4 D's of digital
     transformation."
   service:
-  
     - title: Design
       logo:
-        icon: DiEnvato 
+        icon: DiEnvato
         bgColor: "#f56565"
     - title: Developement
       logo:
-        icon: DiGitBranch 
+        icon: DiGitBranch
         bgColor: "#f56565"
     - title: Deployment
       logo:
@@ -73,7 +72,7 @@ testimonials:
 contact:
   phoneNumber: +91 9962525432
   email: contact@appweave.tech
-  address: WeWork, Cinnabar Hills, Embassy Golf Links Business Park, Bengaluru 560071
+  address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
 blurbs:
   blogList:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
