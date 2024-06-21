@@ -34,13 +34,14 @@ export default function Contact(props: ContactType) {
   return (
     <Container
       id="contact"
-      maxW={'6xl'}
+      maxW={'100%'}
       mt={0}
       centerContent
       overflow="hidden"
       as="section"
       bgColor={"#edf2f7"}
     >
+      
                 <Box bgColor={"#edf2f7"} justifySelf={"center"} margin={"2px 4em"} w={"100%"}>
                   <Heading textAlign={"center"} >
                    Contact us</Heading>
@@ -51,42 +52,39 @@ export default function Contact(props: ContactType) {
 
                 <Box py={{ base: 5, lg: 10 }} w={"100%"} bg={"#edf2f7"}>
                 <center>
-                    <SimpleGrid   minChildWidth='320px' spacing='40px' >
-                      <Box bg={"#edf2f7"}>
-                       
-                      <Link display={'fled'} gap={'8px'} alignItems={'center'} w={"14rem"}>
-                        <VStack>
-                        <MdLocationOn color="#68d391" size="100px" />
-                         <Text mt={{ sm: 3, md: 3, lg: 5}} color="gray.500">
-                        Address
-                         </Text>
-                          <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
-                             {props?.address}
-                          </Text>
-                        </VStack>
-                      </Link>
+                    <SimpleGrid columns={{sm: 1, md: 3}}  spacing='40px' bg={"#edf2f7"} justifyContent={"center"}>
+                      <Box bg={"#edf2f7"}   >
+                        <Link display={'fled'} gap={'8px'} alignItems={'center'} w={"14rem"}>
+                          <VStack>
+                            <MdLocationOn color="#68d391" size="100px" />
+                            <Text mt={{ sm: 3, md: 3, lg: 5}} color="gray.500">
+                              Address
+                            </Text>
+                            <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
+                               {props?.address}
+                            </Text>
+                          </VStack>
+                        </Link>
                       </Box>
                     
                       <Box bg={"#edf2f7"} >
                         <Link href={"tel:" + props?.phoneNumber}  display={'fled'}  gap={'8px'} alignItems={'center'} w={"10rem"}>
-                    
-                        <VStack >
-                        
-                        <MdPhone color="#68d391" size="100px"  />
-                        <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>
-                        PHONE NUMBER
-                       </Text>
-                       <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500" textAlign={"center"}>{props?.phoneNumber}</Text>
-                        </VStack>
-                      </Link>
+                           <VStack >
+                             <MdPhone color="#68d391" size="100px"  />
+                             <Text color="gray.500" textAlign={"center"}>
+                             PHONE NUMBER
+                             </Text>
+                             < Text  color="gray.500" textAlign={"center"}>{props?.phoneNumber}</Text>
+                           </VStack>
+                        </Link>
                       </Box>
                       
                       <Box bg={"#edf2f7"}><Link href={"mailto:" + props?.email} isExternal display={'fled'} gap={'8px'} alignItems={'center'} w={"10rem"} >
                         <VStack>
                            <MdEmail color="#68d391" size="100px" />
-                           <Text mt={{ sm: 3, md: 3, lg: 5 }}  color="gray.500">
+                           <Text  color="gray.500">
                            EMAIL</Text>
-                           <Text mt={{ sm: 3, md: 3, lg: 5 }} >{props?.email}</Text>
+                           <Text >{props?.email}</Text>
                           
                         </VStack>
                       </Link>
@@ -101,11 +99,11 @@ export default function Contact(props: ContactType) {
              
                   
                
-                <Box boxShadow='md' p='6' rounded='md' bg='white'  borderRadius="lg"  w={"100%"} margin={"5px 0px"}>
+                <Box boxShadow='md' p='6' rounded='md' bg='white'  borderRadius="lg"  w={"88%"} margin={"5px 0px"}>
                  
                       <form name="contact" method="post" data-netlify-honeypot="bot-field" data-netlify="true">
                       <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}w={"100%"} >
-                      <SimpleGrid  minChildWidth='120px' spacing='40px'>
+                      <SimpleGrid  columns={{sm: 1, md: 2}} spacing='40px'>
                         <input type="hidden" name="form-name" value="contact"/>
                        
                         <FormControl id="name">
@@ -161,6 +159,7 @@ export default function Contact(props: ContactType) {
                         </FormControl>
                       </form>
                 </Box>
+                {/* </Box> */}
     </Container>
   );
 }
