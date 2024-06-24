@@ -7,6 +7,7 @@ import Features from "../components/Features";
 import Testimonials from "../components/Testimonial";
 import FeaturedBlogs from "../components/Blog";
 import Contact from "../components/Contact";
+import Projects from "../components/Projects";
 
 export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
@@ -35,6 +36,7 @@ export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFro
       <main>
         <Hero {...hero!} />
         <Features {...services!} />
+        <Projects />
         <Testimonials {...testimonials!} />
         {/* <FeaturedBlogs {...blogs}/> */}
         <Contact {...contact!} />
