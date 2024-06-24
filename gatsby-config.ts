@@ -31,20 +31,20 @@ const config: GatsbyConfig = {
       },
     },
     {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        "icon": `images/favicon.png`
+      }
+    },
+    {
       resolve: `gatsby-plugin-decap-cms`,
       options: {
         /**
          * One convention is to place your Decap CMS customization code in a
          * `src/cms` directory.
-        */
-       modulePath: `${__dirname}/src/cms/cms.ts`,
+         */
+        modulePath: `${__dirname}/src/cms/cms.ts`,
       },
-    },
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        "icon": `images/favicon.png`
-      }
     },
     {
       resolve: `gatsby-plugin-typescript`,
