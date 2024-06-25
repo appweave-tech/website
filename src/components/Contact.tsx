@@ -145,7 +145,7 @@ export default function Contact(props: ContactType) {
         rounded="md"
         bg="white"
         borderRadius="lg"
-        w={{sm:"96%", md: "99%"}}
+        w={{sm:"96%", md: "64%"}}
         margin={"2rem 0px 4rem 0px"}
       >
         <form
