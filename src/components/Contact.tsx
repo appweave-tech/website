@@ -74,7 +74,7 @@ export default function Contact(props: ContactType) {
               h={"12rem"}
             >
               <VStack>
-                <MdLocationOn color="#f56565" size="5rem" />
+                <MdLocationOn color="#f56565" size="3rem" />
                 <Text
                   mt={{ sm: 3, md: 3, lg: 5 }}
                   color="gray.900"
@@ -104,7 +104,7 @@ export default function Contact(props: ContactType) {
               w={"10rem"}
             >
               <VStack>
-                <MdPhone color="#f56565" size="5rem" />
+                <MdPhone color="#f56565" size="3rem" />
                 <Text color="gray.900" textAlign={"center"} fontWeight={"600"}>
                   PHONE NUMBER
                 </Text>
@@ -125,7 +125,7 @@ export default function Contact(props: ContactType) {
               w={"10rem"}
             >
               <VStack>
-                <MdEmail color="#f56565" size="5rem" />
+                <MdEmail color="#f56565" size="3rem" />
                 <Text color="gray.900" fontWeight={"600"} textAlign={"center"}>
                   EMAIL
                 </Text>
@@ -136,7 +136,7 @@ export default function Contact(props: ContactType) {
             </Link>
           </Box>
         </SimpleGrid>
-        {/* </center> */}
+        
       </Box>
 
       <Box
@@ -145,8 +145,8 @@ export default function Contact(props: ContactType) {
         rounded="md"
         bg="white"
         borderRadius="lg"
-        w={{sm:"96%", md: "78%"}}
-        margin={"4rem 0px"}
+        w={{sm:"96%", md: "99%"}}
+        margin={"2rem 0px 4rem 0px"}
       >
         <form
           name="contact"
