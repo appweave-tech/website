@@ -34,6 +34,7 @@ export default function Contact(props: ContactType) {
       id="contact"
       maxW={"100%"}
       // maxW='md'
+     
       mt={0}
       centerContent
       overflow="hidden"
@@ -145,7 +146,7 @@ export default function Contact(props: ContactType) {
         bg="white"
         borderRadius="lg"
         w={{sm:"96%", md: "78%"}}
-        margin={"5px 0px"}
+        margin={"4rem 0px"}
       >
         <form
           name="contact"
@@ -153,7 +154,7 @@ export default function Contact(props: ContactType) {
           data-netlify-honeypot="bot-field"
           data-netlify="true"
         >
-          <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }} w={"100%"}>
+          <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }} w={"100%"} >
             <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px">
               <input type="hidden" name="form-name" value="contact" />
 
@@ -182,7 +183,7 @@ export default function Contact(props: ContactType) {
             <FormLabel>Subject</FormLabel>
             <Input type="text" name="subject" size="md" placeholder="Subject" />
           </FormControl>
-          <FormControl id="message" margin={"16px 0px"}>
+          <FormControl id="message" margin={"40px 0px"}>
             <FormLabel>Message</FormLabel>
             <Textarea
               borderColor="gray.300"
@@ -196,7 +197,7 @@ export default function Contact(props: ContactType) {
           <FormControl id="name" float="right">
             <center>
               <Button
-                margin={"1rem"}
+                margin={"40px"}
                 type="submit"
                 variant="solid"
                 bg="#f56565"
