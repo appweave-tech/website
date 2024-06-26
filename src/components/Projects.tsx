@@ -1,21 +1,23 @@
 'use client';
 import React, { useEffect, useState, useRef } from 'react';
+import { PageProps, graphql } from 'gatsby';
 import {
   Container,
   Heading,
   Text,
-  Tag,
   HStack,
   VStack,
   Button,
   Flex,
+  Link,
   Box,
   WrapItem,
-  Icon,
+  Image,
   IconButton,
 } from '@chakra-ui/react';
 import { FaCircleChevronLeft, FaCircleChevronRight } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
+import { ProjectPageType } from '../pages';
 
 const MotionBox = motion(Box);
 
@@ -24,27 +26,32 @@ const ChakraCarousel = React.forwardRef<
   { children: React.ReactNode }
 >(({ children }, ref) => {
   return (
-    <HStack ref={ref} spacing={4} overflow='hidden' w='full'>
+    <HStack
+      ref={ref}
+      spacing={4}
+      overflow='hidden'
+      w='full'
+      p={2}
+      flex={1}
+      alignItems={'stretch'}
+    >
       {children}
     </HStack>
   );
 });
 
-export default function Projects() {
-  const [data, setData] = useState([]);
+type projectType = NonNullable<ProjectPageType>;
+
+export default function Projects(projects: projectType) {
+  const projectList = projects.edges;
+
   const carouselContainer = useRef<HTMLDivElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemWidth = 400; // Width of each item in the carousel
+  const itemWidth = 350; // Width of each item in the carousel
   const itemsToShow = 3; // Number of items to show at a time
   const totalItems = 10; // Total number of items to fetch and display
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts/')
-      .then((res) => res.json())
-      .then((res) => setData(res.slice(0, totalItems))); // Fetching first 10 items
-  }, []);
-
-  const maxIndex = data.length - itemsToShow;
+  const maxIndex = projectList.length - itemsToShow;
 
   const handleButtonAction = (action: string) => {
     if (action === 'right') {
@@ -57,27 +64,30 @@ export default function Projects() {
 
   return (
     <Container id='services' as='section' maxW={'6xl'} py={12}>
-      <Heading mb={6}>Projects</Heading>
+      <Heading mb={6} textAlign={'center'}>
+        Projects
+      </Heading>
       <Flex justifyContent='space-between' alignItems='center'>
-        <Button
+        <IconButton
           onClick={() => handleButtonAction('left')}
           disabled={currentIndex === 0}
           p='0'
           size='fit-content'
           backgroundColor='transparent'
           _hover={{ backgroundColor: 'transparent' }}
+          aria-label={''}
         >
           <FaCircleChevronLeft size={30} />
-        </Button>
+        </IconButton>
         <Box overflow='hidden' w='full' mx={4}>
           <MotionBox
             display='flex'
             animate={{ x: -currentIndex * itemWidth }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            w={`${data.length * itemWidth}px`}
+            w={`${projectList.length * itemWidth}px`}
           >
             <ChakraCarousel ref={carouselContainer}>
-              {data.map((post, index) => (
+              {projectList.map(({ node }, index) => (
                 <WrapItem
                   key={index}
                   boxShadow='rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px'
@@ -91,26 +101,35 @@ export default function Projects() {
                   p={5}
                 >
                   <VStack mb={6}>
+                    <Image
+                      src={node.frontmatter?.image || undefined}
+                      alt={node.frontmatter?.title || undefined}
+                      h={150}
+                      w={'full'}
+                    />
                     <Heading
                       fontSize={{ base: 'xl', md: '2xl' }}
                       textAlign='left'
                       w='full'
                       mb={2}
                     >
-                      {post.title}
+                      {node.frontmatter?.title}
                     </Heading>
-                    <Text w='full'>{post.body}</Text>
+                    <Text w='full' noOfLines={2}>
+                      {node.frontmatter?.description}
+                    </Text>
                   </VStack>
 
-                  <Button
-                    onClick={() => alert(`Post ${post.id} clicked`)}
+                  <Link
+                    color='teal.500'
+                    href={`projects/${node.frontmatter?.slug}`}
                     colorScheme='green'
                     fontWeight='bold'
                     color='gray.900'
                     size='sm'
                   >
                     View Details
-                  </Button>
+                  </Link>
                 </WrapItem>
               ))}
             </ChakraCarousel>
@@ -123,6 +142,7 @@ export default function Projects() {
           size='fit-content'
           backgroundColor='transparent'
           _hover={{ backgroundColor: 'transparent' }}
+          aria-label={''}
         >
           <FaCircleChevronRight size='30' />
         </IconButton>

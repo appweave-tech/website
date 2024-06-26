@@ -1,12 +1,14 @@
 ---
 templateKey: project-page
-title: Web App
-slug: web-app
-image: /images/project-img-3.png
+title: Live Weather Feed
+slug: weather-feed
+image: /images/project-img-1.png
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at
   nibh placerat, fermentum risus nec, faucibus nisi. Cras cursus ullamcorper est
-  in feugiat. Vestibulum a dui vitae lorem condimentum tincidunt.
+  in feugiat. Vestibulum a dui vitae lorem condimentum tincidunt. Duis maximus
+  neque viverra lectus venenatis, nec mattis tellus congue.
 ---
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh placerat, fermentum risus nec, faucibus nisi. Cras cursus ullamcorper est in feugiat. Vestibulum a dui vitae lorem condimentum tincidunt. Duis maximus neque viverra lectus venenatis, nec mattis tellus congue. Aenean felis neque, molestie eget consequat pretium, aliquet pretium tortor. Mauris vitae nisi eget magna viverra gravida. Mauris vitae turpis tempor, ultricies nunc sit amet, rhoncus mauris. Nunc vel mattis sem, ac luctus eros. In at tortor aliquam, porttitor nisl ac, hendrerit risus. Mauris commodo varius sagittis. Suspendisse viverra elit augue, eget hendrerit nunc pulvinar tristique. Suspendisse quis elit efficitur, volutpat libero vel, facilisis nisi. Integer efficitur metus ut turpis vulputate porttitor. Pellentesque mattis ultrices vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
 
 Integer ullamcorper, erat non vulputate interdum, eros magna tincidunt purus, at interdum erat nunc vel nulla. Ut id diam et mauris feugiat porta non eget lectus. Nullam id diam vitae massa sollicitudin scelerisque. Donec non aliquam tellus, nec lacinia urna. Suspendisse tincidunt pharetra justo, vel tristique tellus molestie sit amet. Quisque ultricies sit amet augue id dictum. Curabitur in fermentum nulla, sodales maximus dolor. Ut arcu odio, rutrum id gravida at, facilisis ut arcu. Integer viverra eros in felis mattis, sit amet cursus ipsum volutpat. Vestibulum malesuada enim vitae lectus lobortis facilisis. Donec volutpat quam metus, id rutrum nisi blandit eu. Aenean at ultricies purus. Duis tellus nibh, maximus in sollicitudin eget, pharetra non mauris.

@@ -19,13 +19,17 @@ export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
 
 export type BlogPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]>
 
+export type ProjectPageType = NonNullable<Queries.IndexPageQuery["projects"]>
+
+export type ProjectPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery["projects"]>["edges"]>
+
 // Step 2: Define your component
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   console.log(data);
-  return <IndexPageTemplate indexPage={data.indexPage?.frontmatter!} blogs={data.blogs} />;
+  return <IndexPageTemplate indexPage={data.indexPage?.frontmatter!} blogs={data.blogs} projects={data.projects}/>;
 };
 
-export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFrontmatterType, blogs: BlogPageType}) => {
+export const IndexPageTemplate = ({ indexPage, blogs, projects }: {indexPage: IndexPageFrontmatterType, blogs: BlogPageType, projects: ProjectPageType}) => {
   const { hero, services, testimonials, contact } =
     indexPage!;
   blogs.edges.map((item) => (console.log(item.blog.frontmatter?.title)))
@@ -36,7 +40,7 @@ export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFro
       <main>
         <Hero {...hero!} />
         <Features {...services!} />
-        <Projects />
+        <Projects {...projects} />
         <Testimonials {...testimonials!} />
         {/* <FeaturedBlogs {...blogs}/> */}
         <Contact {...contact!} />
@@ -126,6 +130,20 @@ export const query = graphql`
             words
           }
           timeToRead
+        }
+      }
+    }
+    projects: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "project-page" } } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            description
+            image
+            slug
+          }
         }
       }
     }
