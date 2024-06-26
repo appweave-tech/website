@@ -2,7 +2,20 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import ProjectTemplate from '../../views/ProjectTemplate';
 
-const ProjectPage = ({ data }) => {
+export type ProjectPageProps = {
+  data: {
+    markdownRemark: {
+      html: string;
+      frontmatter: {
+        title: string;
+        description: string;
+        image: string;
+      };
+    };
+  };
+};
+
+const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => {
   if (!data) {
     return <div>Loading....</div>;
   }

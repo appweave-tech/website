@@ -1,12 +1,9 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import Navbar from '../components/Navbar';
-import { Container, Heading, VStack, Text, Image, Box } from '@chakra-ui/react';
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image';
+import { Container, Heading, Text, Image, Box, Flex } from '@chakra-ui/react';
+import { ProjectPageProps } from '../pages/projects/[slug]';
 
-const ProjectTemplate = ({ data }) => {
-  console.log('data:', data);
-
+const ProjectTemplate = ({ data }: ProjectPageProps) => {
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -18,12 +15,22 @@ const ProjectTemplate = ({ data }) => {
   return (
     <>
       <Navbar />
-      <Container maxW={'6xl'} as='main'>
-        {imagePath && <Image src={imagePath} alt={frontmatter.title} h={300} w={'full'}/>}
-        <Heading as='h1' size='2xl' mt={4}>
+      <Container maxW={'6xl'} as='main' mt={4}>
+        <Flex height={300} w={'full'} overflow={'hidden'} borderRadius={10} justifyContent={'center'} alignItems={'center'}>
+          {imagePath && (
+            <Image
+              src={imagePath}
+              alt={frontmatter.title}
+              width={'full'}
+              minWidth={'fit-content'}
+              minHeight={'full'}
+            />
+          )}
+        </Flex>
+        <Heading as='h2' fontSize={40} mt={4}>
           {frontmatter.title}
         </Heading>
-        <Text fontSize='lg' mt={2}>
+        <Text fontSize='lg' mt={2} fontWeight={500}>
           {frontmatter.description}
         </Text>
         <Box mt={4} dangerouslySetInnerHTML={{ __html: html }} />
@@ -31,18 +38,5 @@ const ProjectTemplate = ({ data }) => {
     </>
   );
 };
-
-// export const query = graphql`
-//   query ProjectByTitle($slug: String!) {
-//     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-//       html
-//       frontmatter {
-//         title
-//         description
-//         image
-//       }
-//     }
-//   }
-// `;
 
 export default ProjectTemplate;
