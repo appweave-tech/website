@@ -1,9 +1,26 @@
+import { GatsbyNode } from 'gatsby';
 import path from 'path';
 
-exports.createPages = ({ actions, graphql }) => {
+// Type for GraphQL query result
+interface QueryResult {
+  allMarkdownRemark: {
+    edges: {
+      node: {
+        frontmatter: {
+          slug: string;
+        };
+      };
+    }[];
+  };
+}
+
+export const createPages: GatsbyNode['createPages'] = async ({
+  graphql,
+  actions,
+}) => {
   const { createPage } = actions;
 
-  return graphql(`
+  const result = (await graphql(`
     query GetAllMarkdownSlugs {
       allMarkdownRemark {
         edges {
@@ -15,20 +32,21 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then((result) => {
-    if (result.errors) {
-      throw result.errors;
-    }
+  `)) as { data?: QueryResult };
 
-    // Create project pages
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: `/projects/${node.frontmatter.slug}`,
-        component: path.resolve(`./src/pages/projects/[slug].tsx`),
-        context: {
-          slug: node.frontmatter.slug,
-        },
-      });
+  if (!result.data) {
+    throw new Error('No data returned from GraphQL query');
+  }
+
+  const projects = result.data.allMarkdownRemark.edges;
+  // Create project pages
+  projects.forEach(({ node }) => {
+    createPage({
+      path: `/projects/${node.frontmatter.slug}`,
+      component: path.resolve(`./src/pages/projects/[slug].tsx`),
+      context: {
+        slug: node.frontmatter.slug,
+      },
     });
   });
 };
