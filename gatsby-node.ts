@@ -3,11 +3,11 @@ import path from 'path';
 
 // Type for GraphQL query result
 interface QueryResult {
-  allMarkdownRemark: {
+  ProjectPage: {
     edges: {
       node: {
         frontmatter: {
-          slug: string;
+          slug: string | null;
         };
       };
     }[];
@@ -22,7 +22,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const result = (await graphql(`
     query GetAllMarkdownSlugs {
-      allMarkdownRemark {
+      ProjectPage: allMarkdownRemark(
+        filter: { frontmatter: { templateKey: { eq: "project-page" } } }
+      ) {
         edges {
           node {
             frontmatter {
@@ -38,14 +40,22 @@ export const createPages: GatsbyNode['createPages'] = async ({
     throw new Error('No data returned from GraphQL query');
   }
 
-  const projects = result.data.allMarkdownRemark.edges;
+  const projects = result.data.ProjectPage.edges;
   // Create project pages
   projects.forEach(({ node }) => {
+    const slug = node.frontmatter.slug;
+    if (!slug) {
+      console.warn(
+        'Skipping page creation for markdown node with missing slug'
+      );
+      return;
+    }
+
     createPage({
-      path: `/projects/${node.frontmatter.slug}`,
+      path: `/projects/${slug}`,
       component: path.resolve(`./src/pages/projects/[slug].tsx`),
       context: {
-        slug: node.frontmatter.slug,
+        slug: slug,
       },
     });
   });

@@ -15,7 +15,7 @@ const ProjectTemplate = ({ data }: ProjectPageProps) => {
   return (
     <>
       <Navbar />
-      <Container maxW={'6xl'} as='main' mt={4}>
+      <Container maxW={'6xl'} as='main' my={4}>
         <Flex height={300} w={'full'} overflow={'hidden'} borderRadius={10} justifyContent={'center'} alignItems={'center'}>
           {imagePath && (
             <Image

@@ -24,7 +24,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => {
 };
 
 export const query = graphql`
-  query ProjectByTitle($slug: String!) {
+  query ProjectBySlug($slug: String) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
