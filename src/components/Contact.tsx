@@ -52,7 +52,7 @@ export default function Contact(props: ContactType) {
       bg={useColorModeValue("gray.100", "gray.700")}
     >
       <Box
-         bg={useColorModeValue("gray.100", "gray.700")}
+        bg={useColorModeValue("gray.100", "gray.700")}
         justifySelf={"center"}
         margin={"2px 4em"}
         w={"100%"}
@@ -83,18 +83,15 @@ export default function Contact(props: ContactType) {
         >
           <Flex
             w={48}
-         
             align={"center"}
             justify={"center"}
             color={useColorModeValue("gray.600", "gray.400")}
             rounded={"full"}
             bg={useColorModeValue("gray.100", "gray.700")}
-           
           >
-            <Stack placeItems={"center"}  mt={5}>
-              <MdLocationOn color="#f56565" size="3rem"  />
+            <Stack placeItems={"center"} mt={5}>
+              <MdLocationOn color="#f56565" size="3rem" />
               <Text
-              
                 color={useColorModeValue("gray.600", "gray.400")}
                 fontWeight={"600"}
                 fontFamily={"var(--chakra-colors-chakra-body-text)"}
@@ -102,20 +99,13 @@ export default function Contact(props: ContactType) {
               >
                 ADDRESS
               </Text>
-              <Text
-                m={0}
-                color="gray.500"
-                fontSize={"0.8rem"}
-               
-              >
+              <Text m={0} color="gray.500" fontSize={"0.8rem"}>
                 {props?.address}
               </Text>
             </Stack>
           </Flex>
-
           <Flex
             w={48}
-          
             align={"center"}
             justify={"center"}
             color={useColorModeValue("gray.600", "gray.400")}
@@ -128,11 +118,14 @@ export default function Contact(props: ContactType) {
               isExternal
               display={"flex"}
               justifyContent={"center"}
-            
             >
               <Stack placeItems={"center"}>
                 <MdPhone color="#f56565" size="3rem" />
-                <Text color={useColorModeValue("gray.600", "gray.400")} textAlign={"center"} fontWeight={"600"}>
+                <Text
+                  color={useColorModeValue("gray.600", "gray.400")}
+                  textAlign={"center"}
+                  fontWeight={"600"}
+                >
                   PHONE NUMBER
                 </Text>
                 <Text
@@ -162,7 +155,11 @@ export default function Contact(props: ContactType) {
             >
               <Stack placeItems={"center"}>
                 <MdEmail color="#f56565" size="3rem" />
-                <Text color={useColorModeValue("gray.600", "gray.400")} fontWeight={"600"} textAlign={"center"}>
+                <Text
+                  color={useColorModeValue("gray.600", "gray.400")}
+                  fontWeight={"600"}
+                  textAlign={"center"}
+                >
                   EMAIL
                 </Text>
                 <Text color="gray.900" textAlign={"center"}>
@@ -173,7 +170,6 @@ export default function Contact(props: ContactType) {
           </Flex>
         </SimpleGrid>
       </Box>
-
       <Box
         boxShadow="md"
         p="6"
