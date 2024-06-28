@@ -28,7 +28,7 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
   return (
     <HStack spacing={2} marginTop={props.marginTop}>
       {props.tags.map((tag) => (
-        <Tag size={'md'} variant='solid' colorScheme='orange' key={tag}>
+        <Tag size={'md'} variant='solid' colorScheme='red' key={tag}>
           {tag}
         </Tag>
       ))}
@@ -203,15 +203,12 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
                 {item.blog.frontmatter?.description}
               </Text>
               <Box marginTop='4'>
-                <Link
-                  href={`/blog/${item.blog.frontmatter?.slug}`}
-                  textDecoration='none'
-                >
-                  <Button colorScheme='red' variant='outline'>
-                    Show More
-                  </Button>
-                </Link>
-              </Box>
+              <Link href={`/blog/${item.blog.frontmatter.slug}`} textDecoration='none' _hover={{ textDecoration: 'none' }}>
+        <Button colorScheme='red' variant='outline'> Show More </Button>
+      </Link>
+
+</Box>
+
               <BlogAuthor
                 name={item.blog.frontmatter?.author!}
                 date={item.blog.frontmatter?.date!}
