@@ -42,7 +42,7 @@ export const IndexPageTemplate = ({ indexPage, blogs, projects }: {indexPage: In
         <Features {...services!} />
         <Projects {...projects} />
         <Testimonials {...testimonials!} />
-        {/* <FeaturedBlogs {...blogs}/> */}
+        <FeaturedBlogs {...blogs}/>
         <Contact {...contact!} />
       </main>
 
