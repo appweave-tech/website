@@ -1,4 +1,5 @@
-import React from "react";
+'use client';
+import React, { useState } from 'react';
 import {
   Box,
   Heading,
@@ -8,19 +9,22 @@ import {
   Divider,
   HStack,
   Tag,
-  Wrap,
-  WrapItem,
   SpaceProps,
-  useColorModeValue,
   Container,
-  VStack,
   Flex,
-} from "@chakra-ui/react";
-import { BlogPageEdgeType, BlogPageType } from "../pages";
+  Button,
+  IconButton,
+  useMediaQuery,
+} from '@chakra-ui/react';
+import { BlogPageType } from '../pages';
+import { FaCircleChevronLeft, FaCircleChevronRight } from 'react-icons/fa6';
+// Import Swiper styles
+import 'swiper/css';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
 interface IBlogTags {
   tags: Array<string>;
-  marginTop?: SpaceProps["marginTop"];
+  marginTop?: SpaceProps['marginTop'];
 }
 
 const BlogTags: React.FC<IBlogTags> = (props) => {
@@ -28,7 +32,7 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
     <HStack spacing={2} marginTop={props.marginTop}>
       {props.tags.map((tag) => {
         return (
-          <Tag size={"md"} variant="solid" colorScheme="orange" key={tag}>
+          <Tag size={'md'} variant='solid' colorScheme='orange' key={tag}>
             {tag}
           </Tag>
         );
@@ -46,77 +50,151 @@ type blogType = NonNullable<BlogPageType>;
 
 export const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
   return (
-    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+    <HStack marginTop='2' spacing='2' display='flex' alignItems='center'>
       <Image
-        borderRadius="full"
-        boxSize="40px"
-        src="https://100k-faces.glitch.me/random-image"
+        borderRadius='full'
+        boxSize='40px'
+        src='https://100k-faces.glitch.me/random-image'
         alt={`Avatar of ${props.name}`}
       />
-      <Text fontWeight="medium">{props.name}</Text>
+      <Text fontWeight='medium'>{props.name}</Text>
       <Text>—</Text>
       <Text>{props.date}</Text>
     </HStack>
   );
 };
 
-const FeaturedBlogs = (blogs: blogType) => {
-  console.log(typeof blogs)
+type SwiperNavButtonsProps = {
+  handleButtonAction: (direction: 'left' | 'right') => void;
+  currentIndex: number;
+  maxIndex: number;
+};
+
+const SwiperNavButtons: React.FC<SwiperNavButtonsProps> = ({
+  handleButtonAction,
+  currentIndex,
+  maxIndex,
+}) => {
+  const swiper = useSwiper();
+
   return (
-    <Container maxW={"6xl"} as="section" p="12">
-      <Heading as="h2" marginTop="5" textAlign={"center"}>
+    <Flex gap={3} justifyContent={'center'} mt={4}>
+      <IconButton
+        onClick={() => {
+          swiper.slidePrev();
+          handleButtonAction('left');
+        }}
+        disabled={currentIndex === 0}
+        p='0'
+        size='fit-content'
+        backgroundColor='transparent'
+        _hover={{ backgroundColor: 'transparent' }}
+        aria-label={'move left'}
+        icon={
+          <FaCircleChevronLeft
+            size={30}
+            color={currentIndex === 0 ? 'gray' : 'black'}
+          />
+        }
+      />
+      <IconButton
+        onClick={() => {
+          swiper.slideNext();
+          handleButtonAction('right');
+        }}
+        disabled={currentIndex >= maxIndex}
+        p='0'
+        size='fit-content'
+        backgroundColor='transparent'
+        _hover={{ backgroundColor: 'transparent' }}
+        aria-label={'move right'}
+        icon={
+          <FaCircleChevronRight
+            size={30}
+            color={currentIndex >= maxIndex ? 'gray' : 'black'}
+          />
+        }
+      />
+    </Flex>
+  );
+};
+
+const FeaturedBlogs = (blogs: blogType) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleButtonAction = (action: string) => {
+    if (action === 'right') {
+      setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
+    }
+    if (action === 'left') {
+      setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    }
+  };
+
+  const [isLargerThan968] = useMediaQuery('(min-width: 968px)');
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const cardsToShow = (isLargerThan968 && 3) || (isLargerThan768 && 2) || 1;
+
+  const blogList = blogs.edges;
+  const maxIndex = blogList.length - cardsToShow;
+
+  return (
+    <Container maxW={'6xl'} as='section' p='12'>
+      <Heading as='h2' marginTop='5' textAlign={'center'}>
         Latest articles
       </Heading>
-      <Divider marginTop="5" />
-      <Flex
-        marginTop="5"
-        flexWrap={"wrap"}
-        justifyContent={"space-between"}
-        rowGap={"100"}
-      >
-        {blogs.edges.map((item) => {
-          return (
-            <WrapItem width={{ base: "100%", sm: "45%", md: "30%" }}>
-              <Box w="100%">
-                <Box borderRadius="lg" overflow="hidden">
-                  <Link
-                    textDecoration="none"
-                    _hover={{ textDecoration: "none" }}
-                  >
-                    <Image
-                      transform="scale(1.0)"
-                      src={item.blog.frontmatter?.image!}
-                      alt="some text"
-                      objectFit="contain"
-                      width="100%"
-                      transition="0.3s ease-in-out"
-                      _hover={{
-                        transform: "scale(1.05)",
-                      }}
-                    />
-                  </Link>
-                </Box>
-                <BlogTags tags={["Engineering", "Product"]} marginTop="3" />
-                <Heading fontSize="xl" marginTop="2">
-                  <Link
-                    textDecoration="none"
-                    _hover={{ textDecoration: "none" }}
-                  >
-                    {item.blog.frontmatter?.title}
-                  </Link>
-                </Heading>
-                <Text as="p" fontSize="md" marginTop="2">
-                  {item.blog.frontmatter?.description}
-                </Text>
-                <BlogAuthor
-                  name={item.blog.frontmatter?.author!}
-                  date={item.blog.frontmatter?.date!}
-                />
+      <Divider marginTop='2' width='60px' marginX='auto' color={'black'} />
+      <Swiper spaceBetween={20} slidesPerView={cardsToShow} className='flex' style={{ marginTop: '20px' }}>
+        {blogList.map((item, index: number) => (
+          <SwiperSlide key={index}>
+            <Box
+              w='100%'
+              border='1px solid'
+              borderColor='gray.200'
+              borderRadius='lg'
+              overflow='hidden'
+              p='6'
+              height='550px'
+            >
+              <Box borderRadius='lg' overflow='hidden' height='200px'>
+                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
+                  <Image
+                    transform='scale(1.0)'
+                    src={item.blog.frontmatter?.image!}
+                    alt='some text'
+                    objectFit='cover'
+                    height='100%'
+                    width='100%'
+                    transition='0.3s ease-in-out'
+                    _hover={{ transform: 'scale(1.05)' }}
+                  />
+                </Link>
               </Box>
-            </WrapItem>
-          );
-        })}
-      </Flex>
+              <BlogTags tags={['Engineering', 'Product']} marginTop='3' />
+              <Heading fontSize='xl' marginTop='2' noOfLines={2}>
+                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
+                  {item.blog.frontmatter?.title}
+                </Link>
+              </Heading>
+              <Text as='p' fontSize='md' marginTop='2' noOfLines={3}>
+                {item.blog.frontmatter?.description}
+              </Text>
+              <Box marginTop='4'>
+                <Link href={`/blog/${item.blog.frontmatter?.slug}`} textDecoration='none'>
+                  <Button colorScheme='red' variant='outline'>
+                    Show More
+                  </Button>
+                </Link>
+              </Box>
+              <BlogAuthor
+                name={item.blog.frontmatter?.author!}
+                date={item.blog.frontmatter?.date!}
+              />
+            </Box>
+          </SwiperSlide>
+        ))}
+        <SwiperNavButtons handleButtonAction={handleButtonAction} currentIndex={currentIndex} maxIndex={maxIndex} />
+      </Swiper>
     </Container>
   );
 };
