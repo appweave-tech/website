@@ -27,7 +27,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ data }) => {
 };
 
 export const query = graphql`
-  query BlogBySlug($slug: String) {
+  query BlogBySlug($slug: String!) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
