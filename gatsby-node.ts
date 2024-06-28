@@ -12,6 +12,15 @@ interface QueryResult {
       };
     }[];
   };
+  BlogPage: {
+    edges: {
+      node: {
+        frontmatter: {
+          slug: string | null;
+        };
+      };
+    }[];
+  };
 }
 
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -33,6 +42,17 @@ export const createPages: GatsbyNode['createPages'] = async ({
           }
         }
       }
+      BlogPage: allMarkdownRemark(
+        filter: { frontmatter: { templateKey: { eq: "blog-page" } } }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              slug
+            }
+          }
+        }
+      }
     }
   `)) as { data?: QueryResult };
 
@@ -41,19 +61,36 @@ export const createPages: GatsbyNode['createPages'] = async ({
   }
 
   const projects = result.data.ProjectPage.edges;
+  const blogs = result.data.BlogPage.edges;
+
   // Create project pages
   projects.forEach(({ node }) => {
     const slug = node.frontmatter.slug;
     if (!slug) {
-      console.warn(
-        'Skipping page creation for markdown node with missing slug'
-      );
+      console.warn('Skipping page creation for markdown node with missing slug');
       return;
     }
 
     createPage({
       path: `/projects/${slug}`,
       component: path.resolve(`./src/pages/projects/[slug].tsx`),
+      context: {
+        slug: slug,
+      },
+    });
+  });
+
+  // Create blog pages
+  blogs.forEach(({ node }) => {
+    const slug = node.frontmatter.slug;
+    if (!slug) {
+      console.warn('Skipping page creation for markdown node with missing slug');
+      return;
+    }
+
+    createPage({
+      path: `/blog/${slug}`,
+      component: path.resolve(`./src/pages/blog/[slug].tsx`),
       context: {
         slug: slug,
       },
