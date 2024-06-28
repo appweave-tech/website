@@ -1,4 +1,3 @@
-'use client';
 import React, { useState } from 'react';
 import {
   Box,
@@ -16,9 +15,7 @@ import {
   IconButton,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { BlogPageType } from '../pages';
 import { FaCircleChevronLeft, FaCircleChevronRight } from 'react-icons/fa6';
-// Import Swiper styles
 import 'swiper/css';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
@@ -30,13 +27,11 @@ interface IBlogTags {
 const BlogTags: React.FC<IBlogTags> = (props) => {
   return (
     <HStack spacing={2} marginTop={props.marginTop}>
-      {props.tags.map((tag) => {
-        return (
-          <Tag size={'md'} variant='solid' colorScheme='orange' key={tag}>
-            {tag}
-          </Tag>
-        );
-      })}
+      {props.tags.map((tag) => (
+        <Tag size={'md'} variant='solid' colorScheme='orange' key={tag}>
+          {tag}
+        </Tag>
+      ))}
     </HStack>
   );
 };
@@ -46,9 +41,7 @@ interface BlogAuthorProps {
   name: string;
 }
 
-type blogType = NonNullable<BlogPageType>;
-
-export const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
+const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
   return (
     <HStack marginTop='2' spacing='2' display='flex' alignItems='center'>
       <Image
@@ -119,7 +112,26 @@ const SwiperNavButtons: React.FC<SwiperNavButtonsProps> = ({
   );
 };
 
-const FeaturedBlogs = (blogs: blogType) => {
+interface BlogFrontmatter {
+  date: string | null;
+  title: string | null;
+  author: string | null;
+  description: string | null;
+  image: string | null;
+  slug: string | null;
+}
+
+interface BlogEdge {
+  blog: {
+    frontmatter: BlogFrontmatter;
+  };
+}
+
+interface BlogPageType {
+  edges: BlogEdge[];
+}
+
+const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleButtonAction = (action: string) => {
@@ -135,7 +147,7 @@ const FeaturedBlogs = (blogs: blogType) => {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const cardsToShow = (isLargerThan968 && 3) || (isLargerThan768 && 2) || 1;
 
-  const blogList = blogs.edges;
+  const blogList = edges;
   const maxIndex = blogList.length - cardsToShow;
 
   return (
@@ -144,7 +156,12 @@ const FeaturedBlogs = (blogs: blogType) => {
         Latest articles
       </Heading>
       <Divider marginTop='2' width='60px' marginX='auto' color={'black'} />
-      <Swiper spaceBetween={20} slidesPerView={cardsToShow} className='flex' style={{ marginTop: '20px' }}>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={cardsToShow}
+        className='flex'
+        style={{ marginTop: '20px' }}
+      >
         {blogList.map((item, index: number) => (
           <SwiperSlide key={index}>
             <Box
@@ -157,7 +174,10 @@ const FeaturedBlogs = (blogs: blogType) => {
               height='550px'
             >
               <Box borderRadius='lg' overflow='hidden' height='200px'>
-                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
+                <Link
+                  textDecoration='none'
+                  _hover={{ textDecoration: 'none' }}
+                >
                   <Image
                     transform='scale(1.0)'
                     src={item.blog.frontmatter?.image!}
@@ -172,7 +192,10 @@ const FeaturedBlogs = (blogs: blogType) => {
               </Box>
               <BlogTags tags={['Engineering', 'Product']} marginTop='3' />
               <Heading fontSize='xl' marginTop='2' noOfLines={2}>
-                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
+                <Link
+                  textDecoration='none'
+                  _hover={{ textDecoration: 'none' }}
+                >
                   {item.blog.frontmatter?.title}
                 </Link>
               </Heading>
@@ -180,7 +203,10 @@ const FeaturedBlogs = (blogs: blogType) => {
                 {item.blog.frontmatter?.description}
               </Text>
               <Box marginTop='4'>
-                <Link href={`/blog/${item.blog.frontmatter?.slug}`} textDecoration='none'>
+                <Link
+                  href={`/blog/${item.blog.frontmatter?.slug}`}
+                  textDecoration='none'
+                >
                   <Button colorScheme='red' variant='outline'>
                     Show More
                   </Button>
@@ -193,7 +219,11 @@ const FeaturedBlogs = (blogs: blogType) => {
             </Box>
           </SwiperSlide>
         ))}
-        <SwiperNavButtons handleButtonAction={handleButtonAction} currentIndex={currentIndex} maxIndex={maxIndex} />
+        <SwiperNavButtons
+          handleButtonAction={handleButtonAction}
+          currentIndex={currentIndex}
+          maxIndex={maxIndex}
+        />
       </Swiper>
     </Container>
   );
