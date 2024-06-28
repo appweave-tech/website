@@ -118,6 +118,7 @@ export default function Contact(props: ContactType) {
               isExternal
               display={"flex"}
               justifyContent={"center"}
+              textDecoration={"none"}
             >
               <Stack placeItems={"center"}>
                 <MdPhone color="#f56565" size="3rem" />
@@ -125,13 +126,14 @@ export default function Contact(props: ContactType) {
                   color={useColorModeValue("gray.600", "gray.400")}
                   textAlign={"center"}
                   fontWeight={"600"}
+                  textDecoration={"none"}
                 >
                   PHONE NUMBER
                 </Text>
                 <Text
                   color="gray.500"
                   textAlign={"center"}
-                  sx={{ textDecoration: "none" }}
+                  textDecoration={"none"}
                 >
                   {props?.phoneNumber}
                 </Text>
@@ -152,6 +154,7 @@ export default function Contact(props: ContactType) {
               isExternal
               display={"flex"}
               justifyContent={"center"}
+              textDecoration={"none"}
             >
               <Stack placeItems={"center"}>
                 <MdEmail color="#f56565" size="3rem" />
@@ -159,10 +162,11 @@ export default function Contact(props: ContactType) {
                   color={useColorModeValue("gray.600", "gray.400")}
                   fontWeight={"600"}
                   textAlign={"center"}
+                  textDecoration={"none"}
                 >
                   EMAIL
                 </Text>
-                <Text color="gray.900" textAlign={"center"}>
+                <Text color="gray.500" textAlign={"center"} textDecoration={"none"}>
                   {props?.email}
                 </Text>
               </Stack>

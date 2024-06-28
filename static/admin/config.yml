@@ -145,20 +145,72 @@ collections:
                   },
                 ],
             }
-
           - {
-              label: Contact,
-              name: contact,
-              widget: object,
-              fields:
-                [
-                  { label: Address, name: address, widget: text },
-                  { label: PhoneNumber, name: phoneNumber, widget: string },
-                  { label: Email, name: email, widget: string },
-                  #  { label: dosti, name: dosti, widget: text },
-                ],
-            }
-
+             label : "contact",
+             name : "Contact",
+             widget : object,
+             fields : 
+               [
+                {
+                  label : Location, 
+                  name : location, 
+                  widget : object,
+                  fields : 
+                        [
+                          {label : address , name : address, widget : string},
+                          {
+                            label : logo , 
+                            name : logo , 
+                            widget : object,
+                            fields : 
+                                [
+                                  {label : icon ,name : icon , widget : icon},
+                                  {label : color , name : color , widget : color},
+                                ]
+                             }
+                        ]
+                  },
+                {
+                  label : Phone, 
+                  name : Phone, 
+                  widget : object, 
+                  fields : 
+                        [
+                          { label : PhoneNumber ,name : phonenumber , widget : string},
+                          { 
+                            label : logo , 
+                            name : logo , 
+                            widget : object,
+                            fields : 
+                                [
+                                  {label : icon , name : phoneIcon , widget : icon},
+                                  {label : Color, name : phoneColor , widget : color}
+                                ]
+                            }
+                        ]
+                   },
+                {
+                  label : Mail, 
+                  name : email, 
+                  widget : object,
+                  fields :
+                      [
+                        {label : Email, name : email, widget : string},
+                        {
+                          label : Logo,
+                          name : emailLogo,
+                          widget : object,
+                          fields : 
+                            [
+                             {label : icon,name : emailIcon, widget : icon},
+                             {label : Color, name : emailColor, widget : color}
+                            ]
+                        }
+                      ]
+                   },
+               ]
+          }
+          
           - {
               label: "Blurbs",
               name: "blurbs",
