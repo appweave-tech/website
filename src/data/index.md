@@ -98,16 +98,19 @@ footer:
       logo:
         CoLor: "#ffffff"
         icon: FiYoutube
+        BGCoLor: "#f56565"
       link: "#"
     twiter:
       logo:
         CoLor: "#ffffff"
         icon: FiTwitter
+        BGCoLor: "#f56565"
       link: "#"
     instagram:
       logo:
         CoLor: "#ffffff"
         icon: FiInstagram
+        BGCoLor: "#f56565"
       link: "#"
   company:
     aboutus: "#about"
