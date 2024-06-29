@@ -73,7 +73,48 @@ contact:
   phoneNumber: +91 9962525432
   email: contact@appweave.tech
   address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
+Contact:
+  location:
+    logo:
+      icon: FiMapPin
+      color: "#f56565"
+    address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
+  Phone:
+    logo:
+      phoneIcon: FiPhone
+      phoneColor: "#f56565"
+    phonenumber: +91 9962525432
+  email:
+    emailLogo:
+      emailIcon: FiMail
+      emailColor: "#f56565"
+    email: contact@appweave.tech
 blurbs:
   blogList:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
+footer:
+  social:
+    YouTube:
+      logo:
+        CoLor: "#ffffff"
+        icon: FiYoutube
+      link: "#"
+    twiter:
+      logo:
+        CoLor: "#ffffff"
+        icon: FiTwitter
+      link: "#"
+    instagram:
+      logo:
+        CoLor: "#ffffff"
+        icon: FiInstagram
+      link: "#"
+  company:
+    aboutus: "#about"
+    Services: "#services"
+    testimonials: "#testimonial"
+  support:
+    FAQs: "#"
+    TermService: "#"
+    PrivacyPolicy: "#"
 ---
