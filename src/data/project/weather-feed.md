@@ -1,7 +1,6 @@
 ---
 templateKey: project-page
 title: Live Weather Feed
-slug: weather-feed
 image: /images/project-img-1.png
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at
   nibh placerat, fermentum risus nec, faucibus nisi. Cras cursus ullamcorper est

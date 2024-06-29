@@ -1,7 +1,6 @@
 ---
 templateKey: project-page
 title: Web App
-slug: web-app
 image: /images/project-img-3.png
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at
   nibh placerat, fermentum risus nec, faucibus nisi. Cras cursus ullamcorper est

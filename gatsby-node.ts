@@ -1,12 +1,30 @@
 import { GatsbyNode } from 'gatsby';
+import { createFilePath } from 'gatsby-source-filesystem';
 import path from 'path';
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({
+  node,
+  actions,
+  getNode,
+}) => {
+  const { createNodeField } = actions;
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({ node, getNode });
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
+    });
+  }
+};
 
 // Type for GraphQL query result
 interface QueryResult {
   ProjectPage: {
     edges: {
       node: {
-        frontmatter: {
+        fields: {
           slug: string | null;
         };
       };
@@ -20,30 +38,32 @@ export const createPages: GatsbyNode['createPages'] = async ({
 }) => {
   const { createPage } = actions;
 
-  const result = (await graphql(`
+  const result = await graphql<QueryResult>(`
     query GetAllMarkdownSlugs {
       ProjectPage: allMarkdownRemark(
         filter: { frontmatter: { templateKey: { eq: "project-page" } } }
       ) {
         edges {
           node {
-            frontmatter {
+            fields {
               slug
             }
           }
         }
       }
     }
-  `)) as { data?: QueryResult };
+  `);
 
   if (!result.data) {
     throw new Error('No data returned from GraphQL query');
   }
 
-  const projects = result.data.ProjectPage.edges;
+  const { ProjectPage } = result.data!;
+
+  
   // Create project pages
-  projects.forEach(({ node }) => {
-    const slug = node.frontmatter.slug;
+  ProjectPage.edges.forEach(({ node }) => {
+    const slug = node.fields.slug;
     if (!slug) {
       console.warn(
         'Skipping page creation for markdown node with missing slug'
@@ -52,8 +72,8 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }
 
     createPage({
-      path: `/projects/${slug}`,
-      component: path.resolve(`./src/pages/projects/[slug].tsx`),
+      path: `${slug}`,
+      component: path.resolve(`./src/views/ProjectTemplate.tsx`),
       context: {
         slug: slug,
       },

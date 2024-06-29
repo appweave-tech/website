@@ -60,7 +60,7 @@ const SwiperNavButtons: React.FC<SwiperNavButtonsProps> = ({
 
 type projectType = NonNullable<ProjectPageType>;
 
-export default function Projects(projects: projectType) {
+export default function Projects({ edges }: projectType) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleButtonAction = (action: string) => {
@@ -76,7 +76,7 @@ export default function Projects(projects: projectType) {
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
   const cardsToShow = (isLargerThan968 && 3) || (isLargerThan768 && 2) || 1;
 
-  const projectList = projects.edges;
+  const projectList = edges;
   const maxIndex = projectList.length - cardsToShow;
 
   return (

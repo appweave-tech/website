@@ -11,9 +11,7 @@ import Layout from "../components/layout";
 
 export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
-export type IndexPageFrontmatterType = NonNullable<
-  Queries.IndexPageQuery["indexPage"]
->["frontmatter"];
+export type IndexPageFrontmatterType = NonNullable<Queries.IndexPageQuery["indexPage"]>["frontmatter"];
 
 export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
 
@@ -135,11 +133,13 @@ export const query = graphql`
     ) {
       edges {
         node {
+          fields {
+            slug
+          }
           frontmatter {
             title
             description
             image
-            slug
           }
         }
       }

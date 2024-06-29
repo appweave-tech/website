@@ -1,7 +1,6 @@
 ---
 templateKey: project-page
 title: Mobile App
-slug: mobile-app
 image: /images/project-img-2.png
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at
   nibh placerat, fermentum risus nec, faucibus nisi. Cras cursus ullamcorper est

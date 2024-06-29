@@ -60,7 +60,6 @@ collections:
           default: "project-page",
         }
       - { label: "Project Title", name: "title", widget: "string" }
-      - { label: "Project Slug", name: "slug", widget: "string" }
       - { label: "Image", name: "image", widget: "image"}
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }

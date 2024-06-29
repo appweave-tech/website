@@ -12,11 +12,13 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 
 // Slide component types:
 type NodeType = {
+  fields: {
+    slug: string | null;
+  } | null;
   frontmatter: {
     title: string | null;
     description: string | null;
     image: string | null;
-    slug: string | null;
   } | null;
 };
 
@@ -71,7 +73,7 @@ export const ProjectSlide = ({
 
       <Link
         color='red.400'
-        href={`projects/${node.frontmatter?.slug}`}
+        href={`${node.fields?.slug}`}
         fontWeight='bold'
         size='sm'
         display={'flex'}
