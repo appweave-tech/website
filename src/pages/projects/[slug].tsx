@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import ProjectTemplate from '../../views/ProjectTemplate';
+import Layout from '../../components/layout';
 
 export type ProjectPageProps = {
   data: {
@@ -20,7 +21,11 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ data }) => {
     return <div>Loading....</div>;
   }
 
-  return <ProjectTemplate data={data} />;
+  return (
+    <Layout>
+      <ProjectTemplate data={data} />
+    </Layout>
+  );
 };
 
 export const query = graphql`
