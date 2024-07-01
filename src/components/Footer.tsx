@@ -51,9 +51,9 @@ export default function Footer(props: FooterPropType) {
           >
             <Stack align={"flex-start"}>
               <ListHeader>Company</ListHeader>
-              <Link href={"#about"}>About us</Link>
-              <Link href={"#services"}>Services</Link>
-              <Link href={"#testimonial"}>Testimonials</Link>
+              <Link href={"/#about"}>About us</Link>
+              <Link href={"/#services"}>Services</Link>
+              <Link href={"/#testimonial"}>Testimonials</Link>
             </Stack>
             <Stack align={"flex-start"}>
               <ListHeader>Support</ListHeader>

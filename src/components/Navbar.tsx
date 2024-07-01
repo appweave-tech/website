@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -29,7 +28,7 @@ export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box  as="header"
+    <Box as="header"
       borderBottom={1}
       borderStyle={"solid"}
       borderColor={useColorModeValue("gray.200", "gray.900")}
@@ -249,15 +248,15 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Services",
-    href: "#services",
+    href: "/#services",
   },
   {
     label: "Testimonials",
-    href: "#testimonial",
+    href: "/#testimonial",
   },
   {
     label: "Contact Us",
-    href: "#contact",
+    href: "/#contact",
   },
   // {
   //   label: "Blogs",

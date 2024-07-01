@@ -1,7 +1,6 @@
 import * as React from "react";
 import { PageProps, graphql } from "gatsby";
 import Hero from "../components/Hero";
-import Footer from "../components/Footer";
 import Features from "../components/Features";
 import Testimonials from "../components/Testimonial";
 import FeaturedBlogs from "../components/Blog";
@@ -41,7 +40,6 @@ export const IndexPageTemplate = ({ indexPage, blogs, projects }: {indexPage: In
           {/* <FeaturedBlogs {...blogs}/> */}
           <Contact {...contact!} />
       </Layout>
-      <Footer contact={contact!} />
     </>
   );
 };

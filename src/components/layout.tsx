@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
+import { graphql, StaticQuery } from 'gatsby';
 import Navbar from './Navbar';
-import { Container } from '@chakra-ui/react';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,12 +9,31 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <>
-      <Navbar />
-      <Container maxW={'6xl'} as='main' my={4}>
-        {children}
-      </Container>
-    </>
+    <StaticQuery
+      query={graphql`
+        query FooterContact {
+          markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+            frontmatter {
+              contact {
+                phoneNumber
+                email
+                address
+              }
+            }
+          }
+        }
+      `}
+      render={(data) => {
+        const contact = data.markdownRemark.frontmatter.contact;
+        return (
+          <>
+            <Navbar />
+            {children}
+            <Footer contact={contact} />
+          </>
+        );
+      }}
+    />
   );
 };
 
