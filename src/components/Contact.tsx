@@ -31,15 +31,7 @@ import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
 
 export type ContactType = NonNullable<IndexPageFrontmatterType>["contact"];
-const theme = extendTheme({
-  textStyles: {
-    h1: {
-      baseStyle: {
-        textDecoration: "none",
-      },
-    },
-  },
-});
+
 export default function Contact(props: ContactType) {
   return (
     <Container
@@ -63,7 +55,7 @@ export default function Contact(props: ContactType) {
           color={useColorModeValue("gray.600", "gray.400")}
           textAlign={"center"}
         >
-          Fill up the form below to contact
+          You can contact us various method
         </Text>
       </Box>
 
@@ -194,6 +186,14 @@ export default function Contact(props: ContactType) {
         w={{ sm: "96%", md: "64%" }}
         margin={"2rem 0px 4rem 0px"}
       >
+            <Text
+          mb={{ sm: 3, md: 3, lg: 5 }}
+          color={useColorModeValue("gray.800", "gray.400")}
+          fontWeight={500}
+          textAlign={"center"}
+        >
+          Fill up the form below to contact us
+        </Text>
         <form
           name="contact"
           method="post"
@@ -201,9 +201,10 @@ export default function Contact(props: ContactType) {
           data-netlify="true"
         >
           <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }} w={"100%"}>
+         
             <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px">
               <input type="hidden" name="form-name" value="contact" />
-              <FormControl id="name">
+              <FormControl id="name" isRequired>
                 <FormLabel>Your Name</FormLabel>
                 <InputGroup borderColor="#E0E1E7">
                   <InputLeftElement pointerEvents="none">
@@ -212,7 +213,7 @@ export default function Contact(props: ContactType) {
                   <Input type="text" name="name" size="md" />
                 </InputGroup>
               </FormControl>
-              <FormControl id="email">
+              <FormControl id="email" isRequired>
                 <FormLabel>Mail</FormLabel>
                 <InputGroup borderColor="#E0E1E7">
                   <InputLeftElement pointerEvents="none">
@@ -224,11 +225,11 @@ export default function Contact(props: ContactType) {
             </SimpleGrid>
           </Box>
 
-          <FormControl id="Subject">
+          <FormControl id="Subject" isRequired>
             <FormLabel>Subject</FormLabel>
             <Input type="text" name="subject" size="md" placeholder="Subject" />
           </FormControl>
-          <FormControl id="message" margin={"40px 0px"}>
+          <FormControl id="message" margin={"40px 0px"} isRequired>
             <FormLabel>Message</FormLabel>
             <Textarea
               borderColor="gray.300"
@@ -239,19 +240,20 @@ export default function Contact(props: ContactType) {
               placeholder="message"
             />
           </FormControl>
-          <FormControl id="name" float="right">
-            <center>
+          <FormControl id="name">
+            <Flex justifyContent={"center"}>
               <Button
                 margin={"40px"}
                 type="submit"
                 variant="solid"
                 bg="#f56565"
+                 textAlign={"center"}
                 color="white"
-                _hover={{}}
+                // _hover={{}}
               >
                 Send Message
               </Button>
-            </center>
+              </Flex>
           </FormControl>
         </form>
       </Box>
