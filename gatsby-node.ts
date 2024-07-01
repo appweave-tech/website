@@ -1,5 +1,19 @@
 import { GatsbyNode } from 'gatsby';
+import { createFilePath } from 'gatsby-source-filesystem';
 import path from 'path';
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({ node, getNode });
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
+    });
+  }
+};
 
 // Define types for GraphQL query result
 interface QueryResult {
@@ -15,7 +29,7 @@ interface QueryResult {
   BlogPage: {
     edges: {
       node: {
-        frontmatter: {
+        fields: {
           slug: string | null;
         };
       };
@@ -34,7 +48,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       ) {
         edges {
           node {
-            frontmatter {
+            fields {
               slug
             }
           }
@@ -45,7 +59,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       ) {
         edges {
           node {
-            frontmatter {
+            fields {
               slug
             }
           }
@@ -53,8 +67,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       }
     }
   `);
-
-
 
   // Destructure data from GraphQL query result
   const { ProjectPage, BlogPage } = result.data!;
@@ -68,8 +80,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
     }
 
     createPage({
-      path: `/projects/${slug}`,
-      component: path.resolve(`./src/pages/projects/[slug].tsx`), // Adjust path as necessary
+      path: `${slug}`,
+      component: path.resolve(`./src/views/ProjectTemplate.tsx`),
       context: {
         slug: slug,
       },
@@ -78,15 +90,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
 
   // Create blog pages
   BlogPage.edges.forEach(({ node }) => {
-    const slug = node.frontmatter.slug;
+    const slug = node.fields.slug;
     if (!slug) {
       console.warn('Skipping page creation for markdown node with missing slug');
       return;
     }
 
     createPage({
-      path: `/blog/${slug}`,
-      component: path.resolve(`./src/pages/blog/[slug].tsx`), // Adjust path as necessary
+      path: `${slug}`,
+      component: path.resolve(`./src/views/BlogTemplate.tsx`),
       context: {
         slug: slug,
       },
