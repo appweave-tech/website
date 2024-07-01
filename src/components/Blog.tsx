@@ -18,6 +18,7 @@ import {
 import { FaCircleChevronLeft, FaCircleChevronRight } from 'react-icons/fa6';
 import 'swiper/css';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { BlogPageType } from '../pages';
 
 interface IBlogTags {
   tags: Array<string>;
@@ -112,25 +113,6 @@ const SwiperNavButtons: React.FC<SwiperNavButtonsProps> = ({
   );
 };
 
-interface BlogFrontmatter {
-  date: string | null;
-  title: string | null;
-  author: string | null;
-  description: string | null;
-  image: string | null;
-  slug: string | null;
-}
-
-interface BlogEdge {
-  blog: {
-    frontmatter: BlogFrontmatter;
-  };
-}
-
-interface BlogPageType {
-  edges: BlogEdge[];
-}
-
 const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -174,10 +156,7 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
               height='550px'
             >
               <Box borderRadius='lg' overflow='hidden' height='200px'>
-                <Link
-                  textDecoration='none'
-                  _hover={{ textDecoration: 'none' }}
-                >
+                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
                   <Image
                     transform='scale(1.0)'
                     src={item.blog.frontmatter?.image!}
@@ -192,10 +171,7 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
               </Box>
               <BlogTags tags={['Engineering', 'Product']} marginTop='3' />
               <Heading fontSize='xl' marginTop='2' noOfLines={2}>
-                <Link
-                  textDecoration='none'
-                  _hover={{ textDecoration: 'none' }}
-                >
+                <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
                   {item.blog.frontmatter?.title}
                 </Link>
               </Heading>
@@ -203,11 +179,16 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
                 {item.blog.frontmatter?.description}
               </Text>
               <Box marginTop='4'>
-              <Link href={`/blog/${item.blog.frontmatter.slug}`} textDecoration='none' _hover={{ textDecoration: 'none' }}>
-        <Button colorScheme='red' variant='outline'> Show More </Button>
-      </Link>
-
-</Box>
+                <Link
+                  href={`${item.blog.fields?.slug}`}
+                  textDecoration='none'
+                  _hover={{ textDecoration: 'none' }}
+                >
+                  <Button colorScheme='red' variant='outline'>
+                    Show More
+                  </Button>
+                </Link>
+              </Box>
 
               <BlogAuthor
                 name={item.blog.frontmatter?.author!}
