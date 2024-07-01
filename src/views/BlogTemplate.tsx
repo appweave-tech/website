@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { graphql } from 'gatsby';
 import { Container, Heading, Text, Image, Box, Flex } from '@chakra-ui/react';
 
 export type BlogPageProps = {
@@ -57,3 +58,22 @@ const BlogTemplate: React.FC<BlogPageProps> = ({ data }) => {
 };
 
 export default BlogTemplate;
+
+export const query = graphql`
+  query BlogBySlug($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
+      frontmatter {
+        title
+        description
+        image
+        author
+        date(formatString: "MMMM DD, YYYY")
+        tags {
+          tag
+        }
+      }
+    }
+  }
+`;
+
