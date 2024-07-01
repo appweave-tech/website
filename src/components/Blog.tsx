@@ -153,7 +153,7 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
               borderRadius='lg'
               overflow='hidden'
               p='6'
-              height='550px'
+              height='500px'
             >
               <Box borderRadius='lg' overflow='hidden' height='200px'>
                 <Link textDecoration='none' _hover={{ textDecoration: 'none' }}>
@@ -178,17 +178,6 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
               <Text as='p' fontSize='md' marginTop='2' noOfLines={3}>
                 {item.blog.frontmatter?.description}
               </Text>
-              <Box marginTop='4'>
-                <Link
-                  href={`${item.blog.fields?.slug}`}
-                  textDecoration='none'
-                  _hover={{ textDecoration: 'none' }}
-                >
-                  <Button colorScheme='red' variant='outline'>
-                    Show More
-                  </Button>
-                </Link>
-              </Box>
 
               <BlogAuthor
                 name={item.blog.frontmatter?.author!}
