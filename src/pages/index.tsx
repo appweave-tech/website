@@ -115,6 +115,9 @@ export const query = graphql`
     ) {
       edges {
         blog: node {
+          fields {
+            slug
+          }
           fileAbsolutePath
           frontmatter {
             date
