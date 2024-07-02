@@ -51,25 +51,53 @@ export default function Footer(props: FooterPropType) {
           >
             <Stack align={"flex-start"}>
               <ListHeader>Company</ListHeader>
-              <Link href={"#about"}>About us</Link>
-              <Link href={"#services"}>Services</Link>
-              <Link href={"#testimonial"}>Testimonials</Link>
+              <Link 
+                  href={"#about"}
+                  _hover={{
+                    textDecoration: "none",
+                  }}
+                  >About us</Link>
+              <Link 
+                   href={"#services"}
+                   _hover={{
+                    textDecoration: "none",
+                  }}
+                  >Services</Link>
+              <Link 
+                   href={"#testimonial"}
+                   _hover={{
+                    textDecoration: "none",
+                  }} 
+                  >Testimonials</Link>
             </Stack>
             <Stack align={"flex-start"}>
               <ListHeader>Support</ListHeader>
-              <Link href={"#"}>FAQs</Link>
-              <Link href={"#"}>Terms of Service</Link>
-              <Link href={"#"}>Privacy Policy</Link>
+              <Link 
+                   href={"#"} 
+                   _hover={{
+                    textDecoration: "none",
+                  }}>
+                    FAQs</Link>
+              <Link 
+                  href={"#"} 
+                  _hover={{
+                    textDecoration: "none",
+                  }} >Terms of Service</Link>
+              <Link 
+                  href={"#"}  
+                  _hover={{
+                    textDecoration: "none",
+                  }} >Privacy Policy</Link>
             </Stack>
-            <Stack direction={"column"} spacing={4} align={"flex-start"}>
+            <Stack direction={"column"} spacing={1} align={"flex-start"}>
               <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter size={"2rem"} />
+                <FaTwitter size={"3rem"} />
               </SocialButton>
               <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube size={"2rem"} />
+                <FaYoutube size={"3rem"} color="red.400" />
               </SocialButton>
               <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram size={"2rem"} />
+                <FaInstagram size={"3rem"} color="red.400"/>
               </SocialButton>
             </Stack>
           </SimpleGrid>

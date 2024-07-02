@@ -12,10 +12,12 @@ const SocialButton = ({
 }) => {
   return (
     <Button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+      colorScheme={"red"}
+      bg={"red.400"}
       rounded={"full"}
-      w={8}
-      h={8}
+      w={10}
+      h={10}
+      p= {2}
       cursor={"pointer"}
       as={"a"}
       href={href}
@@ -23,8 +25,9 @@ const SocialButton = ({
       alignItems={"center"}
       justifyContent={"center"}
       transition={"background 0.3s ease"}
+      
       _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
+        bg: "red.500",
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
