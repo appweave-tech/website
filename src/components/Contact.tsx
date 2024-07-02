@@ -58,7 +58,7 @@ export default function Contact(props: ContactType) {
             >
               <Text
                 w={"100%"}
-                mb={{ sm: 3, md: 3, lg: 5 }}
+                mb={"2rem"}
                 fontSize={20}
                 fontWeight={600}
                 as={"span"}
@@ -73,9 +73,10 @@ export default function Contact(props: ContactType) {
                 method="post"
                 data-netlify-honeypot="bot-field"
                 data-netlify="true"
+                
               >
                 <Box w={"100%"}>
-                  <SimpleGrid columns={{ sm: 1, md: 1 }} spacing="30px">
+                  <SimpleGrid columns={{ sm: 1, md: 1 }} spacing="1rem">
                     <input type="hidden" name="form-name" value="contact" />
                     <FormControl id="name" isRequired>
                       <FormLabel>Your Name</FormLabel>
@@ -98,7 +99,7 @@ export default function Contact(props: ContactType) {
                   </SimpleGrid>
                 </Box>
 
-                <FormControl id="Subject" margin={"30px 0px"} isRequired>
+                <FormControl id="Subject" margin={"1rem 0px"} isRequired>
                   <FormLabel>Subject</FormLabel>
                   <Input
                     type="text"
@@ -107,7 +108,7 @@ export default function Contact(props: ContactType) {
                     placeholder="Subject"
                   />
                 </FormControl>
-                <FormControl id="message" margin={"30px 0px"} isRequired>
+                <FormControl id="message" margin={"1rem 0px"} isRequired>
                   <FormLabel>Message</FormLabel>
                   <Textarea
                     borderColor="gray.300"
@@ -190,7 +191,7 @@ export default function Contact(props: ContactType) {
               </Box>
               <Box
                 position={"relative"}
-                top={28}
+                top={20}
                 height={"300px"}
                 rounded={"2xl"}
                 width={"full"}
