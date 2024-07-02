@@ -93,9 +93,10 @@ export const query = graphql`
           }
         }
         contact {
-          phoneNumber
+          phone
           email
           address
+          contactImage
         }
         blurbs {
           blogList {

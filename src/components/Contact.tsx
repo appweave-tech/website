@@ -5,7 +5,6 @@ import {
   Text,
   SimpleGrid,
   Button,
-  VStack,
   FormControl,
   FormLabel,
   Input,
@@ -15,7 +14,7 @@ import {
   Flex,
   Stack,
   useColorModeValue,
-  extendTheme,
+  Image,
   Link,
   textDecoration,
 } from "@chakra-ui/react";
@@ -29,6 +28,7 @@ import {
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
 import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
+// import contactImage from ".../static/images/contact.png";
 
 export type ContactType = NonNullable<IndexPageFrontmatterType>["contact"];
 
@@ -38,225 +38,175 @@ export default function Contact(props: ContactType) {
       id="contact"
       maxW={"100%"}
       mt={0}
-      centerContent
       overflow="hidden"
       as="section"
       bg={useColorModeValue("gray.100", "gray.700")}
     >
-      <Box
-        bg={useColorModeValue("gray.100", "gray.700")}
-        justifySelf={"center"}
-        margin={"2px 4em"}
-        w={"100%"}
-      >
-        <Heading textAlign={"center"}>Contact us</Heading>
-        <Text
-          mt={{ sm: 3, md: 3, lg: 5 }}
-          color={useColorModeValue("gray.600", "gray.400")}
-          textAlign={"center"}
-        >
-          You can contact us various method
-        </Text>
-      </Box>
+      
+      
+          <Flex w={"100%"} justifyContent={"space-between"}>
+            {/* left box */}
 
-      <Box
-        py={{ base: 5, lg: 10 }}
-        w={"100%"}
-        bg={useColorModeValue("gray.100", "gray.700")}
-        display={"flex"}
-        placeItems={"center"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-      >
-        <SimpleGrid
-          columns={{ sm: 1, md: 3 }}
-          spacing={{ sm: "3rem", md: "3rem", lg: "6rem" }}
-          bg={useColorModeValue("gray.100", "gray.700")}
-        >
-          <Flex
-            w={48}
-            align={"center"}
-            justify={"center"}
-            color={useColorModeValue("gray.600", "gray.400")}
-            rounded={"full"}
-            bg={useColorModeValue("gray.100", "gray.700")}
-          >
-            <Stack placeItems={"center"} mt={5}>
-              <MdLocationOn color="#f56565" size="3rem" />
+            <Box
+              w={"40%"}
+              boxShadow="md"
+              m={"0px auto 3rem auto"}
+              p="6"
+              rounded="md"
+              bg={useColorModeValue("white", "gray.600")}
+              borderRadius="lg"
+            >
               <Text
-                color={useColorModeValue("gray.600", "gray.400")}
-                fontWeight={"600"}
-                fontFamily={"var(--chakra-colors-chakra-body-text)"}
-                fontSize={"1rem"}
+                w={"100%"}
+                mb={{ sm: 3, md: 3, lg: 5 }}
+                fontSize={20}
+                fontWeight={600}
+                as={"span"}
+                color={useColorModeValue("red.400", "red.500")}
+                textAlign={"center"}
               >
-                ADDRESS
+                Fill the form to contact us
               </Text>
-              <Text m={0} color="gray.500" fontSize={"0.8rem"}>
-                {props?.address}
-              </Text>
-            </Stack>
-          </Flex>
-          <Flex
-            w={48}
-            align={"center"}
-            justify={"center"}
-            color={useColorModeValue("gray.600", "gray.400")}
-            rounded={"full"}
-            bg={useColorModeValue("gray.100", "gray.700")}
-            mb={1}
-          >
-            <Link
-              href={"tel:" + props?.phoneNumber}
-              isExternal
-              display={"flex"}
-              justifyContent={"center"}
-              _hover={{
-                textDecoration: "none"
-              }}
-            >
-              <Stack placeItems={"center"}>
-                <MdPhone color="#f56565" size="3rem" />
-                <Text
-                  color={useColorModeValue("gray.600", "gray.400")}
-                  textAlign={"center"}
-                  fontWeight={"600"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                >
-                  PHONE NUMBER
-                </Text>
-                <Text
-                  color="gray.500"
-                  textAlign={"center"}
-                  _hover={{
-                    textDecoration: "none",
-                    
-                  }}
-                >
-                  {props?.phoneNumber}
-                </Text>
-              </Stack>
-            </Link>
-          </Flex>
-          <Flex
-            w={48}
-            align={"center"}
-            justify={"center"}
-            color={useColorModeValue("gray.600", "gray.400")}
-            rounded={"full"}
-            bg={useColorModeValue("gray.100", "gray.700")}
-            mb={1}
-          >
-            <Link
-              href={"mailto:" + props?.email}
-              isExternal
-              display={"flex"}
-              justifyContent={"center"}
-              _hover={{
-                textDecoration: "none",
-              }}
-            >
-              <Stack placeItems={"center"}>
-                <MdEmail color="#f56565" size="3rem" />
-                <Text
-                  color={useColorModeValue("gray.600", "gray.400")}
-                  fontWeight={"600"}
-                  textAlign={"center"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                >
-                  EMAIL
-                </Text>
-                <Text color="gray.500" textAlign={"center"} textDecoration={"none"}>
-                  {props?.email}
-                </Text>
-              </Stack>
-            </Link>
-          </Flex>
-        </SimpleGrid>
-      </Box>
-      <Box
-        boxShadow="md"
-        p="6"
-        rounded="md"
-        bg={useColorModeValue("white", "gray.600")}
-        borderRadius="lg"
-        w={{ sm: "96%", md: "64%" }}
-        margin={"2rem 0px 4rem 0px"}
-      >
-            <Text
-          mb={{ sm: 3, md: 3, lg: 5 }}
-          color={useColorModeValue("gray.800", "gray.400")}
-          fontWeight={500}
-          textAlign={"center"}
-        >
-          Fill up the form below to contact us
-        </Text>
-        <form
-          name="contact"
-          method="post"
-          data-netlify-honeypot="bot-field"
-          data-netlify="true"
-        >
-          <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }} w={"100%"}>
-         
-            <SimpleGrid columns={{ sm: 1, md: 2 }} spacing="40px">
-              <input type="hidden" name="form-name" value="contact" />
-              <FormControl id="name" isRequired>
-                <FormLabel>Your Name</FormLabel>
-                <InputGroup borderColor="#E0E1E7">
-                  <InputLeftElement pointerEvents="none">
-                    <BsPerson color="gray.800" />
-                  </InputLeftElement>
-                  <Input type="text" name="name" size="md" />
-                </InputGroup>
-              </FormControl>
-              <FormControl id="email" isRequired>
-                <FormLabel>Mail</FormLabel>
-                <InputGroup borderColor="#E0E1E7">
-                  <InputLeftElement pointerEvents="none">
-                    <MdOutlineEmail color="gray.800" />
-                  </InputLeftElement>
-                  <Input type="text" name="email" size="md" />
-                </InputGroup>
-              </FormControl>
-            </SimpleGrid>
-          </Box>
 
-          <FormControl id="Subject" isRequired>
-            <FormLabel>Subject</FormLabel>
-            <Input type="text" name="subject" size="md" placeholder="Subject" />
-          </FormControl>
-          <FormControl id="message" margin={"40px 0px"} isRequired>
-            <FormLabel>Message</FormLabel>
-            <Textarea
-              borderColor="gray.300"
-              _hover={{
-                borderRadius: "gray.300",
-              }}
-              name="message"
-              placeholder="message"
-            />
-          </FormControl>
-          <FormControl id="name">
-            <Flex justifyContent={"center"}>
-              <Button
-                margin={"40px"}
-                type="submit"
-                variant="solid"
-                bg="#f56565"
-                 textAlign={"center"}
-                color="white"
-                // _hover={{}}
+              <form
+                name="contact"
+                method="post"
+                data-netlify-honeypot="bot-field"
+                data-netlify="true"
               >
-                Send Message
-              </Button>
-              </Flex>
-          </FormControl>
-        </form>
-      </Box>
+                <Box w={"100%"}>
+                  <SimpleGrid columns={{ sm: 1, md: 1 }} spacing="30px">
+                    <input type="hidden" name="form-name" value="contact" />
+                    <FormControl id="name" isRequired>
+                      <FormLabel>Your Name</FormLabel>
+                      <InputGroup borderColor="#E0E1E7">
+                        <InputLeftElement pointerEvents="none">
+                          <BsPerson color="gray.800" />
+                        </InputLeftElement>
+                        <Input type="text" name="name" size="md" />
+                      </InputGroup>
+                    </FormControl>
+                    <FormControl id="email" isRequired>
+                      <FormLabel>Mail</FormLabel>
+                      <InputGroup borderColor="#E0E1E7">
+                        <InputLeftElement pointerEvents="none">
+                          <MdOutlineEmail color="gray.800" />
+                        </InputLeftElement>
+                        <Input type="text" name="email" size="md" />
+                      </InputGroup>
+                    </FormControl>
+                  </SimpleGrid>
+                </Box>
+
+                <FormControl id="Subject" margin={"30px 0px"} isRequired>
+                  <FormLabel>Subject</FormLabel>
+                  <Input
+                    type="text"
+                    name="subject"
+                    size="md"
+                    placeholder="Subject"
+                  />
+                </FormControl>
+                <FormControl id="message" margin={"30px 0px"} isRequired>
+                  <FormLabel>Message</FormLabel>
+                  <Textarea
+                    borderColor="gray.300"
+                    _hover={{
+                      borderRadius: "gray.300",
+                    }}
+                    name="message"
+                    placeholder="message"
+                  />
+                </FormControl>
+                <FormControl id="name">
+                  <Flex justifyContent={"center"}>
+                    <Button
+                      // margin={"40px"}
+                      w={"100%"}
+                      type="submit"
+                      variant="solid"
+                      bg="red.400"
+                      textAlign={"center"}
+                      color="white"
+                      _hover={{
+                        background : "red.500"
+                      }}
+                    >
+                      Send Message
+                    </Button>
+                  </Flex>
+                </FormControl>
+              </form>
+            </Box>
+            <Box w={"50%"}>
+              {/*  rigth box */}
+              <Box justifySelf={"center"} margin={"2px auto"} w={"100%"}>
+                <Heading
+                  lineHeight={1.1}
+                  fontWeight={600}
+                  fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+                  textAlign={"center"}
+                >
+                  <Text
+                    as={"span"}
+                    position={"relative"}
+                    zIndex={1}
+                    _after={{
+                      content: "''",
+                      width: "full",
+                      height: "30%",
+                      position: "absolute",
+                      bottom: 2,
+                      left: 0,
+                      bg: "red.400",
+                      zIndex: -1,
+                    }}
+                  >
+                    Contact us
+                  </Text>
+                </Heading>
+                <Link
+                 href={"mailto:" + props?.email}
+                 isExternal
+                 _hover={{
+                  textDecoration: "none",
+                }}
+  
+                >
+                <Text
+                  mt={{ sm: 3, md: 3, lg: 5 }}
+                  color={useColorModeValue("gray.600", "gray.400")}
+                  textAlign={"center"}
+                  fontWeight={500}
+                  fontSize={24}
+                >
+                  Drop us a mail{" "}
+                  <Text as={"span"} color={"red.400"}>
+                    contact@appweave.tech
+                  </Text>
+                </Text>
+                </Link>
+                
+              </Box>
+              <Box
+                position={"relative"}
+                top={28}
+                height={"300px"}
+                rounded={"2xl"}
+                width={"full"}
+                overflow={"hidden"}
+              >
+                <Image
+                  alt={"contact img"}
+                  fit={"contain"}
+                  align={"center"}
+                  w={"98%"}
+                  h={"98%"}
+                  src= {props?.contactImage}
+                />
+              </Box>
+            </Box>
+          </Flex>
     </Container>
   );
 }

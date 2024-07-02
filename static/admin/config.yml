@@ -2,69 +2,67 @@ backend:
   name: git-gateway
   branch: main
   commit_messages:
-    create: "Create {{collection}} “{{slug}}”"
-    update: "Update {{collection}} “{{slug}}”"
-    delete: "Delete {{collection}} “{{slug}}”"
-    uploadMedia: "[skip ci] Upload “{{path}}”"
-    deleteMedia: "[skip ci] Delete “{{path}}”"
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
 
 local_backend: true
 media_folder: static/images
 public_folder: /images
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/data/blog"
+  - name: 'blog'
+    label: 'Blog'
+    folder: 'src/data/blog'
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
       - {
-          label: "Template Key",
-          name: "templateKey",
-          widget: "hidden",
-          default: "blog-page",
+          label: 'Template Key',
+          name: 'templateKey',
+          widget: 'hidden',
+          default: 'blog-page',
         }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
-      - { label: "Image", name: "image", widget: "image"}
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image' }
       - {
-          label: "Publish Date",
-          name: "date",
-          widget: "datetime",
-          default: "",
-          date_format: "DD.MM.YYYY",
-          time_format: "false",
+          label: 'Publish Date',
+          name: 'date',
+          widget: 'datetime',
+          default: '',
+          date_format: 'DD.MM.YYYY',
+          time_format: 'false',
         }
-      - { label: "Tags",
-          name: "tags", 
-          widget: "list",
-          fields:
-            [
-              { label: "Tag", name: "tag", widget: "string"}
-            ]
+      - {
+          label: 'Tags',
+          name: 'tags',
+          widget: 'list',
+          fields: [{ label: 'Tag', name: 'tag', widget: 'string' }],
         }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
 
-  - name: "pages"
-    label: "Pages"
+  - name: 'pages'
+    label: 'Pages'
     files:
-      - file: "src/data/index.md"
-        label: "Landing Page"
-        name: "index"
+      - file: 'src/data/index.md'
+        label: 'Landing Page'
+        name: 'index'
         fields:
           - {
-              label: "Template Key",
-              name: "templateKey",
-              widget: "hidden",
-              default: "index-page",
+              label: 'Template Key',
+              name: 'templateKey',
+              widget: 'hidden',
+              default: 'index-page',
             }
 
           - {
-              label: "Hero",
-              name: "hero",
-              widget: "object",
+              label: 'Hero',
+              name: 'hero',
+              widget: 'object',
               fields:
                 [
                   { label: TitleUp, name: titleUp, widget: string },
@@ -109,7 +107,12 @@ collections:
                           widget: object,
                           fields:
                             [
-                              { label: Icon, name: icon, widget: icon, iconFamily: di },
+                              {
+                                label: Icon,
+                                name: icon,
+                                widget: icon,
+                                iconFamily: di,
+                              },
                               { label: BgColor, name: bgColor, widget: color },
                             ],
                         },
@@ -146,192 +149,170 @@ collections:
                 ],
             }
           - {
-             label : "contact",
-             name : "Contact",
-             widget : object,
-             fields : 
-               [
-                {
-                  label : Location, 
-                  name : location, 
-                  widget : object,
-                  fields : 
-                        [
-                          {label : address , name : address, widget : string},
-                          {
-                            label : logo , 
-                            name : logo , 
-                            widget : object,
-                            fields : 
-                                [
-                                  {label : icon ,name : icon , widget : icon},
-                                  {label : color , name : color , widget : color},
-                                ]
-                             }
-                        ]
-                  },
-                {
-                  label : Phone, 
-                  name : Phone, 
-                  widget : object, 
-                  fields : 
-                        [
-                          { label : PhoneNumber ,name : phonenumber , widget : string},
-                          { 
-                            label : logo , 
-                            name : logo , 
-                            widget : object,
-                            fields : 
-                                [
-                                  {label : icon , name : phoneIcon , widget : icon},
-                                  {label : Color, name : phoneColor , widget : color}
-                                ]
-                            }
-                        ]
-                   },
-                {
-                  label : Mail, 
-                  name : email, 
-                  widget : object,
-                  fields :
-                      [
-                        {label : Email, name : email, widget : string},
-                        {
-                          label : Logo,
-                          name : emailLogo,
-                          widget : object,
-                          fields : 
-                            [
-                             {label : icon,name : emailIcon, widget : icon},
-                             {label : Color, name : emailColor, widget : color}
-                            ]
-                        }
-                      ]
-                   },
-               ]
-          }
-          
+              label: 'Contact',
+              name: 'contact',
+              widget: object,
+              fields:
+                [
+                  { label: Mail, name: email, widget: string },
+                  { label: Image, name: contactImage, widget: image },
+                ],
+            }
           - {
-              label: "Blurbs",
-              name: "blurbs",
+              label: 'Blurbs',
+              name: 'blurbs',
               widget: object,
               fields:
                 [
                   {
-                    label: "BlogList",
-                    name: "blogList",
+                    label: 'BlogList',
+                    name: 'blogList',
                     widget: list,
                     fields:
                       [
                         {
-                          label: "Blurb", 
-                          name: "blurb", 
-                          widget: "relation", 
-                          collection: "blog", 
-                          search_fields: ['title'], 
-                          value_field: "title", 
-                        }
+                          label: 'Blurb',
+                          name: 'blurb',
+                          widget: 'relation',
+                          collection: 'blog',
+                          search_fields: ['title'],
+                          value_field: 'title',
+                        },
                       ],
-                  }
+                  },
                 ],
             }
           - {
-             label : footer,
-             name : footer,
-             
-             widget : object,
-             fields : 
-               [
-                {
-                  label : company , 
-                  name : company, 
-                  widget : object,
-                  fields : 
-                     [
-                      { label : Aboutus, name : aboutus, widget : string} ,
-                      { label : services, name : Services, widget : string},
-                      { label : Testimonials,name : testimonials, widget : string},
-                     ]
-                  },
-                {
-                  label : Support , 
-                  name : support, 
-                  widget : object,
-                  fields : 
+              label: footer,
+              name: footer,
+              widget: object,
+              fields:
+                [
+                  {
+                    label: company,
+                    name: company,
+                    widget: object,
+                    fields:
                       [
-                        {label : FAQs, name : FAQs, widget : string},
-                        {label : Terms of Service,name : TermService, widget : string},
-                        {label : Privacy Policy, name : PrivacyPolicy, widget : string}
-                      ]
+                        { label: Aboutus, name: aboutus, widget: string },
+                        { label: services, name: Services, widget: string },
+                        {
+                          label: Testimonials,
+                          name: testimonials,
+                          widget: string,
+                        },
+                      ],
                   },
-                {
-                  label : social , 
-                  name : social, 
-                  widget: object,
-                  fields :
-                     [
-                      {
-                        label : twiter ,
-                        name : twiter ,
-                        widget : object ,
-                        fields : 
-                          [
-                            { label : link , name : link , widget : string },
-                            { 
-                              label : logo , 
-                              name : logo , 
-                              widget : object,
-                              fields : 
-                                 [
-                                  { label : icon, name : icon , widget : icon },
-                                  { label : IconColor, name : CoLor , widget : color },
-                                  { label : BGColor, name : BGCoLor , widget : color },
-                                 ]
-                               }
-                          ]
-                      },
-                     {
-                        label : YouTube,
-                        name : YouTube,
-                        widget : object ,
-                        fields : 
-                          [
-                            { label : link , name : link , widget : string },
-                            { 
-                              label : logo , 
-                              name : logo , 
-                              widget : object,
-                              fields : 
-                                 [
-                                  { label : icon, name : icon , widget : icon },
-                                  { label : IconColor, name : CoLor , widget : color },
-                                  { label : BGColor, name : BGCoLor , widget : color },
-                                 ]
-                               }
-                          ]
-                      },
-                      {
-                        label : instagram ,
-                        name : instagram,
-                        widget : object ,
-                        fields : 
-                          [
-                            { label : link , name : link , widget : string },
-                            { 
-                              label : logo , 
-                              name : logo , 
-                              widget : object,
-                              fields : 
-                                 [
-                                  { label : icon, name : icon , widget : icon },
-                                  { label : IconColor, name : CoLor , widget : color },
-                                  { label : BGColor, name : BGCoLor , widget : color },
-                                 ]
-                               }
-                          ]
-                      },
-                     ]
-                   }
-               ]
-             
+                  {
+                    label: Support,
+                    name: support,
+                    widget: object,
+                    fields:
+                      [
+                        { label: FAQs, name: FAQs, widget: string },
+                        {
+                          label: Terms of Service,
+                          name: TermService,
+                          widget: string,
+                        },
+                        {
+                          label: Privacy Policy,
+                          name: PrivacyPolicy,
+                          widget: string,
+                        },
+                      ],
+                  },
+                  {
+                    label: social,
+                    name: social,
+                    widget: object,
+                    fields:
+                      [
+                        {
+                          label: twiter,
+                          name: twiter,
+                          widget: object,
+                          fields:
+                            [
+                              { label: link, name: link, widget: string },
+                              {
+                                label: logo,
+                                name: logo,
+                                widget: object,
+                                fields:
+                                  [
+                                    { label: icon, name: icon, widget: icon },
+                                    {
+                                      label: IconColor,
+                                      name: CoLor,
+                                      widget: color,
+                                    },
+                                    {
+                                      label: BGColor,
+                                      name: BGCoLor,
+                                      widget: color,
+                                    },
+                                  ],
+                              },
+                            ],
+                        },
+                        {
+                          label: YouTube,
+                          name: YouTube,
+                          widget: object,
+                          fields:
+                            [
+                              { label: link, name: link, widget: string },
+                              {
+                                label: logo,
+                                name: logo,
+                                widget: object,
+                                fields:
+                                  [
+                                    { label: icon, name: icon, widget: icon },
+                                    {
+                                      label: IconColor,
+                                      name: CoLor,
+                                      widget: color,
+                                    },
+                                    {
+                                      label: BGColor,
+                                      name: BGCoLor,
+                                      widget: color,
+                                    },
+                                  ],
+                              },
+                            ],
+                        },
+                        {
+                          label: instagram,
+                          name: instagram,
+                          widget: object,
+                          fields:
+                            [
+                              { label: link, name: link, widget: string },
+                              {
+                                label: logo,
+                                name: logo,
+                                widget: object,
+                                fields:
+                                  [
+                                    { label: icon, name: icon, widget: icon },
+                                    {
+                                      label: IconColor,
+                                      name: CoLor,
+                                      widget: color,
+                                    },
+                                    {
+                                      label: BGColor,
+                                      name: BGCoLor,
+                                      widget: color,
+                                    },
+                                  ],
+                              },
+                            ],
+                        },
+                      ],
+                  },
+                ],
             }
