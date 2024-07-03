@@ -8,11 +8,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaXTwitter,FaLinkedinIn,FaGithub } from "react-icons/fa6";
 import Logo from "./Logo";
 import SocialButton from "./SocialButton";
 import { ContactType } from "./Contact";
-
+import { IndexPageFrontmatterType } from "../pages";
+export type FooterType = NonNullable<IndexPageFrontmatterType>["footer"];
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
     <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
@@ -21,7 +22,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
   );
 };
 
-type FooterPropType = { contact: ContactType };
+type FooterPropType = { footerprops: FooterType };
 
 export default function Footer(props: FooterPropType) {
   return (
@@ -90,14 +91,14 @@ export default function Footer(props: FooterPropType) {
                   }} >Privacy Policy</Link>
             </Stack>
             <Stack direction={"column"} spacing={1} align={"flex-start"}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter size={"3rem"} />
+              <SocialButton label={"Twitter"} href={props?.footerprops?.social?.twiter?.link!}>
+                <FaXTwitter size={"3rem"} />
               </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube size={"3rem"} color="red.400" />
+              <SocialButton label={"linkedin"} href={props?.footerprops?.social?.linkedin?.link!}>
+                <FaLinkedinIn size={"3rem"} color="red.400" />
               </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram size="2rem" color="red.400"/>
+              <SocialButton label={"github"} href={props?.footerprops?.social?.Github?.link!}>
+                <FaGithub size={props?.footerprops?.social?.Github?.size!} color="red.400"/>
               </SocialButton>
             </Stack>
           </SimpleGrid>

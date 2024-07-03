@@ -28,7 +28,6 @@ import {
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
 import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
-// import contactImage from ".../static/images/contact.png";
 
 export type ContactType = NonNullable<IndexPageFrontmatterType>["contact"];
 
@@ -66,7 +65,6 @@ export default function Contact(props: ContactType) {
                 
                 fontSize={22}
                 fontWeight={600}
-                // bg={"red"}
                 as={"span"}
                 color={useColorModeValue("red.400", "red.500")}
                 textAlign={"center"}

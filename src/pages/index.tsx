@@ -38,7 +38,7 @@ export const IndexPageTemplate = ({
   indexPage: IndexPageFrontmatterType;
   blogs: BlogPageType;
 }) => {
-  const { hero, services, testimonials, contact } = indexPage!;
+  const { hero, services, testimonials, contact ,footer} = indexPage!;
   blogs.edges.map((item) => console.log(item.blog.frontmatter?.title));
   return (
     <>
@@ -52,7 +52,7 @@ export const IndexPageTemplate = ({
         <Contact {...contact!} />
       </main>
 
-      <Footer contact={contact!} />
+      <Footer footerprops={footer!} />
     </>
   );
 };
