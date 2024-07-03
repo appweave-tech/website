@@ -235,6 +235,7 @@ collections:
                           fields:
                             [
                               { label: link, name: link, widget: string },
+                              { label: size, name: size, widget: string },
                               {
                                 label: logo,
                                 name: logo,
@@ -257,12 +258,13 @@ collections:
                             ],
                         },
                         {
-                          label: YouTube,
-                          name: YouTube,
+                          label: Linkedin,
+                          name: linkedin,
                           widget: object,
                           fields:
                             [
                               { label: link, name: link, widget: string },
+                              { label: size, name: size, widget: string },
                               {
                                 label: logo,
                                 name: logo,
@@ -285,12 +287,13 @@ collections:
                             ],
                         },
                         {
-                          label: instagram,
-                          name: instagram,
+                          label: Github,
+                          name: Github,
                           widget: object,
                           fields:
                             [
                               { label: link, name: link, widget: string },
+                              { label: size, name: size, widget: string },
                               {
                                 label: logo,
                                 name: logo,

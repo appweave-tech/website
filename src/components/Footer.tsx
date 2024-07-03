@@ -97,7 +97,7 @@ export default function Footer(props: FooterPropType) {
                 <FaYoutube size={"3rem"} color="red.400" />
               </SocialButton>
               <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram size={"3rem"} color="red.400"/>
+                <FaInstagram size="2rem" color="red.400"/>
               </SocialButton>
             </Stack>
           </SimpleGrid>

@@ -14,20 +14,32 @@ export type IndexPageFrontmatterType = NonNullable<
   Queries.IndexPageQuery["indexPage"]
 >["frontmatter"];
 
-export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
+export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>;
 
-export type BlogPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]>
+export type BlogPageEdgeType = NonNullable<
+  NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]
+>;
 
 // Step 2: Define your component
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   console.log(data);
-  return <IndexPageTemplate indexPage={data.indexPage?.frontmatter!} blogs={data.blogs} />;
+  return (
+    <IndexPageTemplate
+      indexPage={data.indexPage?.frontmatter!}
+      blogs={data.blogs}
+    />
+  );
 };
 
-export const IndexPageTemplate = ({ indexPage, blogs }: {indexPage: IndexPageFrontmatterType, blogs: BlogPageType}) => {
-  const { hero, services, testimonials, contact } =
-    indexPage!;
-  blogs.edges.map((item) => (console.log(item.blog.frontmatter?.title)))
+export const IndexPageTemplate = ({
+  indexPage,
+  blogs,
+}: {
+  indexPage: IndexPageFrontmatterType;
+  blogs: BlogPageType;
+}) => {
+  const { hero, services, testimonials, contact } = indexPage!;
+  blogs.edges.map((item) => console.log(item.blog.frontmatter?.title));
   return (
     <>
       <Navbar />
@@ -103,6 +115,38 @@ export const query = graphql`
             blurb
           }
         }
+        footer {
+          social {
+            Github {
+              size
+              link
+            }
+            YouTube {
+              link
+            }
+            instagram {
+              link
+            }
+            linkedin {
+              size
+              link
+            }
+            twiter {
+              link
+              size
+            }
+          }
+          company {
+            testimonials
+            Services
+            aboutus
+          }
+          support {
+            PrivacyPolicy
+            TermService
+            FAQs
+          }
+        }
       }
     }
     blogs: allMarkdownRemark(
@@ -116,7 +160,7 @@ export const query = graphql`
             title
             author
             description
-            tags{
+            tags {
               tag
             }
             image

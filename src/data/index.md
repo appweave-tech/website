@@ -97,6 +97,22 @@ footer:
         CoLor: "#ffffff"
         icon: FiTwitter
       link: /
+      size: 2rem
+    linkedin:
+      logo:
+        CoLor: "#ffffff"
+        BGCoLor: "#f56565"
+        icon: FiLinkedin
+        size: 2rem
+      size: 2rem
+      link: linkedin.com/company/appweave
+    Github:
+      logo:
+        BGCoLor: "#f56565"
+        CoLor: "#ffffff"
+        icon: FiGithub
+      size: 2rem
+      link: https://github.com/appweave-tech
   support:
     PrivacyPolicy: /
     TermService: /
