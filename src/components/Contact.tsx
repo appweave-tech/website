@@ -36,38 +36,45 @@ export default function Contact(props: ContactType) {
   return (
     <Container
       id="contact"
-      maxW={"100%"}
-      mt={0}
+      maxW={"9xl"}
       overflow="hidden"
+      display={"flex"}
+      justifyContent={"center"}
       as="section"
       bg={useColorModeValue("gray.100", "gray.700")}
     >
       
       
-          <Flex w={"100%"} justifyContent={"space-between"}>
+          <Flex  maxW={"6xl"} direction={{sm : "column-reverse" , md : "row", lg : "row"}} gap={"3rem"}>
             {/* left box */}
 
             <Box
-              w={"40%"}
+              w={"32rem"}
+              
               boxShadow="md"
-              m={"0px auto 3rem auto"}
-              p="6"
+              m={"1rem auto 3rem auto"}
+              p="1rem"
               rounded="md"
               bg={useColorModeValue("white", "gray.600")}
               borderRadius="lg"
             >
+               <Box w={"32rem"}
+               bg={"yellow"}
+                mb={4}
+                textAlign={"center"}
+                mt={0}>
               <Text
-                w={"100%"}
-                mb={"2rem"}
-                fontSize={20}
+                
+                fontSize={22}
                 fontWeight={600}
+                // bg={"red"}
                 as={"span"}
                 color={useColorModeValue("red.400", "red.500")}
                 textAlign={"center"}
               >
                 Fill the form to contact us
               </Text>
-
+              </Box>
               <form
                 name="contact"
                 method="post"
@@ -75,7 +82,7 @@ export default function Contact(props: ContactType) {
                 data-netlify="true"
                 
               >
-                <Box w={"100%"}>
+                <Box w={"32rem"}>
                   <SimpleGrid columns={{ sm: 1, md: 1 }} spacing="1rem">
                     <input type="hidden" name="form-name" value="contact" />
                     <FormControl id="name" isRequired>
@@ -84,7 +91,7 @@ export default function Contact(props: ContactType) {
                         <InputLeftElement pointerEvents="none">
                           <BsPerson color="gray.800" />
                         </InputLeftElement>
-                        <Input type="text" name="name" size="md" />
+                        <Input type="text" name="name" size="md"  w={"26rem"} />
                       </InputGroup>
                     </FormControl>
                     <FormControl id="email" isRequired>
@@ -93,13 +100,13 @@ export default function Contact(props: ContactType) {
                         <InputLeftElement pointerEvents="none">
                           <MdOutlineEmail color="gray.800" />
                         </InputLeftElement>
-                        <Input type="text" name="email" size="md" />
+                        <Input type="text" name="email" size="md" w={"26rem"}/>
                       </InputGroup>
                     </FormControl>
                   </SimpleGrid>
                 </Box>
 
-                <FormControl id="Subject" margin={"1rem 0px"} isRequired>
+                <FormControl id="Subject" margin={"1rem 0rem"} isRequired>
                   <FormLabel>Subject</FormLabel>
                   <Input
                     type="text"
@@ -108,7 +115,7 @@ export default function Contact(props: ContactType) {
                     placeholder="Subject"
                   />
                 </FormControl>
-                <FormControl id="message" margin={"1rem 0px"} isRequired>
+                <FormControl id="message" margin={"1rem 0rem"} isRequired>
                   <FormLabel>Message</FormLabel>
                   <Textarea
                     borderColor="gray.300"
@@ -122,7 +129,7 @@ export default function Contact(props: ContactType) {
                 <FormControl id="name">
                   <Flex justifyContent={"center"}>
                     <Button
-                      // margin={"40px"}
+                     
                       w={"100%"}
                       type="submit"
                       variant="solid"
@@ -139,9 +146,9 @@ export default function Contact(props: ContactType) {
                 </FormControl>
               </form>
             </Box>
-            <Box w={"50%"}>
+            <Box w={"42rem"} >
               {/*  rigth box */}
-              <Box justifySelf={"center"} margin={"2px auto"} w={"100%"}>
+              <Box justifySelf={"center"} margin={"2px auto"} w={"42rem"}>
                 <Heading
                   lineHeight={1.1}
                   fontWeight={600}
@@ -192,13 +199,15 @@ export default function Contact(props: ContactType) {
               <Box
                 position={"relative"}
                 top={20}
-                height={"300px"}
+                margin={"0rem auto"}
+                height={"24rem"}
                 rounded={"2xl"}
-                width={"full"}
+                
+                width={{sm:"lg",md:"full",lg:"full"}}
                 overflow={"hidden"}
               >
                 <Image
-                  alt={"contact img"}
+                  alt={"contact image"}
                   fit={"contain"}
                   align={"center"}
                   w={"98%"}
