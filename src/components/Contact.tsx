@@ -44,12 +44,16 @@ export default function Contact(props: ContactType) {
     >
       
       
-          <Flex  maxW={"6xl"} direction={{sm : "column" , md : "column", lg : "row"}} gap={"3rem"}>
+          <Flex  
+              maxW={{base: "4xl",sm :"4xl" ,md: "6xl",lg :"6xl" }}
+              direction={{base: "column",sm :"column" ,md: "column",lg :"row" }} 
+              m={ {base: "0rem 2rem", sm : "0rem 2rem", md : "0rem 4rem", lg: "0rem 4rem"}} 
+              gap={"3rem"}>
             {/* left box */}
 
             <Box
-              w={"32rem"}
-              order={{sm:2,md:2,lg:1}}
+              w={{base: "20rem", sm: "28rem", md :"32rem",lg: "32rem"}}
+              order={{base : 2,sm:2,md:2,lg:1}}
               boxShadow="md"
               m={"1rem auto 3rem auto"}
               p="1rem"
@@ -57,7 +61,7 @@ export default function Contact(props: ContactType) {
               bg={useColorModeValue("white", "gray.600")}
               borderRadius="lg"
             >
-               <Box w={"28rem"}
+               <Box  w={{base: "20rem", sm: "28rem", md :"32rem",lg: "32rem"}}
                 mb={4}
                 textAlign={"center"}
                 mt={0}>
@@ -79,8 +83,8 @@ export default function Contact(props: ContactType) {
                 data-netlify="true"
                 
               >
-                <Box w={"28rem"}>
-                  <SimpleGrid columns={{ sm: 1, md: 1 }} spacing="1rem">
+                <Box  w={{base: "20rem", sm: "24rem", md :"28rem",lg: "28rem"}}>
+                  <SimpleGrid columns={{base: 1, sm: 1, md: 1 }} spacing="1rem">
                     <input type="hidden" name="form-name" value="contact" />
                     <FormControl id="name" isRequired>
                       <FormLabel>Your Name</FormLabel>
@@ -88,7 +92,7 @@ export default function Contact(props: ContactType) {
                         <InputLeftElement pointerEvents="none">
                           <BsPerson color="gray.800" />
                         </InputLeftElement>
-                        <Input type="text" name="name" size="md"  w={"26rem"} />
+                        <Input type="text" name="name" size="md"  w={{base :"18rem", sm: "26rem", md: "26rem", lg: "26rem"}} />
                       </InputGroup>
                     </FormControl>
                     <FormControl id="email" isRequired>
@@ -97,7 +101,7 @@ export default function Contact(props: ContactType) {
                         <InputLeftElement pointerEvents="none">
                           <MdOutlineEmail color="gray.800" />
                         </InputLeftElement>
-                        <Input type="text" name="email" size="md" w={"26rem"}/>
+                        <Input type="text" name="email" size="md"  w={{base :"18rem", sm: "26rem", md: "26rem", lg: "26rem"}}/>
                       </InputGroup>
                     </FormControl>
                   </SimpleGrid>
@@ -107,7 +111,7 @@ export default function Contact(props: ContactType) {
                   <FormLabel>Subject</FormLabel>
                   <Input
                     type="text"
-                    w={"26rem"}
+                    w={{base :"18rem", sm: "26rem", md: "26rem", lg: "26rem"}}
                     name="subject"
                     size="md"
                     placeholder="Subject"
@@ -117,7 +121,7 @@ export default function Contact(props: ContactType) {
                   <FormLabel>Message</FormLabel>
                   <Textarea
                     borderColor="gray.300"
-                    w={"26rem"}
+                    w={{base :"18rem", sm: "26rem", md: "26rem", lg: "26rem"}}
                     _hover={{
                       borderRadius: "gray.300",
                     }}
@@ -147,11 +151,11 @@ export default function Contact(props: ContactType) {
             </Box>
              {/*  rigth box */}
             <Box 
-                w={"42rem"}
-                order={{sm:1,md:1,lg:2}}
+                w={{base: "24rem", sm: "32rem", md :"36rem",lg: "42rem"}}
+                order={{base : 1,sm:1,md:1,lg:2}}
                 >
              
-              <Box justifySelf={"center"} margin={"2px auto"} w={"42rem"}>
+              <Box justifySelf={"center"} margin={"0px auto"} >
                 <Heading
                   lineHeight={1.1}
                   fontWeight={600}
