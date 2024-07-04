@@ -121,12 +121,6 @@ export const query = graphql`
               size
               link
             }
-            YouTube {
-              link
-            }
-            instagram {
-              link
-            }
             linkedin {
               size
               link

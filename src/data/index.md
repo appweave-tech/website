@@ -79,24 +79,12 @@ blurbs:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
 footer:
   social:
-    instagram:
-      logo:
-        CoLor: "#ffffff"
-        BGCoLor: "#f56565"
-        icon: FiInstagram
-      link: /
-    YouTube:
-      logo:
-        BGCoLor: "#f56565"
-        CoLor: "#ffffff"
-        icon: FiYoutube
-      link: /
     twiter:
       logo:
         BGCoLor: "#f56565"
         CoLor: "#ffffff"
         icon: FiTwitter
-      link: /
+      link: https://x.com/AppweaveTech
       size: 2rem
     linkedin:
       logo:
