@@ -20,7 +20,7 @@ interface QueryResult {
   ProjectPage: {
     edges: {
       node: {
-        frontmatter: {
+        fields: {
           slug: string | null;
         };
       };
@@ -73,7 +73,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
 
   // Create project pages
   ProjectPage.edges.forEach(({ node }) => {
-    const slug = node.frontmatter.slug;
+    const slug = node.fields.slug;
     if (!slug) {
       console.warn('Skipping page creation for markdown node with missing slug');
       return;
