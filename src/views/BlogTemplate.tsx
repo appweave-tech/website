@@ -1,0 +1,100 @@
+import React from 'react';
+import Navbar from '../components/Navbar';
+import { graphql } from 'gatsby';
+import {
+  Container,
+  Heading,
+  Text,
+  Image,
+  Box,
+  Flex,
+  Divider,
+  VStack,
+} from '@chakra-ui/react';
+
+export type BlogPageProps = {
+  data: {
+    markdownRemark: {
+      html: string;
+      frontmatter: {
+        title: string;
+        description: string;
+        image: string;
+        author: string;
+        date: string;
+      };
+    };
+  };
+};
+
+const BlogTemplate: React.FC<BlogPageProps> = ({ data }) => {
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  const { markdownRemark } = data;
+  const { frontmatter, html } = markdownRemark;
+  const { title, description, image, author, date } = frontmatter;
+
+  return (
+    <>
+      <Navbar />
+      <Container maxW={'6xl'} as='main' my={8}>
+        <Flex height={300} w={'full'} overflow={'hidden'} borderRadius={10} justifyContent={'center'} alignItems={'center'}>
+          {frontmatter.image && (
+            <Image
+              src={frontmatter.image}
+              alt={frontmatter.title}
+              width={'full'}
+              minWidth={'fit-content'}
+              minHeight={'full'}
+              objectFit='cover'
+            />
+          )}
+        </Flex>
+        <VStack align='start' spacing={4} mt={8}>
+          <Heading as='h1' fontSize='3xl'>
+            {title}
+          </Heading>
+          <Text fontSize='lg' fontWeight='medium'>
+            {description}
+          </Text>
+          <Divider />
+          <Flex align='center' justify='start' width='full'>
+            <Image
+              borderRadius='full'
+              boxSize='40px'
+              src='https://100k-faces.glitch.me/random-image'
+              alt={`Avatar of ${author}`}
+              mr={4}
+            />
+            <Text fontSize='sm' fontWeight='light' color='gray.600'>
+              By {author} on {date}
+            </Text>
+          </Flex>
+          <Box mt={4} dangerouslySetInnerHTML={{ __html: html }} />
+        </VStack>
+      </Container>
+    </>
+  );
+};
+
+export default BlogTemplate;
+
+export const query = graphql`
+  query BlogBySlug($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
+      frontmatter {
+        title
+        description
+        image
+        author
+        date(formatString: "MMMM DD, YYYY")
+        tags {
+          tag
+        }
+      }
+    }
+  }
+`;
