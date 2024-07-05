@@ -27,21 +27,21 @@ collections:
         }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Author", name: "author", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Image", name: "image", widget: "image"}
       - {
           label: "Publish Date",
           name: "date",
           widget: "datetime",
           default: "",
           date_format: "DD.MM.YYYY",
-          time_format: false,
+          time_format: "false",
         }
       - { label: "Tags",
           name: "tags", 
           widget: "list",
           fields:
             [
-              { label: "Tag", name: "tag", widget: "string" }
+              { label: "Tag", name: "tag", widget: "string"}
             ]
         }
       - { label: "Description", name: "description", widget: "string" }
@@ -60,9 +60,8 @@ collections:
           default: "project-page",
         }
       - { label: "Project Title", name: "title", widget: "string" }
-      - { label: "Project Slug", name: "slug", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Image", name: "image", widget: "image"}
+      - { label: "Description", name: "description", widget: "text" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "pages"
@@ -85,50 +84,50 @@ collections:
               widget: "object",
               fields:
                 [
-                  { label: "Title Up", name: "titleUp", widget: "string" },
-                  { label: "Title Down", name: "titleDown", widget: "string" },
-                  { label: "Image", name: "image", widget: "image" },
-                  { label: "Description", name: "description", widget: "text" },
+                  { label: TitleUp, name: titleUp, widget: string },
+                  { label: TitleDown, name: titleDown, widget: string },
+                  { label: Image, name: image, widget: image },
+                  { label: Description, name: description, widget: text },
                   {
-                    label: "Button",
-                    name: "ctaButton",
-                    widget: "list",
+                    label: Button,
+                    name: ctaButton,
+                    widget: list,
                     fields:
                       [
-                        { label: "Text", name: "text", widget: "string" },
-                        { label: "Link", name: "link", widget: "string" },
+                        { label: Text, name: text, widget: string },
+                        { label: Link, name: link, widget: string },
                       ],
                   },
                 ],
             }
 
           - {
-              label: "Services",
-              name: "services",
-              widget: "object",
+              label: Services,
+              name: services,
+              widget: object,
               fields:
                 [
-                  { label: "Service Image", name: "serviceImage", widget: "image" },
-                  { label: "Tag", name: "tag", widget: "string" },
-                  { label: "Title", name: "title", widget: "string" },
-                  { label: "Description", name: "description", widget: "text" },
+                  { label: ServiceImage, name: serviceImage, widget: image },
+                  { label: Tag, name: tag, widget: string },
+                  { label: title, name: title, widget: string },
+                  { label: Description, name: description, widget: text },
                   {
-                    label: "Service",
-                    name: "service",
-                    widget: "list",
+                    label: Service,
+                    name: service,
+                    widget: list,
                     min: 3,
                     max: 6,
                     fields:
                       [
-                        { label: "Title", name: "title", widget: "string" },
+                        { label: Title, name: title, widget: string },
                         {
-                          label: "Logo",
-                          name: "logo",
-                          widget: "object",
+                          label: Logo,
+                          name: logo,
+                          widget: object,
                           fields:
                             [
-                              { label: "Icon", name: "icon", widget: "icon", iconFamily: "di" },
-                              { label: "BgColor", name: "bgColor", widget: "color" },
+                              { label: Icon, name: icon, widget: icon, iconFamily: di },
+                              { label: BgColor, name: bgColor, widget: color },
                             ],
                         },
                       ],
@@ -137,55 +136,55 @@ collections:
             }
 
           - {
-              label: "Testimonials",
-              name: "testimonials",
-              widget: "object",
+              label: Testimonials,
+              name: testimonials,
+              widget: object,
               fields:
                 [
-                  { label: "Title", name: "title", widget: "string" },
-                  { label: "Description", name: "description", widget: "string" },
+                  { label: Title, name: title, widget: string },
+                  { label: Description, name: description, widget: string },
                   {
-                    label: "Testimonial",
-                    name: "testimonial",
-                    widget: "list",
+                    label: Testimonial,
+                    name: testimonial,
+                    widget: list,
                     fields:
                       [
-                        { label: "Title", name: "title", widget: "string" },
+                        { label: Title, name: title, widget: string },
                         {
-                          label: "Description",
-                          name: "description",
-                          widget: "string",
+                          label: Description,
+                          name: description,
+                          widget: string,
                         },
-                        { label: "Profile", name: "profile", widget: "image" },
-                        { label: "Name", name: "name", widget: "string" },
-                        { label: "Bio", name: "bio", widget: "string" },
+                        { label: Profile, name: profile, widget: image },
+                        { label: Name, name: name, widget: string },
+                        { label: Bio, name: bio, widget: string },
                       ],
                   },
                 ],
             }
 
           - {
-              label: "Contact",
-              name: "contact",
-              widget: "object",
+              label: Contact,
+              name: contact,
+              widget: object,
               fields:
                 [
-                  { label: "Phone Number", name: "phoneNumber", widget: "string" },
-                  { label: "Email", name: "email", widget: "string" },
-                  { label: "Address", name: "address", widget: "text" },
+                  { label: PhoneNumber, name: phoneNumber, widget: string },
+                  { label: Email, name: email, widget: string },
+                  { label: Address, name: address, widget: text },
                 ],
             }
 
           - {
               label: "Blurbs",
               name: "blurbs",
-              widget: "object",
+              widget: object,
               fields:
                 [
                   {
                     label: "BlogList",
                     name: "blogList",
-                    widget: "list",
+                    widget: list,
                     fields:
                       [
                         {
