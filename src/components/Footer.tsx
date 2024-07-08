@@ -90,7 +90,9 @@ export default function Footer(props: FooterPropType) {
                     textDecoration: "none",
                   }} >Privacy Policy</Link>
             </Stack>
-            <Stack direction={{base :"row", sm : "column", md: "column" , lg: "column"}} spacing={1} align={"flex-start"}>
+            <Stack 
+            direction={{base :"row", sm : "column", md: "column" , lg: "column"}}
+             mt={{base : "1rem", sm:0,md:0,lg:0}} spacing={2} align={"flex-start"}>
               <SocialButton label={"Twitter"} href={props?.footerprops?.social?.twiter?.link!}>
                 <FaXTwitter size={props?.footerprops?.social?.twiter?.size!} />
               </SocialButton>

@@ -3,7 +3,6 @@ import {
   Box,
   Heading,
   Text,
-  SimpleGrid,
   Button,
   FormControl,
   FormLabel,
@@ -12,20 +11,12 @@ import {
   InputLeftElement,
   Textarea,
   Flex,
-  Stack,
   useColorModeValue,
   Image,
   Link,
-  textDecoration,
 } from "@chakra-ui/react";
-import {
-  MdPhone,
-  MdEmail,
-  MdLocationOn,
-  MdFacebook,
-  MdOutlineEmail,
-} from "react-icons/md";
-import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
+import { BsPerson } from "react-icons/bs";
 import React from "react";
 import { IndexPageFrontmatterType } from "../pages";
 
@@ -103,7 +94,7 @@ export default function Contact(props: ContactType) {
                   />
                 </InputGroup>
               </FormControl>
-              <FormControl id="email"margin={"1rem 0rem"} isRequired>
+              <FormControl id="email" margin={"1rem 0rem"} isRequired>
                 <FormLabel>Mail</FormLabel>
                 <InputGroup borderColor="#E0E1E7">
                   <InputLeftElement pointerEvents="none">
@@ -179,7 +170,7 @@ export default function Contact(props: ContactType) {
                 _after={{
                   content: "''",
                   width: "full",
-                  height: {base :"20%" , sm : "20%" , md : "30%", lg : "30%" },
+                  height: { base: "20%", sm: "20%", md: "30%", lg: "30%" },
                   position: "absolute",
                   bottom: 2,
                   left: 0,
@@ -214,6 +205,7 @@ export default function Contact(props: ContactType) {
           <Box
             position={"relative"}
             top={12}
+            display={{ base: "none", sm: "none", md: "block", lg: "block" }}
             margin={"0rem auto"}
             height={"24rem"}
             rounded={"2xl"}
