@@ -21,7 +21,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
     </Text>
   );
 };
-
+const currYear = new Date().getFullYear();
 type FooterPropType = { footerprops: FooterType };
 
 export default function Footer(props: FooterPropType) {
@@ -44,7 +44,7 @@ export default function Footer(props: FooterPropType) {
               <Logo colorSecondary={useColorModeValue("gray.700", "white")} />
             </Box>
             <Text fontSize={"sm"}>
-              © 2022 Chakra Templates. All rights reserved
+            &#169;  {currYear} Appweave Labs. All rights reserved
             </Text>
           </Stack>
           <SimpleGrid
