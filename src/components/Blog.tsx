@@ -11,6 +11,7 @@ import {
   SpaceProps,
   Container,
   SimpleGrid,
+  Button,
 } from '@chakra-ui/react';
 import { BlogPageType } from '../pages';
 
@@ -32,22 +33,25 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
 };
 
 interface BlogAuthorProps {
+  date: Date
   name: string;
 }
 
-const BlogAuthor: React.FC<BlogAuthorProps> = ({ name }) => {
+const BlogAuthor = (props: BlogAuthorProps) => {
   return (
-    <HStack marginTop='2' spacing='2' display='flex' alignItems='center'>
+    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
       <Image
-        borderRadius='full'
-        boxSize='40px'
-        src='https://100k-faces.glitch.me/random-image'
-        alt={`Avatar of ${name}`}
+        borderRadius="full"
+        boxSize="40px"
+        src="https://100k-faces.glitch.me/random-image"
+        alt={`Avatar of ${props.name}`}
       />
-      <Text fontWeight='medium'>{name}</Text>
+      <Text fontWeight="medium">{props.name}</Text>
+      <Text>—</Text>
+      <Text>{props.date.toLocaleDateString()}</Text>
     </HStack>
-  );
-};
+  )
+}
 
 const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
   const blogList = edges.slice(0, 3); 
@@ -92,12 +96,17 @@ const FeaturedBlogs: React.FC<BlogPageType> = ({ edges }) => {
             <Text as='p' fontSize='md' marginTop='2' noOfLines={3}>
               {item.blog.frontmatter?.description}
             </Text>
-            <BlogAuthor 
-              name={item.blog.frontmatter?.author!}
-            />
+            <BlogAuthor name={item.blog.frontmatter?.author!} date={new Date(item.blog.frontmatter?.date!)} />
           </Box>
         ))}
       </SimpleGrid>
+      <Box textAlign='center' marginTop='5'>
+        <Button>
+          <Link href='/all-blogs' colorScheme='red' size='lg'>
+          View All
+          </Link>
+        </Button>
+      </Box>
     </Container>
   );
 };
