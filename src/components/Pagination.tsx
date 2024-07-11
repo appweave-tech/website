@@ -10,8 +10,8 @@ interface PaginationContainerProps {
 const PaginationContainer: React.FC<PaginationContainerProps> = ({ currentPage, numPages }) => {
   const isFirst = currentPage === 1;
   const isLast = currentPage === numPages;
-  const prevPage = currentPage - 1 === 1 ? '/blog' : `/blog/${currentPage - 1}`;
-  const nextPage = `/blog/${currentPage + 1}`;
+  const prevPage = currentPage - 1 === 1 ? '/all-blogs' : `/all-blogs/${currentPage - 1}`;
+  const nextPage = `/all-blogs/${currentPage + 1}`;
 
   return (
     <Container maxW="7xl" w="full" display="flex" alignItems="center" justifyContent="center" p={{ base: 5, sm: 10 }}>
@@ -38,7 +38,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, numPages, prevPage
         </PaginationButton>
       )}
       {Array.from({ length: numPages }, (_, i) => (
-        <PaginationButton as={Link} to={`/blog/${i === 0 ? '' : i + 1}`} key={`pagination-number${i + 1}`} isActive={currentPage === i + 1}>
+        <PaginationButton as={Link} to={`/all-blogs/${i === 0 ? '' : i + 1}`} key={`pagination-number${i + 1}`} isActive={currentPage === i + 1}>
           {i + 1}
         </PaginationButton>
       ))}
