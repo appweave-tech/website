@@ -2,9 +2,12 @@ import { GatsbyNode } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
 import path from 'path';
 
-export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({
+  node,
+  actions,
+  getNode,
+}) => {
   const { createNodeField } = actions;
-
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode });
     createNodeField({
@@ -15,7 +18,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
   }
 };
 
-// Define types for GraphQL query result
 interface QueryResult {
   ProjectPage: {
     edges: {
@@ -36,11 +38,11 @@ interface QueryResult {
     }[];
   };
 }
-
-export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
+export const createPages: GatsbyNode['createPages'] = async ({
+  graphql,
+  actions,
+}) => {
   const { createPage } = actions;
-
-  // Fetch all markdown slugs for project and blog pages
   const result = await graphql<QueryResult>(`
     query GetAllMarkdownSlugs {
       ProjectPage: allMarkdownRemark(
@@ -67,18 +69,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       }
     }
   `);
-
-  // Destructure data from GraphQL query result
-  const { ProjectPage, BlogPage } = result.data!;
-
-  // Create project pages
+  if (!result.data) {
+    throw new Error('GraphQL query for markdown slugs returned no data');
+  }
+  const { ProjectPage, BlogPage } = result.data;
   ProjectPage.edges.forEach(({ node }) => {
     const slug = node.fields.slug;
     if (!slug) {
-      console.warn('Skipping page creation for markdown node with missing slug');
+      console.warn(
+        'Skipping page creation for markdown node with missing slug'
+      );
       return;
     }
-
     createPage({
       path: `${slug}`,
       component: path.resolve(`./src/views/ProjectTemplate.tsx`),
@@ -88,14 +90,33 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
     });
   });
 
-  // Create blog pages
+
+  const posts = BlogPage.edges;
+  const postsPerPage = 3; 
+  const numPages = Math.ceil(posts.length / postsPerPage);
+  
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/all-blogs` : `/all-blogs/${i + 1}`,
+      component: path.resolve(`./src/views/all-blogs.tsx`),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    });
+  });
+
+
   BlogPage.edges.forEach(({ node }) => {
     const slug = node.fields.slug;
     if (!slug) {
-      console.warn('Skipping page creation for markdown node with missing slug');
+      console.warn(
+        'Skipping page creation for markdown node with missing slug'
+      );
       return;
     }
-
     createPage({
       path: `${slug}`,
       component: path.resolve(`./src/views/BlogTemplate.tsx`),
