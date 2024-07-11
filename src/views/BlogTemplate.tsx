@@ -12,6 +12,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
+
 export type BlogPageProps = {
   data: {
     markdownRemark: {
@@ -22,6 +23,7 @@ export type BlogPageProps = {
         image: string;
         author: string;
         date: string;
+        tags: Array<{ tag: string | null }>;
       };
     };
   };
@@ -34,17 +36,17 @@ const BlogTemplate: React.FC<BlogPageProps> = ({ data }) => {
 
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
-  const { title, description, image, author, date } = frontmatter;
+  const { title, description, image, author, date, tags } = frontmatter;
 
   return (
     <>
       <Navbar />
       <Container maxW={'6xl'} as='main' my={8}>
         <Flex height={300} w={'full'} overflow={'hidden'} borderRadius={10} justifyContent={'center'} alignItems={'center'}>
-          {frontmatter.image && (
+          {image && (
             <Image
-              src={frontmatter.image}
-              alt={frontmatter.title}
+              src={image}
+              alt={title}
               width={'full'}
               minWidth={'fit-content'}
               minHeight={'full'}
@@ -72,7 +74,43 @@ const BlogTemplate: React.FC<BlogPageProps> = ({ data }) => {
               By {author} on {date}
             </Text>
           </Flex>
-          <Box mt={4} dangerouslySetInnerHTML={{ __html: html }} />
+          <Box as='article' mt={4}>
+            <Box
+              className='blog-content'
+              dangerouslySetInnerHTML={{ __html: html }}
+              sx={{
+                'h1, h2, h3, h4, h5, h6': {
+                  fontWeight: 'bold',
+                  mt: 4,
+                  mb: 2,
+                },
+                p: {
+                  mt: 2,
+                  mb: 2,
+                  lineHeight: 'tall',
+                },
+                a: {
+                  color: 'teal.500',
+                  textDecoration: 'underline',
+                },
+                ul: {
+                  listStyleType: 'disc',
+                  ml: 5,
+                },
+                ol: {
+                  listStyleType: 'decimal',
+                  ml: 5,
+                },
+                blockquote: {
+                  borderLeft: '4px solid',
+                  borderColor: 'gray.200',
+                  pl: 4,
+                  color: 'gray.600',
+                  fontStyle: 'italic',
+                },
+              }}
+            />
+          </Box>
         </VStack>
       </Container>
     </>
