@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { graphql, PageProps, Link } from 'gatsby';
 import PaginationContainer from '../components/Pagination';
+import Navbar from '../components/Navbar';
 
 interface IBlogTags {
   tags: Array<string>;
@@ -79,6 +80,8 @@ const ArticleList: React.FC<AllBlogsProps> = ({ data, pageContext }) => {
   const blogs = data.allMarkdownRemark.edges;
 
   return (
+    <>
+    <Navbar />
     <Container maxW={'7xl'} p="12">
       <Heading as="h1">All Blogs</Heading>
       {blogs.map(({ node }) => (
@@ -131,6 +134,7 @@ const ArticleList: React.FC<AllBlogsProps> = ({ data, pageContext }) => {
       ))}
        <PaginationContainer currentPage={currentPage} numPages={numPages} />
     </Container>
+    </>
   );
 };
 
