@@ -1,6 +1,8 @@
 import * as React from "react";
 import { PageProps, graphql } from "gatsby";
+import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import Footer from "../components/Footer";
 import Features from "../components/Features";
 import Testimonials from "../components/Testimonial";
 import FeaturedBlogs from "../components/Blog";
@@ -10,7 +12,9 @@ import Layout from "../components/layout";
 
 export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
-export type IndexPageFrontmatterType = NonNullable<Queries.IndexPageQuery["indexPage"]>["frontmatter"];
+export type IndexPageFrontmatterType = NonNullable<
+  Queries.IndexPageQuery["indexPage"]
+>["frontmatter"];
 
 export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
 
@@ -37,7 +41,7 @@ export const IndexPageTemplate = ({ indexPage, blogs, projects }: {indexPage: In
           <Features {...services!} />
           <Projects {...projects} />
           <Testimonials {...testimonials!} />
-          {/* <FeaturedBlogs {...blogs}/> */}
+         <FeaturedBlogs {...blogs}/>
           <Contact {...contact!} />
       </Layout>
     </>
@@ -108,6 +112,9 @@ export const query = graphql`
     ) {
       edges {
         blog: node {
+          fields {
+            slug
+          }
           fileAbsolutePath
           frontmatter {
             date
@@ -126,7 +133,7 @@ export const query = graphql`
         }
       }
     }
-    projects: allMarkdownRemark(
+     projects: allMarkdownRemark(
       filter: { frontmatter: { templateKey: { eq: "project-page" } } }
     ) {
       edges {

@@ -8,7 +8,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   getNode,
 }) => {
   const { createNodeField } = actions;
-
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode });
     createNodeField({
@@ -19,7 +18,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   }
 };
 
-// Type for GraphQL query result
 interface QueryResult {
   ProjectPage: {
     edges: {
@@ -30,14 +28,21 @@ interface QueryResult {
       };
     }[];
   };
+  BlogPage: {
+    edges: {
+      node: {
+        fields: {
+          slug: string | null;
+        };
+      };
+    }[];
+  };
 }
-
 export const createPages: GatsbyNode['createPages'] = async ({
   graphql,
   actions,
 }) => {
   const { createPage } = actions;
-
   const result = await graphql<QueryResult>(`
     query GetAllMarkdownSlugs {
       ProjectPage: allMarkdownRemark(
@@ -51,17 +56,23 @@ export const createPages: GatsbyNode['createPages'] = async ({
           }
         }
       }
+      BlogPage: allMarkdownRemark(
+        filter: { frontmatter: { templateKey: { eq: "blog-page" } } }
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
     }
   `);
-
   if (!result.data) {
-    throw new Error('No data returned from GraphQL query');
+    throw new Error('GraphQL query for markdown slugs returned no data');
   }
-
-  const { ProjectPage } = result.data!;
-
-  
-  // Create project pages
+  const { ProjectPage, BlogPage } = result.data;
   ProjectPage.edges.forEach(({ node }) => {
     const slug = node.fields.slug;
     if (!slug) {
@@ -70,10 +81,45 @@ export const createPages: GatsbyNode['createPages'] = async ({
       );
       return;
     }
-
     createPage({
       path: `${slug}`,
       component: path.resolve(`./src/views/ProjectTemplate.tsx`),
+      context: {
+        slug: slug,
+      },
+    });
+  });
+
+
+  const posts = BlogPage.edges;
+  const postsPerPage = 3; 
+  const numPages = Math.ceil(posts.length / postsPerPage);
+  
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/all-blogs` : `/all-blogs/${i + 1}`,
+      component: path.resolve(`./src/views/all-blogs.tsx`),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    });
+  });
+
+
+  BlogPage.edges.forEach(({ node }) => {
+    const slug = node.fields.slug;
+    if (!slug) {
+      console.warn(
+        'Skipping page creation for markdown node with missing slug'
+      );
+      return;
+    }
+    createPage({
+      path: `${slug}`,
+      component: path.resolve(`./src/views/BlogTemplate.tsx`),
       context: {
         slug: slug,
       },
