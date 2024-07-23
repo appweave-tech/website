@@ -70,10 +70,41 @@ testimonials:
       name: Gabriel Valencia
       profile: /images/1688862579862.jpeg
 contact:
-  phoneNumber: +91 9962525432
+  contactImage: /images/undraw_contact_us_re_4qqt.svg
   email: contact@appweave.tech
-  address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
 blurbs:
   blogList:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"
+footer:
+  social:
+    twiter:
+      logo:
+        BGCoLor: "#f56565"
+        CoLor: "#ffffff"
+        icon: FiTwitter
+      link: https://x.com/AppweaveTech
+      size: 2rem
+    linkedin:
+      logo:
+        CoLor: "#ffffff"
+        BGCoLor: "#f56565"
+        icon: FiLinkedin
+        size: 2rem
+      size: 2rem
+      link: linkedin.com/company/appweave
+    Github:
+      logo:
+        BGCoLor: "#f56565"
+        CoLor: "#ffffff"
+        icon: FiGithub
+      size: 2rem
+      link: https://github.com/appweave-tech
+  support:
+    PrivacyPolicy: /
+    TermService: /
+    FAQs: /
+  company:
+    testimonials: "#testimonial"
+    Services: "#services"
+    aboutus: "#about"
 ---

@@ -15,9 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
             frontmatter {
               contact {
-                phoneNumber
                 email
-                address
               }
             }
           }
