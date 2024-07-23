@@ -7,7 +7,8 @@ import FeaturedBlogs from "../components/Blog";
 import Contact from "../components/Contact";
 import Projects from "../components/Projects";
 import Layout from "../components/layout";
-
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer";
 export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
 export type IndexPageFrontmatterType = NonNullable<Queries.IndexPageQuery["indexPage"]>["frontmatter"];
@@ -107,8 +108,8 @@ export const query = graphql`
           }
         }
         contact {
-        contactImage
-        email
+         contactImage
+         email
         }
         blurbs {
           blogList {
