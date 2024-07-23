@@ -72,8 +72,6 @@ testimonials:
 contact:
   contactImage: /images/undraw_contact_us_re_4qqt.svg
   email: contact@appweave.tech
-  address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
-  phone: +91 9962525432
 blurbs:
   blogList:
     - blurb: "Conversational Revolution: Unleashing the Power of AI Chatbots"

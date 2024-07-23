@@ -47,7 +47,7 @@ export default function Contact(props: ContactType) {
         {/* left box */}
 
         <Box
-          w={{ base: "100%", sm: "100%", md: "32rem", lg: "32rem" }}
+          w={{ base: "100%", sm: "100%", md: "32rem", lg: "28rem" }}
           order={{ base: 2, sm: 2, md: 2, lg: 1 }}
           boxShadow="md"
           m={"1rem auto 3rem auto"}
@@ -57,7 +57,7 @@ export default function Contact(props: ContactType) {
           borderRadius="lg"
         >
           <Box
-            w={{ base: "20rem", sm: "28rem", md: "32rem", lg: "32rem" }}
+            w={{ base: "20rem", sm: "28rem", md: "32rem", lg: "28rem" }}
             mb={4}
             textAlign={"center"}
             mt={0}
@@ -78,7 +78,7 @@ export default function Contact(props: ContactType) {
             data-netlify-honeypot="bot-field"
             data-netlify="true"
           >
-            <Box w={{ base: "100%", sm: "100%", md: "28rem", lg: "28rem" }}>
+            <Box w={{ base: "100%", sm: "100%", md: "28rem", lg: "26rem" }}>
               <input type="hidden" name="form-name" value="contact" />
               <FormControl id="name" margin={"1rem 0rem"} isRequired>
                 <FormLabel>Your Name</FormLabel>
@@ -90,7 +90,7 @@ export default function Contact(props: ContactType) {
                     type="text"
                     name="name"
                     size="md"
-                    w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "28rem" }}
+                    w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "26rem" }}
                   />
                 </InputGroup>
               </FormControl>
@@ -104,7 +104,7 @@ export default function Contact(props: ContactType) {
                     type="text"
                     name="email"
                     size="md"
-                    w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "28rem" }}
+                    w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "26rem" }}
                   />
                 </InputGroup>
               </FormControl>
@@ -114,7 +114,7 @@ export default function Contact(props: ContactType) {
               <FormLabel>Subject</FormLabel>
               <Input
                 type="text"
-                w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "28rem" }}
+                w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "26rem" }}
                 name="subject"
                 size="md"
                 placeholder="Subject"
@@ -124,7 +124,7 @@ export default function Contact(props: ContactType) {
               <FormLabel>Message</FormLabel>
               <Textarea
                 borderColor="gray.300"
-                w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "28rem" }}
+                w={{ base: "20rem", sm: "20rem", md: "28rem", lg: "26rem" }}
                 _hover={{
                   borderRadius: "gray.300",
                 }}
@@ -153,14 +153,14 @@ export default function Contact(props: ContactType) {
         </Box>
         {/*  rigth box */}
         <Box
-          w={{ base: "24rem", sm: "32rem", md: "36rem", lg: "42rem" }}
+          w={{ base: "24rem", sm: "32rem", md: "34rem", lg: "32rem" }}
           order={{ base: 1, sm: 1, md: 1, lg: 2 }}
         >
           <Box justifySelf={"center"} margin={"0px auto"}>
             <Heading
               lineHeight={1.1}
               fontWeight={600}
-              fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+              fontSize={{ base: "3xl", sm: "4xl", lg: "5xl" }}
               textAlign={"center"}
             >
               <Text
