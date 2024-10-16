@@ -1,11 +1,8 @@
 import * as React from "react";
 import { PageProps, graphql } from "gatsby";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Footer from "../components/Footer";
 import Features from "../components/Features";
 import Testimonials from "../components/Testimonial";
-import FeaturedBlogs from "../components/Blog";
 import Contact from "../components/Contact";
 import Projects from "../components/Projects";
 import Layout from "../components/layout";
@@ -17,11 +14,11 @@ export type IndexPageFrontmatterType = NonNullable<
   Queries.IndexPageQuery["indexPage"]
 >["frontmatter"];
 
-export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>;
+// export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>;
 
-export type BlogPageEdgeType = NonNullable<
-  NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]
->;
+// export type BlogPageEdgeType = NonNullable<
+//   NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]
+// >;
 
 export type ProjectPageType = NonNullable<Queries.IndexPageQuery["projects"]>
 
@@ -39,14 +36,11 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
 };
 
 export const IndexPageTemplate = ({
-  indexPage,
-  blogs,
+  indexPage
 }: {
   indexPage: IndexPageFrontmatterType;
-  blogs: BlogPageType;
 }) => {
   const { hero, services, testimonials, contact ,footer} = indexPage!;
-  blogs.edges.map((item) => console.log(item.blog.frontmatter?.title));
   return (
     <>
       <Navbar />
@@ -54,7 +48,6 @@ export const IndexPageTemplate = ({
         <Hero {...hero!} />
         <Features {...services!} />
         <Testimonials {...testimonials!} />
-        {/* <FeaturedBlogs {...blogs}/> */}
         <Contact {...contact!} />
       </main>
 
@@ -144,32 +137,6 @@ export const query = graphql`
             TermService
             FAQs
           }
-        }
-      }
-    }
-    blogs: allMarkdownRemark(
-      filter: { frontmatter: { templateKey: { eq: "blog-page" } } }
-    ) {
-      edges {
-        blog: node {
-          fields {
-            slug
-          }
-          fileAbsolutePath
-          frontmatter {
-            date
-            title
-            author
-            description
-            tags {
-              tag
-            }
-            image
-          }
-          wordCount {
-            words
-          }
-          timeToRead
         }
       }
     }

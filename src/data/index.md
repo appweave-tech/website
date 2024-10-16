@@ -73,7 +73,6 @@ contact:
   contactImage: /images/undraw_contact_us_re_4qqt.svg
   email: contact@appweave.tech
   address: UNIT 101 OXFORD TOWERS 139 HAL OLD AIRPORT RD, 560008, Bangalore
-  contactImage: /images/undraw_contact_us_re_4qqt.svg
 Contact:
   location:
     logo:
