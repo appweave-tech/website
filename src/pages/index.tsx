@@ -9,16 +9,19 @@ import FeaturedBlogs from "../components/Blog";
 import Contact from "../components/Contact";
 import Projects from "../components/Projects";
 import Layout from "../components/layout";
-
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer";
 export type IndexPageType = Pick<Queries.IndexPageQuery, "indexPage">;
 
 export type IndexPageFrontmatterType = NonNullable<
   Queries.IndexPageQuery["indexPage"]
 >["frontmatter"];
 
-export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>
+export type BlogPageType = NonNullable<Queries.IndexPageQuery["blogs"]>;
 
-export type BlogPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]>
+export type BlogPageEdgeType = NonNullable<
+  NonNullable<Queries.IndexPageQuery["blogs"]>["edges"]
+>;
 
 export type ProjectPageType = NonNullable<Queries.IndexPageQuery["projects"]>
 
@@ -27,23 +30,35 @@ export type ProjectPageEdgeType = NonNullable<NonNullable<Queries.IndexPageQuery
 // Step 2: Define your component
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   console.log(data);
-  return <IndexPageTemplate indexPage={data.indexPage?.frontmatter!} blogs={data.blogs} projects={data.projects}/>;
+  return (
+    <IndexPageTemplate
+      indexPage={data.indexPage?.frontmatter!}
+      blogs={data.blogs}
+    />
+  );
 };
 
-export const IndexPageTemplate = ({ indexPage, blogs, projects }: {indexPage: IndexPageFrontmatterType, blogs: BlogPageType, projects: ProjectPageType}) => {
-  const { hero, services, testimonials, contact } =
-    indexPage!;
-  blogs.edges.map((item) => (console.log(item.blog.frontmatter?.title)))
+export const IndexPageTemplate = ({
+  indexPage,
+  blogs,
+}: {
+  indexPage: IndexPageFrontmatterType;
+  blogs: BlogPageType;
+}) => {
+  const { hero, services, testimonials, contact ,footer} = indexPage!;
+  blogs.edges.map((item) => console.log(item.blog.frontmatter?.title));
   return (
     <>
-      <Layout>
-          <Hero {...hero!} />
-          <Features {...services!} />
-          <Projects {...projects} />
-          <Testimonials {...testimonials!} />
-         <FeaturedBlogs {...blogs}/>
-          <Contact {...contact!} />
-      </Layout>
+      <Navbar />
+      <main>
+        <Hero {...hero!} />
+        <Features {...services!} />
+        <Testimonials {...testimonials!} />
+        {/* <FeaturedBlogs {...blogs}/> */}
+        <Contact {...contact!} />
+      </main>
+
+      <Footer footerprops={footer!} />
     </>
   );
 };
@@ -96,13 +111,38 @@ export const query = graphql`
           }
         }
         contact {
-          phoneNumber
-          email
-          address
+         contactImage
+         email
         }
         blurbs {
           blogList {
             blurb
+          }
+        }
+        footer {
+          social {
+            Github {
+              size
+              link
+            }
+            linkedin {
+              size
+              link
+            }
+            twiter {
+              link
+              size
+            }
+          }
+          company {
+            testimonials
+            Services
+            aboutus
+          }
+          support {
+            PrivacyPolicy
+            TermService
+            FAQs
           }
         }
       }
@@ -121,7 +161,7 @@ export const query = graphql`
             title
             author
             description
-            tags{
+            tags {
               tag
             }
             image
