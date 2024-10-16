@@ -8,11 +8,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaXTwitter,FaLinkedinIn,FaGithub } from "react-icons/fa6";
 import Logo from "./Logo";
 import SocialButton from "./SocialButton";
 import { ContactType } from "./Contact";
-
+import { IndexPageFrontmatterType } from "../pages";
+export type FooterType = NonNullable<IndexPageFrontmatterType>["footer"];
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
     <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
@@ -20,8 +21,8 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
     </Text>
   );
 };
-
-type FooterPropType = { contact: ContactType };
+const currYear = new Date().getFullYear();
+type FooterPropType = { footerprops: FooterType };
 
 export default function Footer(props: FooterPropType) {
   return (
@@ -43,7 +44,7 @@ export default function Footer(props: FooterPropType) {
               <Logo colorSecondary={useColorModeValue("gray.700", "white")} />
             </Box>
             <Text fontSize={"sm"}>
-              © 2022 Chakra Templates. All rights reserved
+            &#169;  {currYear} Appweave Labs. All rights reserved
             </Text>
           </Stack>
           <SimpleGrid
@@ -51,25 +52,55 @@ export default function Footer(props: FooterPropType) {
           >
             <Stack align={"flex-start"}>
               <ListHeader>Company</ListHeader>
-              <Link href={"#about"}>About us</Link>
-              <Link href={"#services"}>Services</Link>
-              <Link href={"#testimonial"}>Testimonials</Link>
+              <Link 
+                  href={"#about"}
+                  _hover={{
+                    textDecoration: "none",
+                  }}
+                  >About us</Link>
+              <Link 
+                   href={"#services"}
+                   _hover={{
+                    textDecoration: "none",
+                  }}
+                  >Services</Link>
+              <Link 
+                   href={"#testimonial"}
+                   _hover={{
+                    textDecoration: "none",
+                  }} 
+                  >Testimonials</Link>
             </Stack>
             <Stack align={"flex-start"}>
               <ListHeader>Support</ListHeader>
-              <Link href={"#"}>FAQs</Link>
-              <Link href={"#"}>Terms of Service</Link>
-              <Link href={"#"}>Privacy Policy</Link>
+              <Link 
+                   href={"#"} 
+                   _hover={{
+                    textDecoration: "none",
+                  }}>
+                    FAQs</Link>
+              <Link 
+                  href={"#"} 
+                  _hover={{
+                    textDecoration: "none",
+                  }} >Terms of Service</Link>
+              <Link 
+                  href={"#"}  
+                  _hover={{
+                    textDecoration: "none",
+                  }} >Privacy Policy</Link>
             </Stack>
-            <Stack direction={"column"} spacing={4} align={"flex-start"}>
-              <SocialButton label={"Twitter"} href={"#"}>
-                <FaTwitter size={"2rem"} />
+            <Stack 
+            direction={{base :"row", sm : "column", md: "column" , lg: "column"}}
+             mt={{base : "1rem", sm:0,md:0,lg:0}} spacing={2} align={"flex-start"}>
+              <SocialButton label={"Twitter"} href={props?.footerprops?.social?.twiter?.link!}>
+                <FaXTwitter size={props?.footerprops?.social?.twiter?.size!} />
               </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
-                <FaYoutube size={"2rem"} />
+              <SocialButton label={"linkedin"} href={props?.footerprops?.social?.linkedin?.link!}>
+                <FaLinkedinIn size={props?.footerprops?.social?.linkedin?.size!} color="red.400" />
               </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
-                <FaInstagram size={"2rem"} />
+              <SocialButton label={"github"} href={props?.footerprops?.social?.Github?.link!}>
+                <FaGithub size={props?.footerprops?.social?.Github?.size!} color="red.400"/>
               </SocialButton>
             </Stack>
           </SimpleGrid>
