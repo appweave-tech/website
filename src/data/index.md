@@ -115,7 +115,7 @@ footer:
         icon: FiLinkedin
         size: 2rem
       size: 2rem
-      link: linkedin.com/company/appweave
+      link: https://linkedin.com/company/appweave
     Github:
       logo:
         BGCoLor: "#f56565"
