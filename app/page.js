@@ -129,11 +129,7 @@ export default async function HomePage() {
             <h2 className="section-title">End-to-end technology services</h2>
           </div>
           {services.length > 0 ? (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.25rem'
-            }}>
+            <div className="services-grid">
               {services.map((service) => (
                 <div key={service._id} style={{
                   background: 'var(--bg-card)',

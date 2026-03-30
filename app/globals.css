@@ -629,6 +629,16 @@ footer {
   }
 }
 
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
   nav { padding: 1rem; }
   .nav-links { display: none; }
@@ -637,4 +647,5 @@ footer {
   .post-page { padding: 6rem 1.5rem 4rem; }
   .footer-container { flex-direction: column; gap: 1.5rem; text-align: center; }
   .footer-left { flex-direction: column; }
+  .services-grid { grid-template-columns: 1fr; }
 }
