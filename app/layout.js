@@ -28,11 +28,11 @@ export default function RootLayout({ children }) {
               <div className="logo-text">AppWeave <span>Labs</span></div>
             </Link>
             <div className="nav-links">
-              <Link href="/#services">Services</Link>
-              <Link href="/#clients">Clients</Link>
+              <Link href="/services">Services</Link>
+              <Link href="/clients">Clients</Link>
+              <Link href="/careers">Careers</Link>
               <Link href="/products">Products</Link>
               <Link href="/blog">Blog</Link>
-              <Link href="/#careers">Careers</Link>
               <ThemeToggle />
               <Link href="/contact" className="nav-cta">Get in Touch</Link>
             </div>
@@ -54,7 +54,9 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="logo-text">AppWeave <span>Labs</span></div>
               </Link>
-              <span className="footer-copy">© 2025 AppWeave Labs Pvt Ltd</span>
+              <span className="footer-copy">© 2026 AppWeave Labs Pvt Ltd</span>
+              <span className="footer-copy" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Unit 101, Oxford Towers, 139 HAL Old Airport Rd, Bengaluru, Karnataka, India 560008</span>
+              <span className="footer-copy" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>CIN: U62099KA2024PTC185497</span>
             </div>
             <div className="footer-social">
               <a href="https://x.com/AppWeaveTech" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
@@ -79,6 +81,32 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              // Clean URL scroll — intercept /services, /clients, /careers nav clicks
+              document.addEventListener('click', function(e) {
+                var link = e.target.closest('a');
+                if (!link) return;
+                var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
+                var href = link.getAttribute('href');
+                var sectionId = map[href];
+                if (!sectionId) return;
+                var el = document.getElementById(sectionId);
+                if (el) {
+                  e.preventDefault();
+                  el.scrollIntoView({ behavior: 'smooth' });
+                  history.pushState(null, '', href);
+                }
+              });
+
+              // On page load, scroll to section if URL matches
+              (function() {
+                var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
+                var sectionId = map[location.pathname];
+                if (sectionId) {
+                  var el = document.getElementById(sectionId);
+                  if (el) setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth' }); }, 100);
+                }
+              })();
+
               // Theme initialization
               (function() {
                 const savedTheme = localStorage.getItem('theme');

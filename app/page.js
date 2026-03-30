@@ -107,7 +107,7 @@ export default async function HomePage() {
             marginBottom: '2.5rem',
             lineHeight: 1.7
           }}>
-            Boutique full-stack development studio. We design, build, and ship web applications, mobile apps, and data platforms — from early-stage MVPs to production-ready systems.
+            Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms — from early-stage MVPs to production-ready systems.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <Link href="/contact" className="btn btn-primary">
