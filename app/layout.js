@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
               <img src="/logo-dark.svg" alt="AppWeave Labs" className="logo-img logo-img-dark" />
               <img src="/logo-light.svg" alt="AppWeave Labs" className="logo-img logo-img-light" />
             </Link>
-            <div className="nav-links">
+            <div className="nav-links" id="navLinks">
               <Link href="/services">Services</Link>
               <Link href="/clients">Clients</Link>
               <Link href="/careers">Careers</Link>
@@ -30,6 +30,11 @@ export default function RootLayout({ children }) {
               <ThemeToggle />
               <Link href="/contact" className="nav-cta">Get in Touch</Link>
             </div>
+            <button className="hamburger" id="hamburger" aria-label="Toggle menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
         </nav>
 
@@ -94,6 +99,24 @@ export default function RootLayout({ children }) {
                   if (el) setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth' }); }, 100);
                 }
               })();
+
+              // Hamburger menu toggle
+              document.addEventListener('DOMContentLoaded', function() {
+                var hamburger = document.getElementById('hamburger');
+                var navLinks = document.getElementById('navLinks');
+                if (hamburger && navLinks) {
+                  hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('nav-open');
+                    hamburger.classList.toggle('hamburger-active');
+                  });
+                  navLinks.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                      navLinks.classList.remove('nav-open');
+                      hamburger.classList.remove('hamburger-active');
+                    }
+                  });
+                }
+              });
 
               // Theme initialization
               (function() {

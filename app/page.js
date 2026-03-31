@@ -50,7 +50,7 @@ export default async function HomePage() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        padding: '8rem 2rem 6rem',
+        padding: 'clamp(5rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(3rem, 6vw, 6rem)',
         position: 'relative',
         overflow: 'hidden'
       }}>
@@ -86,7 +86,7 @@ export default async function HomePage() {
             Available for new projects
           </div>
           <h1 style={{
-            fontSize: 'clamp(2.75rem, 7vw, 4.5rem)',
+            fontSize: 'clamp(2rem, 6vw, 4.5rem)',
             fontWeight: 700,
             letterSpacing: '-0.04em',
             lineHeight: 1.1,
@@ -122,7 +122,7 @@ export default async function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" style={{ padding: '7rem 2rem' }}>
+      <section id="services" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)' }}>
         <div className="section-container">
           <div className="section-header">
             <div className="section-label mono">What We Do</div>
@@ -191,7 +191,7 @@ export default async function HomePage() {
       </section>
 
       {/* Clients Section - CMS Powered */}
-      <section id="clients" style={{ padding: '7rem 2rem', background: 'var(--bg-secondary)' }}>
+      <section id="clients" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)', background: 'var(--bg-secondary)' }}>
         <div className="section-container">
           <div className="section-header">
             <div className="section-label mono">Our Clients</div>
@@ -199,7 +199,7 @@ export default async function HomePage() {
           </div>
           
           {clients.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
               {clients.map((clientItem) => (
                 <div key={clientItem._id} style={{
                   background: 'var(--bg-primary)',
@@ -295,7 +295,7 @@ export default async function HomePage() {
       </section>
 
       {/* Careers Section - CMS Powered */}
-      <section id="careers" style={{ padding: '7rem 2rem' }}>
+      <section id="careers" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)' }}>
         <div className="section-container">
           <div className="section-header">
             <div className="section-label mono">Join Us</div>
@@ -303,7 +303,7 @@ export default async function HomePage() {
           </div>
           
           {careers.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '1.5rem' }}>
               {careers.map((job) => (
                 <div key={job._id} style={{
                   background: 'var(--bg-card)',
@@ -371,7 +371,7 @@ export default async function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" style={{ padding: '7rem 2rem', background: 'var(--bg-secondary)' }}>
+      <section id="contact" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)', background: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
           <div className="section-label mono">Let's Talk</div>
           <h2 style={{

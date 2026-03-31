@@ -307,7 +307,7 @@ export default async function ProductPage({ params }) {
             <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Key Features</h2>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
               gap: '1rem'
             }}>
               {product.features.map((feature, i) => (
@@ -386,7 +386,7 @@ export default async function ProductPage({ params }) {
             <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Screenshots</h2>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
               gap: '1rem'
             }}>
               {product.screenshots.map((screenshot, i) => (

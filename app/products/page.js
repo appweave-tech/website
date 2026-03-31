@@ -73,7 +73,7 @@ export default async function ProductsPage() {
         {products.length > 0 ? (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
             gap: '1.5rem'
           }}>
             {products.map((product) => {
