@@ -8,12 +8,14 @@ export default function ContactPage() {
     email: '',
     company: '',
     budget: '',
-    message: ''
+    message: '',
+    honeypot: ''
   })
   const [status, setStatus] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (formData.honeypot) return; // Bot detected
     setStatus('sending')
     
     // For now, construct mailto link with form data
@@ -172,6 +174,17 @@ ${formData.message}`
                   />
                 </div>
 
+                <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.honeypot || ''}
+                    onChange={(e) => setFormData({...formData, honeypot: e.target.value})}
+                  />
+                </div>
+
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -189,6 +202,34 @@ ${formData.message}`
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
                 </button>
+
+                {status === 'sent' && (
+                  <p style={{
+                    marginTop: '1rem',
+                    padding: '0.875rem 1rem',
+                    borderRadius: '8px',
+                    background: 'rgba(16, 185, 129, 0.1)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                    color: '#10b981',
+                    fontSize: '0.95rem'
+                  }}>
+                    Message sent! We'll get back to you within 24 hours.
+                  </p>
+                )}
+
+                {status === 'error' && (
+                  <p style={{
+                    marginTop: '1rem',
+                    padding: '0.875rem 1rem',
+                    borderRadius: '8px',
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    color: '#ef4444',
+                    fontSize: '0.95rem'
+                  }}>
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
               </div>
             </form>
 

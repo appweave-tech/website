@@ -52,6 +52,10 @@ html {
   50% { opacity: 0.6; transform: scale(0.9); }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 body {
   font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
@@ -181,7 +185,7 @@ nav.scrolled {
 
 [data-theme="light"] .nav-cta {
   background: var(--text-primary);
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .nav-cta:hover {
@@ -263,8 +267,8 @@ nav.scrolled {
 }
 
 [data-theme="light"] .btn-primary {
-  background: #09090b;
-  color: #fff;
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .btn-primary:hover {
@@ -329,6 +333,22 @@ footer {
 .footer-social a:hover {
   border-color: var(--accent-cyan);
   color: var(--accent-cyan);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--text-primary);
 }
 
 /* Blog styles */
@@ -629,6 +649,21 @@ footer {
   color: var(--text-secondary);
 }
 
+/* Focus indicators for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .blog-grid {
@@ -702,6 +737,7 @@ footer {
   .post-page { padding: 6rem 1.5rem 4rem; }
   .footer-container { flex-direction: column; gap: 1.5rem; text-align: center; }
   .footer-left { flex-direction: column; }
+  .footer-legal { justify-content: center; }
   .services-grid { grid-template-columns: 1fr; }
   .post-hero-img { height: 280px; }
 }

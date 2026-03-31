@@ -3,7 +3,24 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'AppWeave Labs | Full-Stack Development Studio',
-  description: 'Boutique full-stack development studio. We design, build, and ship web applications, mobile apps, and data platforms.',
+  description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms — from early-stage MVPs to production-ready systems.',
+  metadataBase: new URL('https://appweave.tech'),
+  openGraph: {
+    title: 'AppWeave Labs | Full-Stack Development Studio',
+    description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.',
+    url: 'https://appweave.tech',
+    siteName: 'AppWeave Labs',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AppWeave Labs | Full-Stack Development Studio',
+    description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.',
+    creator: '@AppWeaveTech',
+  },
+  alternates: {
+    canonical: 'https://appweave.tech',
+  },
 }
 
 export default function RootLayout({ children }) {
@@ -68,6 +85,10 @@ export default function RootLayout({ children }) {
                 </svg>
               </a>
             </div>
+            <div className="footer-legal">
+              <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/terms">Terms of Service</Link>
+            </div>
           </div>
         </footer>
 
@@ -115,6 +136,19 @@ export default function RootLayout({ children }) {
                       hamburger.classList.remove('hamburger-active');
                     }
                   });
+                }
+              });
+
+              // Close mobile menu on Escape key
+              document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                  var navLinks = document.getElementById('navLinks');
+                  var hamburger = document.getElementById('hamburger');
+                  if (navLinks && navLinks.classList.contains('nav-open')) {
+                    navLinks.classList.remove('nav-open');
+                    hamburger.classList.remove('hamburger-active');
+                    hamburger.focus();
+                  }
                 }
               });
 

@@ -116,7 +116,7 @@ export default async function HomePage() {
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </Link>
-            <Link href="#clients" className="btn btn-secondary">See Our Work</Link>
+            <Link href="/clients" className="btn btn-secondary">See Our Work</Link>
           </div>
         </div>
       </section>
@@ -226,9 +226,9 @@ export default async function HomePage() {
                           alignItems: 'center',
                           justifyContent: 'center',
                           fontWeight: 700,
-                          background: 'linear-gradient(135deg, #18181b, #27272a)',
-                          border: '1px solid #3f3f46',
-                          color: '#fff'
+                          background: 'linear-gradient(135deg, var(--bg-primary), var(--bg-card))',
+                          border: '1px solid var(--border-hover)',
+                          color: 'var(--text-primary)'
                         }}>{clientItem.name?.charAt(0) || 'C'}</div>
                       )}
                       <div>
