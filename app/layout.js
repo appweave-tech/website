@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -18,14 +18,8 @@ export default function RootLayout({ children }) {
         <nav id="nav">
           <div className="nav-container">
             <Link href="/" className="logo">
-              <div className="logo-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <div className="logo-text">AppWeave <span>Labs</span></div>
+              <img src="/logo-dark.svg" alt="AppWeave Labs" className="logo-img logo-img-dark" />
+              <img src="/logo-light.svg" alt="AppWeave Labs" className="logo-img logo-img-light" />
             </Link>
             <div className="nav-links">
               <Link href="/services">Services</Link>
@@ -45,14 +39,8 @@ export default function RootLayout({ children }) {
           <div className="footer-container">
             <div className="footer-left">
               <Link href="/" className="logo">
-                <div className="logo-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                    <path d="M2 17l10 5 10-5"/>
-                    <path d="M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <div className="logo-text">AppWeave <span>Labs</span></div>
+                <img src="/logo-dark.svg" alt="AppWeave Labs" className="logo-img logo-img-dark" />
+                <img src="/logo-light.svg" alt="AppWeave Labs" className="logo-img logo-img-light" />
               </Link>
               <span className="footer-copy">© 2026 AppWeave Labs Pvt Ltd</span>
               <span className="footer-copy" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Unit 101, Oxford Towers, 139 HAL Old Airport Rd, Bengaluru, Karnataka, India 560008</span>

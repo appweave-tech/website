@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
 const statusStyles = {
   'live': { bg: 'rgba(16, 185, 129, 0.1)', color: 'var(--accent-emerald)', label: 'Live' },
   'beta': { bg: 'rgba(251, 191, 36, 0.1)', color: '#fbbf24', label: 'Beta' },
-  'coming-soon': { bg: 'rgba(6, 182, 212, 0.1)', color: 'var(--accent-cyan)', label: 'Coming Soon' },
+  'coming-soon': { bg: 'rgba(220, 38, 38, 0.1)', color: 'var(--accent-cyan)', label: 'Coming Soon' },
   'deprecated': { bg: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', label: 'Deprecated' },
 }
 
@@ -345,8 +345,8 @@ export default async function ProductPage({ params }) {
               {product.useCases.map((useCase, i) => (
                 <span key={i} style={{
                   padding: '0.5rem 1rem',
-                  background: 'rgba(6, 182, 212, 0.1)',
-                  border: '1px solid rgba(6, 182, 212, 0.2)',
+                  background: 'rgba(220, 38, 38, 0.1)',
+                  border: '1px solid rgba(220, 38, 38, 0.2)',
                   borderRadius: '100px',
                   fontSize: '0.85rem',
                   color: 'var(--accent-cyan)'

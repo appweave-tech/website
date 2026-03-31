@@ -60,7 +60,7 @@ export default async function HomePage() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'radial-gradient(ellipse 50% 80% at 20% 0%, rgba(6, 182, 212, 0.08), transparent), radial-gradient(ellipse 40% 60% at 80% 20%, rgba(139, 92, 246, 0.06), transparent)',
+          background: 'radial-gradient(ellipse 50% 80% at 20% 0%, rgba(220, 38, 38, 0.08), transparent), radial-gradient(ellipse 40% 60% at 80% 20%, rgba(159, 18, 57, 0.06), transparent)',
           pointerEvents: 'none'
         }} />
         <div style={{ maxWidth: '1300px', margin: '0 auto', width: '100%', position: 'relative', zIndex: 2 }}>
@@ -69,8 +69,8 @@ export default async function HomePage() {
             alignItems: 'center',
             gap: '0.5rem',
             padding: '0.4rem 0.8rem',
-            background: 'rgba(6, 182, 212, 0.1)',
-            border: '1px solid rgba(6, 182, 212, 0.2)',
+            background: 'rgba(220, 38, 38, 0.1)',
+            border: '1px solid rgba(220, 38, 38, 0.2)',
             borderRadius: '100px',
             fontSize: '0.75rem',
             color: 'var(--accent-cyan)',
@@ -93,7 +93,7 @@ export default async function HomePage() {
             marginBottom: '1.5rem'
           }}>
             Weaving <span style={{
-              background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-violet))',
+              background: 'linear-gradient(135deg, #f87171, #fb7185, #fda4af)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
