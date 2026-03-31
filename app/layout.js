@@ -30,6 +30,32 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "AppWeave Labs Pvt Ltd",
+              "url": "https://appweave.tech",
+              "logo": "https://appweave.tech/logo-dark.svg",
+              "description": "Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Unit 101, Oxford Towers, 139 HAL Old Airport Rd",
+                "addressLocality": "Bengaluru",
+                "addressRegion": "Karnataka",
+                "postalCode": "560008",
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                "https://x.com/AppWeaveTech",
+                "https://linkedin.com/company/appweave",
+                "https://github.com/appweave-tech"
+              ]
+            })
+          }}
+        />
       </head>
       <body>
         <nav id="nav">
@@ -108,6 +134,7 @@ export default function RootLayout({ children }) {
                   e.preventDefault();
                   el.scrollIntoView({ behavior: 'smooth' });
                   history.pushState(null, '', href);
+                  updateActiveNav();
                 }
               });
 
@@ -173,6 +200,22 @@ export default function RootLayout({ children }) {
                   });
                 }
               });
+
+              // Active nav state
+              function updateActiveNav() {
+                var links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+                var path = location.pathname;
+                links.forEach(function(link) {
+                  var href = link.getAttribute('href');
+                  if (href === path || (href !== '/' && path.startsWith(href))) {
+                    link.classList.add('nav-active');
+                  } else {
+                    link.classList.remove('nav-active');
+                  }
+                });
+              }
+              document.addEventListener('DOMContentLoaded', updateActiveNav);
+              window.addEventListener('popstate', updateActiveNav);
             `,
           }}
         />

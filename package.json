@@ -23,6 +23,7 @@
     "sanity": "^5.5.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.1",
     "@sanity/vision": "^5.0.0"
   },
   "directories": {
