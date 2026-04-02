@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { client, postQuery, postSlugsQuery, urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
 
+const baseUrl = 'https://appweave.tech'
+
 async function getPost(slug) {
   try {
     const post = await client.fetch(postQuery, { slug })
@@ -31,9 +33,29 @@ export async function generateMetadata({ params }) {
     return { title: 'Post Not Found | AppWeave Labs' }
   }
 
+  const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
+
   return {
     title: `${post.title} | AppWeave Labs`,
     description: post.excerpt || '',
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || '',
+      url: `${baseUrl}/blog/${slug}`,
+      type: 'article',
+      publishedTime: post.publishedAt,
+      authors: post.author?.name ? [post.author.name] : undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt || '',
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: `${baseUrl}/blog/${slug}`,
+    },
   }
 }
 
@@ -99,8 +121,39 @@ export default async function PostPage({ params }) {
     notFound()
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt || '',
+    "image": post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined,
+    "datePublished": post.publishedAt,
+    "author": {
+      "@type": "Person",
+      "name": post.author?.name || 'AppWeave Labs',
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AppWeave Labs",
+      "logo": { "@type": "ImageObject", "url": `${baseUrl}/logo-dark.svg` },
+    },
+    "mainEntityOfPage": `${baseUrl}/blog/${slug}`,
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${baseUrl}/blog` },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": `${baseUrl}/blog/${slug}` },
+    ],
+  }
+
   return (
     <main className="post-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <div className="post-container">
         <Link href="/blog" className="back-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

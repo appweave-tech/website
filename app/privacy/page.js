@@ -18,8 +18,9 @@ export default function PrivacyPolicy() {
           <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2rem', marginBottom: '0.75rem' }}>How We Use Your Information</h2>
           <p style={{ marginBottom: '1.5rem' }}>We use the information you provide solely to respond to your inquiries and discuss potential projects. We do not sell, rent, or share your personal information with third parties.</p>
 
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2rem', marginBottom: '0.75rem' }}>Cookies</h2>
-          <p style={{ marginBottom: '1.5rem' }}>We use a single localStorage item to remember your theme preference (dark/light mode). We do not use tracking cookies or analytics cookies.</p>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2rem', marginBottom: '0.75rem' }}>Cookies &amp; Analytics</h2>
+          <p style={{ marginBottom: '1rem' }}>We use a single localStorage item to remember your theme preference (dark/light mode).</p>
+          <p style={{ marginBottom: '1.5rem' }}>We use Google Analytics (GA4) to understand how visitors interact with our website. This service may use cookies to collect anonymized data such as pages visited, time spent on pages, and referral sources. This data helps us improve our website and services. Google Analytics data is processed in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-cyan)' }}>Google's Privacy Policy</a>. No personally identifiable information is collected through analytics.</p>
 
           <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '2rem', marginBottom: '0.75rem' }}>Data Security</h2>
           <p style={{ marginBottom: '1.5rem' }}>We take reasonable measures to protect the information you provide. However, no method of transmission over the internet is 100% secure.</p>

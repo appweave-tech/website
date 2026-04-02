@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { client, productQuery, productSlugsQuery, urlFor } from '@/lib/sanity'
 
+const baseUrl = 'https://appweave.tech'
+
 async function getProduct(slug) {
   try {
     const product = await client.fetch(productQuery, { slug })
@@ -30,9 +32,27 @@ export async function generateMetadata({ params }) {
     return { title: 'Product Not Found | AppWeave Labs' }
   }
 
+  const ogImage = product.heroImage ? urlFor(product.heroImage).width(1200).height(630).url() : undefined
+
   return {
     title: `${product.name} | AppWeave Labs`,
     description: product.tagline || product.description || '',
+    openGraph: {
+      title: product.name,
+      description: product.tagline || product.description || '',
+      url: `${baseUrl}/products/${slug}`,
+      type: 'website',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.name,
+      description: product.tagline || product.description || '',
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: `${baseUrl}/products/${slug}`,
+    },
   }
 }
 
@@ -79,8 +99,40 @@ export default async function ProductPage({ params }) {
 
   const status = statusStyles[product.status] || statusStyles['live']
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": product.name,
+    "description": product.tagline || product.description || '',
+    "image": product.heroImage ? urlFor(product.heroImage).width(1200).height(630).url() : undefined,
+    "applicationCategory": product.category || 'Software',
+    "operatingSystem": product.platforms?.join(', '),
+    "offers": product.pricing?.startingPrice ? {
+      "@type": "Offer",
+      "price": product.pricing.startingPrice,
+      "priceCurrency": "INR",
+    } : undefined,
+    "author": {
+      "@type": "Organization",
+      "name": "AppWeave Labs",
+      "url": baseUrl,
+    },
+  }
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": `${baseUrl}/products` },
+      { "@type": "ListItem", "position": 3, "name": product.name, "item": `${baseUrl}/products/${slug}` },
+    ],
+  }
+
   return (
     <main style={{ paddingTop: '6rem', paddingBottom: '4rem' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
         {/* Back Link */}
         <Link href="/products" style={{
