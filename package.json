@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@next/third-parties": "^16.2.2",
     "@portabletext/react": "^6.0.2",
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.0.3",

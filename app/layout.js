@@ -1,5 +1,6 @@
 import './globals.css'
 import Link from 'next/link'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: 'AppWeave Labs | Full-Stack Development Studio',
@@ -221,6 +222,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <GoogleAnalytics gaId="G-1P1R8BM85Z" />
       </body>
     </html>
   )
