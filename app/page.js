@@ -138,39 +138,37 @@ export default async function HomePage() {
                   padding: '1.75rem',
                   transition: 'all 0.3s ease'
                 }}>
-                  <div style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1.25rem',
-                    background: `rgba(var(--accent-${service.color || 'cyan'}-rgb, 6, 182, 212), 0.15)`,
-                    color: `var(--accent-${service.color || 'cyan'})`,
-                    overflow: 'hidden'
-                  }}>
-                    {service.icon?.asset ? (
-                      <Image
-                        src={urlFor(service.icon).width(40).height(40).url()}
-                        alt={service.title}
-                        width={40}
-                        height={40}
-                        style={{
-                          objectFit: 'contain',
-                          width: '100%',
-                          height: '100%',
-                          padding: '8px'
-                        }}
-                      />
-                    ) : service.iconEmoji ? (
-                      <span style={{ fontSize: '20px' }}>{service.iconEmoji}</span>
-                    ) : (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                      </svg>
-                    )}
-                  </div>
+                  {(service.icon?.asset || service.iconEmoji) && (
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '1.25rem',
+                      background: `rgba(var(--accent-${service.color || 'cyan'}-rgb, 6, 182, 212), 0.15)`,
+                      color: `var(--accent-${service.color || 'cyan'})`,
+                      overflow: 'hidden'
+                    }}>
+                      {service.icon?.asset ? (
+                        <Image
+                          src={urlFor(service.icon).width(40).height(40).url()}
+                          alt={service.title}
+                          width={40}
+                          height={40}
+                          style={{
+                            objectFit: 'contain',
+                            width: '100%',
+                            height: '100%',
+                            padding: '8px'
+                          }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: '20px' }}>{service.iconEmoji}</span>
+                      )}
+                    </div>
+                  )}
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.5rem' }}>{service.title}</h3>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.6 }}>{service.description}</p>
                 </div>
