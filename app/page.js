@@ -47,7 +47,7 @@ export default async function HomePage() {
     <main>
       {/* Hero */}
       <section className="hero" style={{
-        minHeight: '100vh',
+        minHeight: 'clamp(70vh, 85vh, 100vh)',
         display: 'flex',
         alignItems: 'center',
         padding: 'clamp(5rem, 10vw, 8rem) clamp(1rem, 3vw, 2rem) clamp(3rem, 6vw, 6rem)',
@@ -68,25 +68,26 @@ export default async function HomePage() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            padding: '0.4rem 0.8rem',
-            background: 'rgba(220, 38, 38, 0.1)',
-            border: '1px solid rgba(220, 38, 38, 0.2)',
+            padding: '0.4rem 0.85rem',
+            background: 'rgba(220, 38, 38, 0.16)',
+            border: '1px solid rgba(220, 38, 38, 0.32)',
             borderRadius: '100px',
             fontSize: '0.75rem',
-            color: 'var(--accent-cyan)',
+            fontWeight: 500,
+            color: 'var(--text-primary)',
             marginBottom: '1.5rem'
           }}>
             <span style={{
               width: '6px',
               height: '6px',
-              background: 'var(--accent-emerald)',
+              background: 'var(--accent-cyan)',
               borderRadius: '50%',
               animation: 'pulse 2s infinite'
             }} />
             Available for new projects
           </div>
           <h1 style={{
-            fontSize: 'clamp(2rem, 6vw, 4.5rem)',
+            fontSize: 'clamp(2.25rem, 6vw, 4.5rem)',
             fontWeight: 700,
             letterSpacing: '-0.04em',
             lineHeight: 1.1,
@@ -101,7 +102,7 @@ export default async function HomePage() {
             into Apps
           </h1>
           <p style={{
-            fontSize: '1.15rem',
+            fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
             color: 'var(--text-secondary)',
             maxWidth: '550px',
             marginBottom: '2.5rem',
@@ -122,13 +123,13 @@ export default async function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)' }}>
-        <div className="section-container">
-          <div className="section-header">
-            <div className="section-label mono">What We Do</div>
-            <h2 className="section-title">End-to-end technology services</h2>
-          </div>
-          {services.length > 0 ? (
+      {services.length > 0 && (
+        <section id="services" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)' }}>
+          <div className="section-container">
+            <div className="section-header">
+              <div className="section-label mono">What We Do</div>
+              <h2 className="section-title">End-to-end technology services</h2>
+            </div>
             <div className="services-grid">
               {services.map((service) => (
                 <div key={service._id} style={{
@@ -174,31 +175,21 @@ export default async function HomePage() {
                 </div>
               ))}
             </div>
-          ) : (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '4rem 2rem',
-              background: 'var(--bg-card)',
-              borderRadius: '12px',
-              border: '1px solid var(--border)'
-            }}>
-              <p style={{ color: 'var(--text-muted)' }}>Services coming soon. Add services in Sanity Studio to see them here.</p>
-            </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* Clients Section - CMS Powered */}
+      {clients.length > 0 && (
       <section id="clients" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)', background: 'var(--bg-secondary)' }}>
         <div className="section-container">
           <div className="section-header">
             <div className="section-label mono">Our Clients</div>
             <h2 className="section-title">Building products for ambitious teams</h2>
           </div>
-          
-          {clients.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
-              {clients.map((clientItem) => (
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
+            {clients.map((clientItem) => (
                 <div key={clientItem._id} style={{
                   background: 'var(--bg-primary)',
                   border: '1px solid var(--border)',
@@ -277,32 +268,22 @@ export default async function HomePage() {
                   )}
                 </div>
               ))}
-            </div>
-          ) : (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '4rem 2rem',
-              background: 'var(--bg-primary)',
-              borderRadius: '12px',
-              border: '1px solid var(--border)'
-            }}>
-              <p style={{ color: 'var(--text-muted)' }}>Client showcases coming soon.</p>
-            </div>
-          )}
+          </div>
         </div>
       </section>
+      )}
 
       {/* Careers Section - CMS Powered */}
+      {careers.length > 0 && (
       <section id="careers" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)' }}>
         <div className="section-container">
           <div className="section-header">
             <div className="section-label mono">Join Us</div>
             <h2 className="section-title">Build your career at AppWeave</h2>
           </div>
-          
-          {careers.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '1.5rem' }}>
-              {careers.map((job) => (
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))', gap: '1.5rem' }}>
+            {careers.map((job) => (
                 <div key={job._id} style={{
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border)',
@@ -331,7 +312,7 @@ export default async function HomePage() {
                       {job.shortDescription}
                     </p>
                   )}
-                  <Link 
+                  <Link
                     href={`/careers/${job.slug?.current}`}
                     style={{
                       display: 'inline-flex',
@@ -353,31 +334,16 @@ export default async function HomePage() {
                   </Link>
                 </div>
               ))}
-            </div>
-          ) : (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '4rem 2rem',
-              background: 'var(--bg-card)',
-              borderRadius: '12px',
-              border: '1px solid var(--border)'
-            }}>
-              <p style={{ color: 'var(--text-muted)' }}>No open positions at the moment. Check back soon!</p>
-            </div>
-          )}
+          </div>
         </div>
       </section>
+      )}
 
       {/* Contact Section */}
       <section id="contact" style={{ padding: 'clamp(3.5rem, 7vw, 7rem) clamp(1rem, 3vw, 2rem)', background: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
           <div className="section-label mono">Let's Talk</div>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: 600,
-            letterSpacing: '-0.03em',
-            marginBottom: '1rem'
-          }}>Have a project in mind?</h2>
+          <h2 className="section-title" style={{ marginBottom: '1rem' }}>Have a project in mind?</h2>
           <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginBottom: '2.5rem' }}>
             Whether you're building something new or need help scaling what you have, we'd love to hear about it.
           </p>

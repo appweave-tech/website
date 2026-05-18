@@ -180,12 +180,15 @@ nav.scrolled {
 }
 
 .nav-cta {
-  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.625rem 1.1rem;
   background: var(--text-primary);
   color: var(--bg-primary);
   border-radius: 6px;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 [data-theme="light"] .nav-cta {
@@ -331,8 +334,8 @@ footer {
 }
 
 .footer-social a {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
