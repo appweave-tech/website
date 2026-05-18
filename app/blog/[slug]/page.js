@@ -45,13 +45,13 @@ export async function generateMetadata({ params }) {
       type: 'article',
       publishedTime: post.publishedAt,
       authors: post.author?.name ? [post.author.name] : undefined,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+      ...(ogImage && { images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }] }),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt || '',
-      images: [ogImage],
+      ...(ogImage && { images: [ogImage] }),
     },
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,
@@ -152,8 +152,8 @@ export default async function PostPage({ params }) {
 
   return (
     <main className="post-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }} />
       <div className="post-container">
         <Link href="/blog" className="back-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

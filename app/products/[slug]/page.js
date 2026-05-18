@@ -42,13 +42,13 @@ export async function generateMetadata({ params }) {
       description: product.tagline || product.description || '',
       url: `${baseUrl}/products/${slug}`,
       type: 'website',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }],
+      ...(ogImage && { images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }] }),
     },
     twitter: {
       card: 'summary_large_image',
       title: product.name,
       description: product.tagline || product.description || '',
-      images: [ogImage],
+      ...(ogImage && { images: [ogImage] }),
     },
     alternates: {
       canonical: `${baseUrl}/products/${slug}`,
@@ -131,8 +131,8 @@ export default async function ProductPage({ params }) {
 
   return (
     <main style={{ paddingTop: '6rem', paddingBottom: '4rem' }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }} />
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
         {/* Back Link */}
         <Link href="/products" style={{

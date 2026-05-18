@@ -30,7 +30,26 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onLoad="this.media='all'" />
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+          />
+        </noscript>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -54,7 +73,7 @@ export default function RootLayout({ children }) {
                 "https://linkedin.com/company/appweave",
                 "https://github.com/appweave-tech"
               ]
-            })
+            }).replace(/</g, '\\u003c')
           }}
         />
       </head>
@@ -124,101 +143,107 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Clean URL scroll — intercept /services, /clients, /careers nav clicks
-              document.addEventListener('click', function(e) {
-                var link = e.target.closest('a');
-                if (!link) return;
-                var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
-                var href = link.getAttribute('href');
-                var sectionId = map[href];
-                if (!sectionId) return;
-                var el = document.getElementById(sectionId);
-                if (el) {
-                  e.preventDefault();
-                  el.scrollIntoView({ behavior: 'smooth' });
-                  history.pushState(null, '', href);
-                  updateActiveNav();
-                }
-              });
-
-              // On page load, scroll to section if URL matches
               (function() {
-                var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
-                var sectionId = map[location.pathname];
-                if (sectionId) {
-                  var el = document.getElementById(sectionId);
-                  if (el) setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth' }); }, 100);
+                function ready(fn) {
+                  if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', fn);
+                  } else {
+                    fn();
+                  }
                 }
-              })();
 
-              // Hamburger menu toggle
-              document.addEventListener('DOMContentLoaded', function() {
-                var hamburger = document.getElementById('hamburger');
-                var navLinks = document.getElementById('navLinks');
-                if (hamburger && navLinks) {
-                  hamburger.addEventListener('click', function() {
-                    navLinks.classList.toggle('nav-open');
-                    hamburger.classList.toggle('hamburger-active');
-                  });
-                  navLinks.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A') {
-                      navLinks.classList.remove('nav-open');
-                      hamburger.classList.remove('hamburger-active');
+                function updateActiveNav() {
+                  var links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+                  var path = location.pathname;
+                  links.forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    if (href === path || (href !== '/' && path.startsWith(href))) {
+                      link.classList.add('nav-active');
+                    } else {
+                      link.classList.remove('nav-active');
                     }
                   });
                 }
-              });
 
-              // Close mobile menu on Escape key
-              document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                  var navLinks = document.getElementById('navLinks');
-                  var hamburger = document.getElementById('hamburger');
-                  if (navLinks && navLinks.classList.contains('nav-open')) {
-                    navLinks.classList.remove('nav-open');
-                    hamburger.classList.remove('hamburger-active');
-                    hamburger.focus();
-                  }
-                }
-              });
-
-              // Theme initialization
-              (function() {
-                const savedTheme = localStorage.getItem('theme');
-                if (savedTheme === 'light') {
-                  document.documentElement.setAttribute('data-theme', 'light');
-                }
-              })();
-              
-              // Theme toggle handler
-              document.addEventListener('DOMContentLoaded', function() {
-                const toggle = document.getElementById('themeToggle');
-                if (toggle) {
-                  toggle.addEventListener('click', function() {
-                    const html = document.documentElement;
-                    const currentTheme = html.getAttribute('data-theme');
-                    const newTheme = currentTheme === 'light' ? '' : 'light';
-                    html.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme || 'dark');
-                  });
-                }
-              });
-
-              // Active nav state
-              function updateActiveNav() {
-                var links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
-                var path = location.pathname;
-                links.forEach(function(link) {
+                // Clean URL scroll — intercept /services, /clients, /careers nav clicks
+                document.addEventListener('click', function(e) {
+                  var link = e.target.closest('a');
+                  if (!link) return;
+                  var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
                   var href = link.getAttribute('href');
-                  if (href === path || (href !== '/' && path.startsWith(href))) {
-                    link.classList.add('nav-active');
-                  } else {
-                    link.classList.remove('nav-active');
+                  var sectionId = map[href];
+                  if (!sectionId) return;
+                  var el = document.getElementById(sectionId);
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, '', href);
+                    updateActiveNav();
                   }
                 });
-              }
-              document.addEventListener('DOMContentLoaded', updateActiveNav);
-              window.addEventListener('popstate', updateActiveNav);
+
+                // On page load, scroll to section if URL matches
+                ready(function() {
+                  var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
+                  var sectionId = map[location.pathname];
+                  if (sectionId) {
+                    var el = document.getElementById(sectionId);
+                    if (el) setTimeout(function(){ el.scrollIntoView({ behavior: 'smooth' }); }, 100);
+                  }
+                });
+
+                // Hamburger menu toggle
+                ready(function() {
+                  var hamburger = document.getElementById('hamburger');
+                  var navLinks = document.getElementById('navLinks');
+                  if (hamburger && navLinks) {
+                    hamburger.addEventListener('click', function() {
+                      navLinks.classList.toggle('nav-open');
+                      hamburger.classList.toggle('hamburger-active');
+                    });
+                    navLinks.addEventListener('click', function(e) {
+                      if (e.target.tagName === 'A') {
+                        navLinks.classList.remove('nav-open');
+                        hamburger.classList.remove('hamburger-active');
+                      }
+                    });
+                  }
+                });
+
+                // Close mobile menu on Escape key
+                document.addEventListener('keydown', function(e) {
+                  if (e.key === 'Escape') {
+                    var navLinks = document.getElementById('navLinks');
+                    var hamburger = document.getElementById('hamburger');
+                    if (navLinks && navLinks.classList.contains('nav-open')) {
+                      navLinks.classList.remove('nav-open');
+                      hamburger.classList.remove('hamburger-active');
+                      hamburger.focus();
+                    }
+                  }
+                });
+
+                // Theme toggle handler (init already ran in <head>)
+                ready(function() {
+                  var toggle = document.getElementById('themeToggle');
+                  if (toggle) {
+                    toggle.addEventListener('click', function() {
+                      var html = document.documentElement;
+                      var currentTheme = html.getAttribute('data-theme');
+                      if (currentTheme === 'light') {
+                        html.removeAttribute('data-theme');
+                        try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+                      } else {
+                        html.setAttribute('data-theme', 'light');
+                        try { localStorage.setItem('theme', 'light'); } catch (e) {}
+                      }
+                    });
+                  }
+                });
+
+                ready(updateActiveNav);
+                window.addEventListener('popstate', updateActiveNav);
+              })();
             `,
           }}
         />

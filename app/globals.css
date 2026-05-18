@@ -415,7 +415,7 @@ footer {
 .blog-card-category {
   font-size: 0.7rem;
   padding: 0.25rem 0.5rem;
-  background: rgba(6, 182, 212, 0.1);
+  background: rgba(220, 38, 38, 0.1);
   color: var(--accent-cyan);
   border-radius: 4px;
   text-transform: uppercase;
@@ -469,7 +469,7 @@ footer {
 .post-category {
   font-size: 0.75rem;
   padding: 0.3rem 0.6rem;
-  background: rgba(6, 182, 212, 0.1);
+  background: rgba(220, 38, 38, 0.1);
   color: var(--accent-cyan);
   border-radius: 4px;
   text-transform: uppercase;
@@ -749,11 +749,11 @@ textarea:focus-visible {
   .footer-right { align-items: center; }
   .footer-legal { justify-content: center; }
   .services-grid { grid-template-columns: 1fr; }
-  .post-hero-img { height: 280px; }
+  .post-hero-image { height: 280px; }
 }
 
 @media (max-width: 480px) {
   .logo-img { height: 28px; }
   .blog-card { padding: 1rem; }
-  .post-hero-img { height: 220px; }
+  .post-hero-image { height: 220px; }
 }
