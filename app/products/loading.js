@@ -1,9 +1,4 @@
-/* Root fallback: covers `/` and the detail routes. Routes whose layout differs
-   meaningfully own their own loading.js (blog, products, careers), so this one
-   stays close to the home page's first content block: a 2-column card grid whose
-   cards carry an icon rather than a cover image. It deliberately promises no
-   large imagery, since a skeleton that shows media the arriving page lacks reads
-   as a layout glitch. */
+/* Mirrors app/products/page.js: .product-grid columns and a 16:9 cover image. */
 export default function Loading() {
   return (
     <div className="section page-offset" aria-busy="true">
@@ -14,10 +9,10 @@ export default function Loading() {
           <div className="skeleton skeleton-heading" />
           <div className="skeleton skeleton-line" />
         </div>
-        <div className="skeleton-grid skeleton-grid--home" aria-hidden="true">
+        <div className="skeleton-grid skeleton-grid--products" aria-hidden="true">
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="skeleton-card">
-              <div className="skeleton skeleton-icon" />
+              <div className="skeleton skeleton-media skeleton-media--wide" />
               <div className="skeleton skeleton-line" />
               <div className="skeleton skeleton-line" />
               <div className="skeleton skeleton-line" />

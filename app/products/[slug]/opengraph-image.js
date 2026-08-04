@@ -15,11 +15,12 @@ const statusLabels = {
   'deprecated': 'Deprecated',
 }
 
+/* Mirrors the --status-* tokens in globals.css */
 const statusColors = {
-  'live': '#10b981',
-  'beta': '#fbbf24',
-  'coming-soon': '#06b6d4',
-  'deprecated': '#ef4444',
+  'live': '#5aa87a',
+  'beta': '#c39a4a',
+  'coming-soon': '#e97060',
+  'deprecated': '#7a716f',
 }
 
 async function getProduct(slug) {

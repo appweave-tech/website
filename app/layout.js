@@ -2,9 +2,17 @@ import './globals.css'
 import Link from 'next/link'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
+// Display: Bricolage Grotesque (headlines) · Body: Instrument Sans · Data: JetBrains Mono
+const fontHref =
+  'https://fonts.googleapis.com/css2' +
+  '?family=Bricolage+Grotesque:opsz,wght@12..96,500..800' +
+  '&family=Instrument+Sans:wght@400;500;600;700' +
+  '&family=JetBrains+Mono:wght@400;500' +
+  '&display=swap'
+
 export const metadata = {
   title: 'AppWeave Labs | Full-Stack Development Studio',
-  description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms — from early-stage MVPs to production-ready systems.',
+  description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms, from MVP to production.',
   metadataBase: new URL('https://appweave.tech'),
   openGraph: {
     title: 'AppWeave Labs | Full-Stack Development Studio',
@@ -30,24 +38,14 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="preload"
-          as="style"
-          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-        />
+        <link rel="preload" as="style" href={fontHref} />
+        <link rel="stylesheet" href={fontHref} />
         <noscript>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          />
+          <link rel="stylesheet" href={fontHref} />
         </noscript>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}try{if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js-reveal');}}catch(e){}})();`,
           }}
         />
         <script
@@ -78,6 +76,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <a href="#main" className="skip-link">Skip to content</a>
         <nav id="nav">
           <div className="nav-container">
             <Link href="/" className="logo">
@@ -91,9 +90,15 @@ export default function RootLayout({ children }) {
               <Link href="/products">Products</Link>
               <Link href="/blog">Blog</Link>
               <ThemeToggle />
-              <Link href="/contact" className="nav-cta">Get in Touch</Link>
+              <Link href="/contact" className="nav-cta">Get in touch</Link>
             </div>
-            <button className="hamburger" id="hamburger" aria-label="Toggle menu">
+            <button
+              className="hamburger"
+              id="hamburger"
+              aria-label="Toggle menu"
+              aria-expanded="false"
+              aria-controls="navLinks"
+            >
               <span></span>
               <span></span>
               <span></span>
@@ -111,8 +116,10 @@ export default function RootLayout({ children }) {
                 <img src="/logo-light.svg" alt="AppWeave Labs" className="logo-img logo-img-light" />
               </Link>
               <span className="footer-copy">© 2026 AppWeave Labs Pvt Ltd</span>
-              <span className="footer-copy" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Unit 101, Oxford Towers, 139 HAL Old Airport Rd, Bengaluru, Karnataka, India 560008</span>
-              <span className="footer-copy" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>CIN: U62099KA2024PTC185497</span>
+              <address className="footer-fine">
+                Unit 101, Oxford Towers, 139 HAL Old Airport Rd, Bengaluru, Karnataka, India 560008
+              </address>
+              <span className="footer-fine mono">CIN: U62099KA2024PTC185497</span>
             </div>
             <div className="footer-right">
               <div className="footer-social">
@@ -169,7 +176,7 @@ export default function RootLayout({ children }) {
                 document.addEventListener('click', function(e) {
                   var link = e.target.closest('a');
                   if (!link) return;
-                  var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
+                  var map = {'/services':'services', '/clients':'clients'};
                   var href = link.getAttribute('href');
                   var sectionId = map[href];
                   if (!sectionId) return;
@@ -184,7 +191,7 @@ export default function RootLayout({ children }) {
 
                 // On page load, scroll to section if URL matches
                 ready(function() {
-                  var map = {'/services':'services', '/clients':'clients', '/careers':'careers'};
+                  var map = {'/services':'services', '/clients':'clients'};
                   var sectionId = map[location.pathname];
                   if (sectionId) {
                     var el = document.getElementById(sectionId);
@@ -192,35 +199,76 @@ export default function RootLayout({ children }) {
                   }
                 });
 
-                // Hamburger menu toggle
+                // Mobile menu — keeps aria-expanded and body scroll in sync
+                function setMenu(open) {
+                  var hamburger = document.getElementById('hamburger');
+                  var navLinks = document.getElementById('navLinks');
+                  if (!hamburger || !navLinks) return;
+
+                  hamburger.classList.toggle('hamburger-active', open);
+                  hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+                  document.body.style.overflow = open ? 'hidden' : '';
+
+                  if (open) {
+                    navLinks.classList.remove('nav-closing');
+                    navLinks.classList.add('nav-open');
+                    return;
+                  }
+
+                  if (!navLinks.classList.contains('nav-open')) return;
+
+                  navLinks.classList.remove('nav-open');
+                  navLinks.classList.add('nav-closing');
+
+                  var done = false;
+                  function finish() {
+                    if (done) return;
+                    done = true;
+                    navLinks.classList.remove('nav-closing');
+                    navLinks.removeEventListener('animationend', finish);
+                  }
+                  navLinks.addEventListener('animationend', finish);
+                  // Fallback: animationend never fires if the animation is suppressed
+                  // (reduced motion, background tab), so the class must be cleared anyway.
+                  setTimeout(finish, 400);
+                }
+
                 ready(function() {
                   var hamburger = document.getElementById('hamburger');
                   var navLinks = document.getElementById('navLinks');
-                  if (hamburger && navLinks) {
-                    hamburger.addEventListener('click', function() {
-                      navLinks.classList.toggle('nav-open');
-                      hamburger.classList.toggle('hamburger-active');
-                    });
-                    navLinks.addEventListener('click', function(e) {
-                      if (e.target.tagName === 'A') {
-                        navLinks.classList.remove('nav-open');
-                        hamburger.classList.remove('hamburger-active');
-                      }
-                    });
-                  }
+                  if (!hamburger || !navLinks) return;
+                  hamburger.addEventListener('click', function() {
+                    setMenu(!navLinks.classList.contains('nav-open'));
+                  });
+                  navLinks.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) setMenu(false);
+                  });
                 });
 
                 // Close mobile menu on Escape key
                 document.addEventListener('keydown', function(e) {
-                  if (e.key === 'Escape') {
-                    var navLinks = document.getElementById('navLinks');
-                    var hamburger = document.getElementById('hamburger');
-                    if (navLinks && navLinks.classList.contains('nav-open')) {
-                      navLinks.classList.remove('nav-open');
-                      hamburger.classList.remove('hamburger-active');
-                      hamburger.focus();
-                    }
+                  if (e.key !== 'Escape') return;
+                  var navLinks = document.getElementById('navLinks');
+                  var hamburger = document.getElementById('hamburger');
+                  if (navLinks && navLinks.classList.contains('nav-open')) {
+                    setMenu(false);
+                    if (hamburger) hamburger.focus();
                   }
+                });
+
+                // Hairline border on the nav once the page has scrolled
+                ready(function() {
+                  var navEl = document.getElementById('nav');
+                  if (!navEl) return;
+                  var raf = null;
+                  function sync() {
+                    raf = null;
+                    navEl.classList.toggle('scrolled', window.scrollY > 12);
+                  }
+                  sync();
+                  window.addEventListener('scroll', function() {
+                    if (raf === null) raf = requestAnimationFrame(sync);
+                  }, { passive: true });
                 });
 
                 // Theme toggle handler (init already ran in <head>)
@@ -239,6 +287,60 @@ export default function RootLayout({ children }) {
                       }
                     });
                   }
+                });
+
+                // Staggered reveal for below-fold home grids. The hidden state comes from the
+                // .js-reveal class set in <head>; this only decides when to release it.
+                ready(function() {
+                  var root = document.documentElement;
+                  if (!root.classList.contains('js-reveal')) return;
+
+                  var SEL = '.services-grid, .client-grid';
+
+                  function release(el) {
+                    el.classList.add('reveal-in');
+                  }
+
+                  var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                      if (!entry.isIntersecting) return;
+                      release(entry.target);
+                      io.unobserve(entry.target);
+                    });
+                  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+                  // Bookkeeping lives in a WeakSet, never as a DOM attribute: writing one
+                  // onto a node React is about to hydrate produces an attribute mismatch
+                  // ("server rendered HTML didn't match the client properties").
+                  var bound = new WeakSet();
+
+                  // Binds any grid not already bound. Must be re-runnable: next/link does
+                  // soft navigation, so DOMContentLoaded never fires again and a revisit
+                  // renders brand-new grid nodes that nothing is watching.
+                  function scan() {
+                    var groups = document.querySelectorAll(SEL);
+                    Array.prototype.forEach.call(groups, function(g) {
+                      if (bound.has(g)) return;
+                      bound.add(g);
+                      io.observe(g);
+                      // Per-element safety net: content must never stay hidden because of a
+                      // missed callback, a background tab, or a scroll that outran the observer.
+                      setTimeout(function() { release(g); }, 2500);
+                    });
+                  }
+
+                  var pending = false;
+                  function schedule() {
+                    if (pending) return;
+                    pending = true;
+                    requestAnimationFrame(function() { pending = false; scan(); });
+                  }
+
+                  scan();
+                  new MutationObserver(schedule).observe(document.body, {
+                    childList: true,
+                    subtree: true
+                  });
                 });
 
                 ready(updateActiveNav);

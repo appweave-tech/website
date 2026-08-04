@@ -151,7 +151,7 @@ export default async function PostPage({ params }) {
   }
 
   return (
-    <main className="post-page">
+    <main id="main" className="post-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }} />
       <div className="post-container">
@@ -159,7 +159,7 @@ export default async function PostPage({ params }) {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
           </svg>
-          Back to Blog
+          Back to blog
         </Link>
 
         <article>
