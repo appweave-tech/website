@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { PageTransition } from '../page-transition'
+import { buildOpenGraph } from '@/lib/seo'
+
+// Description was previously absent, so this page inherited the homepage's and
+// shipped a duplicate meta description.
+const DESCRIPTION =
+  'The terms governing use of the AppWeave Labs website and the software development services we provide.'
 
 export const metadata = {
-  title: 'Terms of Service | AppWeave Labs',
+  title: 'Terms of Service',
+  description: DESCRIPTION,
+  openGraph: buildOpenGraph({ title: 'Terms of Service', description: DESCRIPTION, path: '/terms' }),
 }
 
 export default function TermsOfService() {

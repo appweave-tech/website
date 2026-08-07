@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import { PageTransition } from '../page-transition'
+import { buildOpenGraph } from '@/lib/seo'
+
+const DESCRIPTION =
+  'AppWeave Labs is a boutique full-stack studio in Bengaluru, incorporated in 2024. Registered details, address, and what we work on.'
 
 export const metadata = {
-  title: 'About | AppWeave Labs',
-  description:
-    'AppWeave Labs is a boutique full-stack studio in Bengaluru, incorporated in 2024. Registered details, address, and what we work on.',
+  title: 'About',
+  description: DESCRIPTION,
+  openGraph: buildOpenGraph({ title: 'About', description: DESCRIPTION, path: '/about' }),
 }
 
 /* Registered identifiers.

@@ -1,19 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { client, productsQuery, urlFor } from '@/lib/sanity'
+import { fetchList, productsQuery, urlFor } from '@/lib/sanity'
+import { buildOpenGraph } from '@/lib/seo'
 import { PageTransition } from '../page-transition'
 import { ViewTransition } from 'react'
 
+// Distinguishes an outage from an empty list: the empty state makes a factual
+// claim ('nothing published') that would be false if the CMS is unreachable.
+// cache() means generateMetadata and the component share one Sanity request.
 async function getProducts() {
-  try {
-    const items = await client.fetch(productsQuery)
-    return { items, failed: false }
-  } catch (error) {
-    console.error('Error fetching products:', error)
-    // Distinguish an outage from an empty list: the empty state makes a factual
-    // claim ('nothing published') that would be false if the CMS is unreachable.
-    return { items: [], failed: true }
-  }
+  return fetchList(productsQuery)
 }
 
 const statusMeta = {
@@ -34,9 +30,21 @@ const platformLabels = {
   'desktop': 'Desktop',
 }
 
-export const metadata = {
-  title: 'Products | AppWeave Labs',
-  description: 'SaaS products built by AppWeave Labs - from blockchain certificates to invoice parsing and e-commerce scraping.',
+const TITLE = 'Products'
+const DESCRIPTION =
+  'SaaS products built by AppWeave Labs - from blockchain certificates to invoice parsing and e-commerce scraping.'
+
+// noindex while no products are published — see the note in app/blog/page.js.
+export async function generateMetadata() {
+  const { items, failed } = await getProducts()
+  const isEmpty = !failed && items.length === 0
+
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: buildOpenGraph({ title: TITLE, description: DESCRIPTION, path: '/products' }),
+    ...(isEmpty && { robots: { index: false, follow: true } }),
+  }
 }
 
 export default async function ProductsPage() {

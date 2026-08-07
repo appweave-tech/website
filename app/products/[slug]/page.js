@@ -31,17 +31,21 @@ export async function generateMetadata({ params }) {
   const product = await getProduct(slug)
 
   if (!product) {
-    return { title: 'Product Not Found | AppWeave Labs' }
+    return { title: 'Product Not Found', robots: { index: false, follow: true } }
   }
 
   const ogImage = product.heroImage ? urlFor(product.heroImage).width(1200).height(630).url() : undefined
 
+  /* undefined rather than '': an empty meta description is read as a deliberate
+     blank, whereas omitting the tag lets Google build a snippet from the body. */
+  const description = product.tagline || product.description || undefined
+
   return {
-    title: `${product.name} | AppWeave Labs`,
-    description: product.tagline || product.description || '',
+    title: product.name,
+    description,
     openGraph: {
       title: product.name,
-      description: product.tagline || product.description || '',
+      description,
       url: `${baseUrl}/products/${slug}`,
       type: 'website',
       ...(ogImage && { images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }] }),
@@ -49,7 +53,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: product.name,
-      description: product.tagline || product.description || '',
+      description,
       ...(ogImage && { images: [ogImage] }),
     },
     alternates: {

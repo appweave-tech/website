@@ -1,16 +1,12 @@
-import { client, careersQuery } from '@/lib/sanity'
+import { fetchList, careersQuery } from '@/lib/sanity'
+import { buildOpenGraph } from '@/lib/seo'
 import { PageTransition } from '../page-transition'
 
+// Distinguishes an outage from an empty list: the empty state makes a factual
+// claim ('nothing published') that would be false if the CMS is unreachable.
+// cache() means generateMetadata and the component share one Sanity request.
 async function getCareers() {
-  try {
-    const items = await client.fetch(careersQuery)
-    return { items, failed: false }
-  } catch (error) {
-    console.error('Error fetching careers:', error)
-    // Distinguish an outage from an empty list: the empty state makes a factual
-    // claim ('nothing published') that would be false if the CMS is unreachable.
-    return { items: [], failed: true }
-  }
+  return fetchList(careersQuery)
 }
 
 const typeLabels = {
@@ -29,9 +25,23 @@ function ArrowRight() {
   )
 }
 
-export const metadata = {
-  title: 'Careers | AppWeave Labs',
-  description: 'Open roles at AppWeave Labs. Join a boutique studio building AI applications, mobile apps, and data platforms.',
+const TITLE = 'Careers'
+const DESCRIPTION =
+  'Open roles at AppWeave Labs. Join a boutique studio building AI applications, mobile apps, and data platforms.'
+
+// noindex while there are no open roles — see the note in app/blog/page.js. The
+// page stays in the nav because 'no open roles right now' is genuinely useful to
+// a human; it just should not be competing in search as a thin page.
+export async function generateMetadata() {
+  const { items, failed } = await getCareers()
+  const isEmpty = !failed && items.length === 0
+
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: buildOpenGraph({ title: TITLE, description: DESCRIPTION, path: '/careers' }),
+    ...(isEmpty && { robots: { index: false, follow: true } }),
+  }
 }
 
 export default async function CareersPage() {

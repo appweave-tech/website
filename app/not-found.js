@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Page not found | AppWeave Labs',
+  title: 'Page not found',
+  robots: { index: false, follow: true },
 }
 
 export default function NotFound() {

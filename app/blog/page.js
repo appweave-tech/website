@@ -1,19 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { client, postsQuery, urlFor } from '@/lib/sanity'
+import { fetchList, postsQuery, urlFor } from '@/lib/sanity'
+import { buildOpenGraph } from '@/lib/seo'
 import { PageTransition } from '../page-transition'
 import { ViewTransition } from 'react'
 
+// Distinguishes an outage from an empty list: the empty state makes a factual
+// claim ('nothing published') that would be false if the CMS is unreachable.
+// cache() means generateMetadata and the component share one Sanity request.
 async function getPosts() {
-  try {
-    const items = await client.fetch(postsQuery)
-    return { items, failed: false }
-  } catch (error) {
-    console.error('Error fetching posts:', error)
-    // Distinguish an outage from an empty list: the empty state makes a factual
-    // claim ('nothing published') that would be false if the CMS is unreachable.
-    return { items: [], failed: true }
-  }
+  return fetchList(postsQuery)
 }
 
 function formatDate(dateString) {
@@ -25,9 +21,27 @@ function formatDate(dateString) {
   })
 }
 
-export const metadata = {
-  title: 'Blog | AppWeave Labs',
-  description: 'Insights on full-stack development, data engineering, AI, and building great products.',
+const TITLE = 'Blog'
+const DESCRIPTION =
+  'Insights on full-stack development, data engineering, AI, and building great products.'
+
+/* noindex while the blog has no posts. A listing with zero entries is thin
+   content, and Google's helpful-content assessment is site-wide, so an empty
+   page in the nav drags on the pages that are good. follow stays true so
+   crawlers still traverse to the rest of the site.
+
+   Conditional on the fetch succeeding: an outage must not deindex a blog that
+   really has posts. Reverses itself on the first publish. */
+export async function generateMetadata() {
+  const { items, failed } = await getPosts()
+  const isEmpty = !failed && items.length === 0
+
+  return {
+    title: TITLE,
+    description: DESCRIPTION,
+    openGraph: buildOpenGraph({ title: TITLE, description: DESCRIPTION, path: '/blog' }),
+    ...(isEmpty && { robots: { index: false, follow: true } }),
+  }
 }
 
 function PostCard({ post, lead }) {

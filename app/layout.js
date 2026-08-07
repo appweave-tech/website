@@ -1,47 +1,62 @@
 import './globals.css'
 import Link from 'next/link'
+import { JetBrains_Mono } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 // Sans and display are Satoshi, self-hosted from /public/fonts and declared as
-// @font-face in globals.css. Only the mono face is fetched, for --font-mono.
-const fontHref =
-  'https://fonts.googleapis.com/css2' +
-  '?family=JetBrains+Mono:wght@400;500' +
-  '&display=swap'
+// @font-face in globals.css. The mono face is the only one that has to be
+// fetched, and next/font self-hosts it at build time: previously this was a raw
+// <link rel="stylesheet"> to fonts.googleapis.com, a render-blocking request to
+// a third-party origin on every page. The variable is consumed by --font-mono in
+// globals.css, which keeps the fallback stack in one place.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-mono-jetbrains',
+})
+
+const SITE_NAME = 'AppWeave Labs'
+const DEFAULT_TITLE = 'AppWeave Labs | Full-Stack Development Studio'
+const DEFAULT_DESCRIPTION =
+  'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.'
 
 export const metadata = {
-  title: 'AppWeave Labs | Full-Stack Development Studio',
+  // `template` appends the brand suffix, so pages set a bare title ('About')
+  // rather than repeating '| AppWeave Labs' in seven files. `default` is what
+  // renders for the homepage and anything that sets no title of its own.
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms, from MVP to production.',
   metadataBase: new URL('https://appweave.tech'),
   openGraph: {
-    title: 'AppWeave Labs | Full-Stack Development Studio',
-    description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     url: 'https://appweave.tech',
-    siteName: 'AppWeave Labs',
+    siteName: SITE_NAME,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AppWeave Labs | Full-Stack Development Studio',
-    description: 'Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     creator: '@AppWeaveTech',
   },
   alternates: {
-    canonical: 'https://appweave.tech',
+    // './' resolves against the current pathname, so every route self-canonicals.
+    // An absolute URL here is inherited verbatim by every page that does not set
+    // its own `alternates`, which pointed /about, /blog, /products, /careers,
+    // /privacy and /terms at the homepage and told Google they were duplicates.
+    canonical: './',
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={jetbrainsMono.variable} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="style" href={fontHref} />
-        <link rel="stylesheet" href={fontHref} />
-        <noscript>
-          <link rel="stylesheet" href={fontHref} />
-        </noscript>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}try{if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js-reveal');}}catch(e){}})();`,
@@ -52,11 +67,24 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              // Deliberately Organization, not LocalBusiness/ProfessionalService.
+              // The registered address is in Bengaluru but the market is outside
+              // India, so local-pack optimisation would be aimed at the wrong
+              // audience. areaServed carries the targeting instead.
               "@type": "Organization",
               "name": "AppWeave Labs Pvt Ltd",
               "url": "https://appweave.tech",
               "logo": "https://appweave.tech/logo-dark.svg",
+              "email": "contact@appweave.tech",
+              "foundingDate": "2024",
               "description": "Boutique full-stack development studio. We design, build, and ship AI applications, mobile apps, and data platforms.",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "email": "contact@appweave.tech",
+                "areaServed": ["US", "GB", "CA", "AU", "AE", "SG", "DE", "NL"],
+                "availableLanguage": ["en"]
+              },
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Unit 101, Oxford Towers, 139 HAL Old Airport Rd",

@@ -41,7 +41,9 @@
   /* Type */
   --font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* --font-mono-jetbrains is supplied by next/font in layout.js, which self-hosts
+     the face instead of fetching it from fonts.googleapis.com at render time. */
+  --font-mono: var(--font-mono-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Surfaces — warm-tinted neutrals */
   --bg-primary: #0c0a0a;

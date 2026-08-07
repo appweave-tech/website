@@ -32,17 +32,22 @@ export async function generateMetadata({ params }) {
   const post = await getPost(slug)
   
   if (!post) {
-    return { title: 'Post Not Found | AppWeave Labs' }
+    return { title: 'Post Not Found', robots: { index: false, follow: true } }
   }
 
   const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
 
+  /* Falling back to '' shipped an empty meta description, which is worse than
+     omitting the tag: Google reads it as a deliberate blank rather than picking
+     a snippet from the body. undefined omits the tag entirely. */
+  const description = post.excerpt || undefined
+
   return {
-    title: `${post.title} | AppWeave Labs`,
-    description: post.excerpt || '',
+    title: post.title,
+    description,
     openGraph: {
       title: post.title,
-      description: post.excerpt || '',
+      description,
       url: `${baseUrl}/blog/${slug}`,
       type: 'article',
       publishedTime: post.publishedAt,
@@ -52,7 +57,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt || '',
+      description,
       ...(ogImage && { images: [ogImage] }),
     },
     alternates: {

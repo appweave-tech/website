@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { PageTransition } from '../page-transition'
+import { buildOpenGraph } from '@/lib/seo'
+
+// Description was previously absent, so this page inherited the homepage's and
+// shipped a duplicate meta description.
+const DESCRIPTION =
+  'How AppWeave Labs collects, uses, and protects the information you share with us through this site and our contact form.'
 
 export const metadata = {
-  title: 'Privacy Policy | AppWeave Labs',
+  title: 'Privacy Policy',
+  description: DESCRIPTION,
+  openGraph: buildOpenGraph({ title: 'Privacy Policy', description: DESCRIPTION, path: '/privacy' }),
 }
 
 export default function PrivacyPolicy() {
