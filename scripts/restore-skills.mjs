@@ -15,7 +15,12 @@
  * Usage:
  *   node scripts/restore-skills.mjs           restore anything missing
  *   node scripts/restore-skills.mjs --force   re-download everything
- *   node scripts/restore-skills.mjs --check    report only, write nothing
+ *   node scripts/restore-skills.mjs --check   report only, write nothing
+ *   node scripts/restore-skills.mjs --soft    warn instead of failing
+ *
+ * --soft is what the prepare lifecycle uses. Skills are developer tooling and
+ * nothing in the site build reads them, so an unreachable GitHub should not be
+ * able to fail an `npm install`.
  */
 
 import { createHash } from 'node:crypto'
@@ -32,6 +37,10 @@ const LINK_DIR = path.join(ROOT, '.claude', 'skills')
 const args = new Set(process.argv.slice(2))
 const FORCE = args.has('--force')
 const CHECK = args.has('--check')
+const SOFT = args.has('--soft')
+
+/** Exit code for a genuine failure: 0 under --soft so a lifecycle hook survives it. */
+const failExit = () => (SOFT ? 0 : 1)
 
 const c = process.stdout.isTTY
   ? { dim: (s) => `\x1b[2m${s}\x1b[0m`, red: (s) => `\x1b[31m${s}\x1b[0m`,
@@ -65,18 +74,18 @@ function hashSkillDir(dir) {
 function readLock() {
   if (!fs.existsSync(LOCK)) {
     console.error(c.red(`No skills-lock.json at ${LOCK}`))
-    process.exit(1)
+    process.exit(failExit())
   }
   const lock = JSON.parse(fs.readFileSync(LOCK, 'utf8'))
   const entries = Object.entries(lock.skills ?? {})
   if (entries.length === 0) {
     console.error(c.red('skills-lock.json lists no skills.'))
-    process.exit(1)
+    process.exit(failExit())
   }
   for (const [name, e] of entries) {
     if (e.sourceType !== 'github') {
       console.error(c.red(`${name}: unsupported sourceType "${e.sourceType}" (only github is handled).`))
-      process.exit(1)
+      process.exit(failExit())
     }
   }
   return entries
@@ -217,11 +226,13 @@ async function main() {
 
   if (failed.length > 0) {
     console.log(c.red(`Failed: ${failed.join(', ')}`))
-    process.exit(1)
+    if (SOFT) console.log(c.dim('Continuing anyway; run `npm run skills:restore` to retry.'))
+    process.exit(failExit())
   }
 }
 
 main().catch((error) => {
   console.error(c.red(error.stack ?? String(error)))
-  process.exit(1)
+  if (SOFT) console.error(c.dim('Skills were not restored; run `npm run skills:restore` to retry.'))
+  process.exit(failExit())
 })

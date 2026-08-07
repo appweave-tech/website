@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "studio": "sanity dev --port 3333",
+    "prepare": "npm run skills:restore -- --soft",
     "skills:restore": "node scripts/restore-skills.mjs",
     "skills:check": "node scripts/restore-skills.mjs --check"
   },

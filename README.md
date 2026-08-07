@@ -71,25 +71,31 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
-### 6. Restore Agent Skills (optional)
+## Agent Skills
 
 The agent skills used on this project are vendored into `.agents/skills/` and
 symlinked from `.claude/skills/`. Both are gitignored — 7.2M of third-party
 markdown — so a fresh clone has none of them. `skills-lock.json` records where
-each one came from, and this rebuilds them:
+each one came from.
+
+**Restoring them is automatic:** `npm install` and `npm ci` both run `prepare`,
+which rebuilds anything missing (~10s for all 74). Run it by hand with:
 
 ```bash
-npm run skills:restore   # fetch anything missing (~7s for all 74)
+npm run skills:restore   # fetch anything missing
+npm run skills:restore -- --force   # re-download everything
 npm run skills:check     # report what is missing or has drifted, write nothing
 ```
 
 The script groups skills by source repository so each repo is downloaded once
-rather than one request per file. Re-running it is cheap and touches the network
-only when something is actually missing; if `.claude/skills/` is lost but
-`.agents/` survives, it just rebuilds the symlinks.
+rather than one request per file. It touches the network only when something is
+actually missing, so a repeat `npm install` costs nothing; if `.claude/skills/`
+is lost but `.agents/` survives, it just rebuilds the symlinks.
 
-Skip this entirely if you are not using Claude Code — nothing in the site build
-depends on it.
+`prepare` passes `--soft`, which downgrades any failure to a warning. Skills are
+developer tooling and nothing in the site build reads them, so an unreachable
+GitHub cannot fail an install. Run `npm run skills:restore` afterwards to retry
+and get a real exit code.
 
 > **Note:** `skills-lock.json` records a content hash but no commit, so a restore
 > takes whatever is on each repository's default branch that day. 51 of the 74
