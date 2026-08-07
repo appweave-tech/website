@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "studio": "sanity dev --port 3333"
+    "studio": "sanity dev --port 3333",
+    "skills:restore": "node scripts/restore-skills.mjs",
+    "skills:check": "node scripts/restore-skills.mjs --check"
   },
   "keywords": [],
   "author": "",

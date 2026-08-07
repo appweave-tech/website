@@ -71,6 +71,32 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
+### 6. Restore Agent Skills (optional)
+
+The agent skills used on this project are vendored into `.agents/skills/` and
+symlinked from `.claude/skills/`. Both are gitignored — 7.2M of third-party
+markdown — so a fresh clone has none of them. `skills-lock.json` records where
+each one came from, and this rebuilds them:
+
+```bash
+npm run skills:restore   # fetch anything missing (~7s for all 74)
+npm run skills:check     # report what is missing or has drifted, write nothing
+```
+
+The script groups skills by source repository so each repo is downloaded once
+rather than one request per file. Re-running it is cheap and touches the network
+only when something is actually missing; if `.claude/skills/` is lost but
+`.agents/` survives, it just rebuilds the symlinks.
+
+Skip this entirely if you are not using Claude Code — nothing in the site build
+depends on it.
+
+> **Note:** `skills-lock.json` records a content hash but no commit, so a restore
+> takes whatever is on each repository's default branch that day. 51 of the 74
+> already differ from their recorded hash; the script reports the count rather
+> than failing. To pin one, add a `"ref": "<commit-sha>"` field to its entry —
+> the script uses it when present.
+
 ## Content Types
 
 ### Blog Posts
