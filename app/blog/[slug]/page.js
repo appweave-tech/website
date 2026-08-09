@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { client, postQuery, postSlugsQuery, urlFor } from '@/lib/sanity'
 import { PortableText } from '@portabletext/react'
+import { PageTransition } from '../../page-transition'
+import { ViewTransition } from 'react'
 
 const baseUrl = 'https://appweave.tech'
 
@@ -30,17 +32,22 @@ export async function generateMetadata({ params }) {
   const post = await getPost(slug)
   
   if (!post) {
-    return { title: 'Post Not Found | AppWeave Labs' }
+    return { title: 'Post Not Found', robots: { index: false, follow: true } }
   }
 
   const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined
 
+  /* Falling back to '' shipped an empty meta description, which is worse than
+     omitting the tag: Google reads it as a deliberate blank rather than picking
+     a snippet from the body. undefined omits the tag entirely. */
+  const description = post.excerpt || undefined
+
   return {
-    title: `${post.title} | AppWeave Labs`,
-    description: post.excerpt || '',
+    title: post.title,
+    description,
     openGraph: {
       title: post.title,
-      description: post.excerpt || '',
+      description,
       url: `${baseUrl}/blog/${slug}`,
       type: 'article',
       publishedTime: post.publishedAt,
@@ -50,7 +57,7 @@ export async function generateMetadata({ params }) {
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt || '',
+      description,
       ...(ogImage && { images: [ogImage] }),
     },
     alternates: {
@@ -151,67 +158,71 @@ export default async function PostPage({ params }) {
   }
 
   return (
-    <main className="post-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }} />
-      <div className="post-container">
-        <Link href="/blog" className="back-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Back to Blog
-        </Link>
+    <PageTransition>
+  <main id="main" className="post-page">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c') }} />
+        <div className="post-container">
+          <Link href="/blog" className="back-link" transitionTypes={['nav-back']}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to blog
+          </Link>
 
-        <article>
-          <header className="post-header">
-            <div className="post-meta">
-              {post.categories?.[0] && (
-                <span className="post-category">{post.categories[0]}</span>
-              )}
-              <span className="post-date">{formatDate(post.publishedAt)}</span>
-            </div>
-            <h1 className="post-title">{post.title}</h1>
-            {post.excerpt && (
-              <p className="post-excerpt">{post.excerpt}</p>
-            )}
-          </header>
-
-          {post.mainImage && (
-            <Image
-              src={urlFor(post.mainImage).width(1600).height(800).url()}
-              alt={post.title || 'Blog post image'}
-              width={1600}
-              height={800}
-              className="post-hero-image"
-              priority
-            />
-          )}
-
-          <div className="post-content">
-            {post.body && (
-              <PortableText value={post.body} components={portableTextComponents} />
-            )}
-          </div>
-
-          {post.author && (
-            <div className="post-author">
-              {post.author.image && (
-                <Image
-                  src={urlFor(post.author.image).width(96).height(96).url()}
-                  alt={post.author.name || 'Author'}
-                  width={48}
-                  height={48}
-                  className="post-author-image"
-                />
-              )}
-              <div>
-                <div className="post-author-name">{post.author.name}</div>
-                <div className="post-author-label">Author</div>
+          <article>
+            <header className="post-header">
+              <div className="post-meta">
+                {post.categories?.[0] && (
+                  <span className="post-category">{post.categories[0]}</span>
+                )}
+                <span className="post-date">{formatDate(post.publishedAt)}</span>
               </div>
+              <h1 className="post-title">{post.title}</h1>
+              {post.excerpt && (
+                <p className="post-excerpt">{post.excerpt}</p>
+              )}
+            </header>
+
+            {post.mainImage && (
+              <ViewTransition name={`post-cover-${slug}`} share="morph" default="none">
+                <Image
+                  src={urlFor(post.mainImage).width(1600).height(800).url()}
+                  alt={post.title || 'Blog post image'}
+                  width={1600}
+                  height={800}
+                  className="post-hero-image"
+                  priority
+                />
+              </ViewTransition>
+            )}
+
+            <div className="post-content">
+              {post.body && (
+                <PortableText value={post.body} components={portableTextComponents} />
+              )}
             </div>
-          )}
-        </article>
-      </div>
-    </main>
+
+            {post.author && (
+              <div className="post-author">
+                {post.author.image && (
+                  <Image
+                    src={urlFor(post.author.image).width(96).height(96).url()}
+                    alt={post.author.name || 'Author'}
+                    width={48}
+                    height={48}
+                    className="post-author-image"
+                  />
+                )}
+                <div>
+                  <div className="post-author-name">{post.author.name}</div>
+                  <div className="post-author-label">Author</div>
+                </div>
+              </div>
+            )}
+          </article>
+        </div>
+      </main>
+    </PageTransition>
   )
 }

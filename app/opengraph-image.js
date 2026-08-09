@@ -1,101 +1,61 @@
 import { ImageResponse } from 'next/og'
+import { OG, SIZE, Card, LogoMark } from './og-brand'
 
-export const runtime = 'edge'
 export const alt = 'AppWeave Labs - Full-Stack Development Studio'
-export const size = { width: 1200, height: 630 }
+export const size = SIZE
 export const contentType = 'image/png'
 
+/* Left-aligned on purpose. The card was previously centred on every axis, which
+   is the layout every generated OG card defaults to; it also left the three
+   offerings as a pipe-separated run. Three zones now, matching the article and
+   product cards, so the set reads as one family. */
 export default function Image() {
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
-          fontFamily: 'sans-serif',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-            marginBottom: '32px',
-          }}
-        >
-          {/* Logo mark - simplified geometric shape */}
-          <svg width="80" height="80" viewBox="0 0 163 163">
-            <path fill="#cc2411" d="M66.95,154.12c4.67-4.68,8.49-8.9,8.49-9.38s-3.67-4.58-8.16-9.11c-6.3-6.37-8.53-8.24-9.77-8.24s-3.47,1.88-9.77,8.24c-4.49,4.53-8.16,8.64-8.16,9.13,0,1.18,16.76,17.87,17.95,17.87.51,0,4.75-3.83,9.42-8.51Z"/>
-            <path fill="#cc2411" d="M46.83,95.08c15.4-15.39,28.17-28.5,28.37-29.14.28-.9-1.59-3.13-8.19-9.74-4.71-4.72-8.98-8.58-9.5-8.58-1.22,0-57.51,56.3-57.51,57.52s16.73,17.92,17.92,17.92c.5,0,13.51-12.59,28.91-27.98Z"/>
-            <path fill="#cc2411" d="M134.34,86.72c15.56-15.56,28.29-28.71,28.29-29.23,0-1.2-16.73-17.92-17.92-17.92-1.11,0-56.77,55.5-57.28,57.12-.28.9,1.59,3.13,8.19,9.74,4.71,4.72,8.98,8.58,9.5,8.58s13.67-12.73,29.23-28.29Z"/>
-            <path fill="#cc2411" d="M114.89,27c4.49-4.53,8.16-8.64,8.16-9.13,0-1.18-16.76-17.87-17.95-17.87s-17.92,16.72-17.92,17.89c0,.48,3.67,4.58,8.16,9.11,6.3,6.37,8.53,8.24,9.77,8.24s3.47-1.88,9.77-8.24Z"/>
-            <path fill="#ffffff" d="M114.52,154.75c4.38-4.33,8.13-8.54,8.33-9.34.32-1.28-3.19-5.02-28-29.84-18.15-18.15-28.81-28.38-29.59-28.38-1.88,0-17.65,16.04-17.65,17.95,0,2.18,55.29,57.49,57.46,57.49,1.07,0,3.69-2.18,9.45-7.88Z"/>
-            <path fill="#ffffff" d="M154.41,114.84c5.93-5.93,8.22-8.63,8.22-9.69,0-1.78-14.94-17.19-17.22-17.76-1.25-.31-2.72.9-10.05,8.21-4.73,4.72-8.59,9-8.59,9.52,0,1.41,16.79,17.93,18.22,17.93.72,0,4.51-3.3,9.42-8.22Z"/>
-            <path fill="#ffffff" d="M106.8,67.22c6.07-6.07,8.22-8.62,8.22-9.73C115.02,55.31,59.73,0,57.55,0c-1.8,0-17.2,14.92-17.78,17.22-.32,1.28,3.19,5.03,28,29.84,18.15,18.15,28.81,28.38,29.59,28.38.73,0,4.47-3.25,9.43-8.22Z"/>
-            <path fill="#ffffff" d="M27.37,66.93c4.67-4.68,8.49-8.93,8.49-9.44s-3.87-4.79-8.59-9.5c-7.33-7.32-8.81-8.52-10.05-8.21-2.28.57-17.22,15.98-17.22,17.76,0,1.87,15.81,17.91,17.66,17.91.74,0,4.54-3.32,9.71-8.51Z"/>
-          </svg>
-          <div
+      <Card>
+        {/* Top: mark alone. The wordmark carries the bottom row, so repeating it
+            here would say the name twice on one card. */}
+        <div style={{ display: 'flex' }}>
+          <LogoMark size={64} />
+        </div>
+
+        {/* Middle: the claim */}
+        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '900px' }}>
+          <span
             style={{
-              display: 'flex',
-              flexDirection: 'column',
+              fontSize: '76px',
+              fontWeight: 700,
+              color: OG.text,
+              letterSpacing: '-0.035em',
+              lineHeight: 1.02,
             }}
           >
-            <span
-              style={{
-                fontSize: '56px',
-                fontWeight: 700,
-                color: '#ffffff',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.1,
-              }}
-            >
-              AppWeave Labs
-            </span>
+            AppWeave Labs
+          </span>
+          <span
+            style={{
+              fontSize: '30px',
+              color: OG.textSoft,
+              letterSpacing: '-0.01em',
+              marginTop: '18px',
+            }}
+          >
+            Full-stack studio. AI applications, mobile apps, and data platforms.
+          </span>
+        </div>
+
+        {/* Bottom: domain, with the offerings set as spaced items rather than a
+            pipe-delimited string. */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', gap: '32px', fontSize: '18px', color: OG.textMuted }}>
+            <span>AI applications</span>
+            <span>Mobile apps</span>
+            <span>Data platforms</span>
           </div>
+          <span style={{ fontSize: '18px', color: OG.textMuted }}>appweave.tech</span>
         </div>
-        <div
-          style={{
-            fontSize: '24px',
-            color: '#a0a0a0',
-            textAlign: 'center',
-            maxWidth: '700px',
-            lineHeight: 1.5,
-          }}
-        >
-          Full-Stack Development Studio
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            gap: '24px',
-            marginTop: '40px',
-            fontSize: '16px',
-            color: '#666666',
-          }}
-        >
-          <span>AI Applications</span>
-          <span style={{ color: '#cc2411' }}>|</span>
-          <span>Mobile Apps</span>
-          <span style={{ color: '#cc2411' }}>|</span>
-          <span>Data Platforms</span>
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '32px',
-            fontSize: '14px',
-            color: '#444444',
-          }}
-        >
-          appweave.tech
-        </div>
-      </div>
+      </Card>
     ),
-    { ...size }
+    { ...SIZE }
   )
 }
