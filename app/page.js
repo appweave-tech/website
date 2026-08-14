@@ -33,15 +33,15 @@ const BENTO_SPANS = ['bento-card--lead', 'bento-card--accent bento-card--wide', 
    `chips` renders as pills (lead tile), `items` as a ruled list (tall tiles). */
 const SERVICE_CAPABILITIES = {
   'Full-Stack Development': {
-    chips: ['React', 'Next.js', 'React Native', 'SaaS platforms', 'Marketplaces'],
+    chips: ['React', 'Next.js', 'React Native', 'SaaS Platforms', 'Marketplaces'],
   },
   'Data & Analytics': {
-    items: ['ETL pipelines', 'Data warehousing', 'Predictive modeling', 'Visualization dashboards'],
+    items: ['ETL Pipelines', 'Data Warehousing', 'Predictive Modeling', 'Visualization Dashboards'],
     note: 'From infrastructure to insight.',
   },
   'Fractional CTO': {
-    items: ['Architecture review', 'Team scaling', 'Vendor selection', 'Technical due diligence'],
-    note: 'Senior judgement, without the full-time hire.',
+    items: ['Architecture Review', 'Team Scaling', 'Vendor Selection', 'Technical Due Diligence'],
+    note: 'Senior judgement, not headcount.',
   },
 }
 

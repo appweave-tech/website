@@ -60,8 +60,8 @@ export default function AboutPage() {
                 work.
               </p>
               <p>
-                Today that covers full-stack product work, AI engineering, data platforms, and
-                fractional CTO engagements. We also run our own products alongside client
+                Today that covers Full-Stack Product Work, AI Engineering, Data Platforms, and
+                Fractional CTO Engagements. We also run our own products alongside client
                 work, which is the fastest way we know to stay honest about what shipping
                 actually costs.
               </p>
